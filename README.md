@@ -4,7 +4,7 @@ Unity is a powerful cross-platform game engine that's also great for getting sta
 
 In this weekly workshop series, you will learn the fundamentals of game development and the Unity game engine, skills which can also be applied to other game engines and projects. If you have never coded or used a game engine before, this is the perfect series for you! Live workshops will take place at **[TBD]**, but if you can't attend in person, you can also watch edited recordings on our YouTube channel.
 
-We also offer the [Advanced Track](https://github.com/uclaacm/studio-advanced-tutorials-f21) and Art Track. The Advanced Track covers more complex coding concepts and systems, but we encourage you to check it out if you have prior coding experience, even if you haven't used Unity before. The Art Track focuses on non-coding aspects of game development, such as animation, writing, and sound design, and is also open to newcomers learning Unity through our beginner track.
+We also offer the [Advanced Track](https://github.com/uclaacm/studio-advanced-tutorials-f21) and [Creative Track](https://github.com/uclaacm/studio-creative-tutorials-f21). The Advanced Track covers more complex coding concepts and systems, but we encourage you to check it out if you have prior coding experience, even if you haven't used Unity before. The Creative Track focuses on non-coding aspects of game development, such as animation, writing, and sound design, and is also open to newcomers learning Unity through our beginner track.
 
 ## Curriculum Overview
 | Tutorials                   | Topics Covered                                                                  | Slides | Live Schedule   |
