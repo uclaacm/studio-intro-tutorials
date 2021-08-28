@@ -6,7 +6,8 @@ using UnityEngine.InputSystem;
 public class PlayerController : MonoBehaviour
 {
     // Public means other scripts can access this value. It will also show up in the editor
-    public float speed = 0;
+    [SerializeField] float speed = 10;
+    [SerializeField] float jumpForce = 500f;
     
     // Holds a reference to a rigid body component of the game object is attached to
     private Rigidbody rb;
@@ -29,7 +30,11 @@ public class PlayerController : MonoBehaviour
 
         movX = movementVector.x;
         movY = movementVector.y;
+    }
 
+    void OnJump()
+    {
+        rb.AddForce(Vector3.up*jumpForce);
     }
 
     void FixedUpdate()
