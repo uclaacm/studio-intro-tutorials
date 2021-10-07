@@ -2,21 +2,20 @@
 ## Welcome to the Beginner Track!
 Unity is a powerful cross-platform game engine that's also great for getting started with game development. Many popular games you may have played, including *Pokémon Go*, *Hearthstone*, *Ori*, and *Escape from Tarkov*, were developed with Unity, but the engine also provides many tools for newcomers to learn with minimal coding.
 
-In this weekly workshop series, you will learn the fundamentals of game development and the Unity game engine, skills which can also be applied to other game engines and projects. If you have never coded or used a game engine before, this is the perfect series for you! Live workshops will take place at **[TBD]**, but if you can't attend in person, you can also watch edited recordings on our YouTube channel.
+In this weekly workshop series, you will learn the fundamentals of game development and the Unity game engine, skills which can also be applied to other game engines and projects. If you have never coded or used a game engine before, this is the perfect series for you! Live workshops will take place at the **ACM Clubhouse (Boelter 2763)** from **7 PM - 9 PM on Tuesdays**, but if you can't attend in person, you can also watch edited recordings on our YouTube channel.
 
 We also offer the [Advanced Track](https://github.com/uclaacm/studio-advanced-tutorials-f21) and [Creative Track](https://github.com/uclaacm/studio-creative-tutorials-f21). The Advanced Track covers more complex coding concepts and systems, but we encourage you to check it out if you have prior coding experience, even if you haven't used Unity before. The Creative Track focuses on non-coding aspects of game development, such as animation, writing, and sound design, and is also open to newcomers learning Unity through our beginner track.
 
 ## Curriculum Overview
 | Tutorials                           | Topics Covered                                                                                                | Slides | Live Schedule |
 |-------------------------------------|---------------------------------------------------------------------------------------------------------------|--------|---------------|
-| Week 2?: Unity Installation         | <ul> <li>Install Unity Hub     </li> <li>Unity versions         </li> <li>Github setup            </li> </ul> | Slides | TBD           |
-| Week 3: Roll a Ball Part 1          | <ul> <li>Scenes                </li> <li>Scripting              </li> <li>GameObjects & components</li> </ul> | Slides | TBD           |
-| Week 4: Roll a Ball Part 2          | <ul> <li>User interface        </li> <li>Physics                </li> <li>Scene management        </li> </ul> | Slides | TBD           |
-| Week 5: 2D Platformer Part 1        | <ul> <li>Movement and platforms</li> <li>Tilemaps & 2D animation</li> <li>Audio management        </li> </ul> | Slides | TBD           |
-| Week 6: 2D Platformer Part 2        | <ul> <li>Enemy AI              </li> <li>Platformer mechanics   </li> <li>Level design            </li> </ul> | Slides | TBD           |
-| Week 7: 2D Platformer Part 3        | <ul> <li>Persistent settings   </li> <li>Cutscenes & cinemachine</li>                                   </ul> | Slides | TBD           |
-| Week 8: First Person Shooter Part 1 | <ul> <li>3D animation & rigging</li> <li>3D movement            </li> <li>More cinemachine        </li> </ul> | Slides | TBD           |
-| Week 9: First Person Shooter Part 2 | <ul> <li>Projectiles           </li> <li>Raycasting             </li> <li>Particle effects        </li> </ul> | Slides | TBD           |
+| Week 3: Roll a Ball Part 1          | <ul> <li>Scenes                </li> <li>Scripting              </li> <li>GameObjects & components</li> </ul> | [Slides](https://docs.google.com/presentation/d/1jJV7GuUdXfJm5YG7ruv3OJBBqoY1VfJ1LB5PPNmsd1w/edit?usp=sharing) | October 12th  |
+| Week 4: Roll a Ball Part 2          | <ul> <li>User interface        </li> <li>Physics                </li> <li>Scene management        </li> </ul> | Slides | October 19th  |
+| Week 5: 2D Platformer Part 1        | <ul> <li>Movement and platforms</li> <li>Tilemaps & 2D animation</li> <li>Audio management        </li> </ul> | Slides | October 26th  |
+| Week 6: 2D Platformer Part 2        | <ul> <li>Enemy AI              </li> <li>Platformer mechanics   </li> <li>Level design            </li> </ul> | Slides | November 2nd  |
+| Week 7: 2D Platformer Part 3        | <ul> <li>Persistent settings   </li> <li>Cutscenes & cinemachine</li>                                   </ul> | Slides | November 9th  |
+| Week 8: First Person Shooter Part 1 | <ul> <li>3D animation & rigging</li> <li>3D movement            </li> <li>More cinemachine        </li> </ul> | Slides | November 16th |
+| Week 9: First Person Shooter Part 2 | <ul> <li>Projectiles           </li> <li>Raycasting             </li> <li>Particle effects        </li> </ul> | Slides | November 23rd |
 
 ## Essential Links
 - [Studio Discord](https://discord.com/invite/bBk2Mcw)
