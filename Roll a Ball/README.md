@@ -27,7 +27,7 @@ Start Unity Hub and click on **Projects** on the sidebar. Click on Add and selec
 To create a new scene, first open the project and navigate to ```Assets->Create->Scene```. You can name your scene whatever you want.
  
 ## Navigating your workspace
-![ScreenShot](Screenshots/image2.png)
+![ScreenShot](Screenshots/image2.PNG)
 There are several different Windows that should be visible by default. Here is a brief description of them.
  
 **Hierarchy**: Displays every GameObject in a Scene. You can add GameObjects by right clicking on this window and selecting a type of GameObject. You can also search for specific GameObjects using the search bar above.<br>
@@ -54,7 +54,7 @@ Forwards, Left, Backwards, Right:  RMB + (W,A,S,D) <br>
 **Orbit around a point**: Alt + Move left mouse button
  
  ---
- 
+
 ## Toolbar
 ![Alt text](https://docs.unity3d.com/uploads/Main/ToolbarCallout.png)
 **Tools**: Move around the scene using the *Hand* tool, and edit GameObjects with the self-explanatory *Move*, *Rotate*, *Scale*, *Rectangular Transform*, and *Transform* tools.
