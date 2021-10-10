@@ -1,7 +1,7 @@
 # Studio Beginner Tutorials - Roll a Ball Part 1
  
 **Date**: October 12, 2021<br>
-**Location**: TBD<br>
+**Location**: Faraday Room (ENG IV)<br>
 **Instructors**: Richard Cheng, Ray Hsiao, Peter Sutarjo
  
 ## Resources
