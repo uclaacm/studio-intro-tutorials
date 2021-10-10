@@ -5,7 +5,6 @@ using UnityEngine.InputSystem;
 
 public class PlayerController : MonoBehaviour
 {
-    // Public means other scripts can access this value. It will also show up in the editor
     [SerializeField] float speed = 10;
     [SerializeField] float jumpForce = 500f;
     
@@ -15,11 +14,18 @@ public class PlayerController : MonoBehaviour
     private float movX;
     private float movY;
 
+    // Starting position of the ball
+    private Vector3 startingPosition;
+
+    // You can initialize member variables at declaration
+    private int touchingGround = 0;
+
     // Start is called before the first frame update
     void Start()
     {
         // Make sure you attach rigid body to the ball first
-        rb = GetComponent<Rigidbody>();     
+        rb = GetComponent<Rigidbody>();
+        startingPosition = transform.position;
     }
 
     // Detects event and then calls Update
@@ -32,9 +38,42 @@ public class PlayerController : MonoBehaviour
         movY = movementVector.y;
     }
 
+    // onCollisionEnter is called when you start colliding with an object
+    void OnCollisionEnter(Collision collision)
+    {
+    	if (collision.gameObject.tag == "Ground")
+    	{
+    		touchingGround++;
+    	}
+    }
+
+    // onColisionExit is called when you stop colliding with an object
+    void OnCollisionExit(Collision collision)
+    {
+    	if (collision.gameObject.tag == "Ground")
+    	{
+    		touchingGround--;
+    	}
+    }
+
+    void OnTriggerEnter(Collider collider)
+    {
+    	if (collider.gameObject.name == "Respawn Plane")
+    	{
+    		// Respawn ball at starting position
+    		transform.position = startingPosition;
+
+    		// Also stop ball from moving & rotating at respawn
+    		rb.velocity = Vector3.zero;
+    		rb.angularVelocity = Vector3.zero;
+    	}
+    }
+
+    // Only jump if you are touching the ground
     void OnJump()
     {
-        rb.AddForce(Vector3.up*jumpForce);
+    	if (touchingGround > 0)
+        	rb.AddForce(Vector3.up*jumpForce);
     }
 
     void FixedUpdate()
