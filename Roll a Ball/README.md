@@ -190,7 +190,7 @@ public class PlayerController : MonoBehaviour
 ```
 ## Setting up the camera
 ![Screenshot](Screenshots/image7.png)
-If you enter *Play Mode*, the ball should move when pressing the appropriate input controls, but the camera does not follow correctly. To resolve this, we need to add a camera controller script. 
+If you enter *Play Mode*, the ball should move when pressing the appropriate input controls, but the camera does not follow correctly. To resolve this, we need to add a camera controller script.<br> 
 
 ```csharp
 using System.Collections;
