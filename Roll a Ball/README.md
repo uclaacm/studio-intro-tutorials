@@ -24,11 +24,11 @@
 ## Setting up a scene:
 Start Unity Hub and click on **Projects** on the sidebar. Click on Add and select the folder named Roll a Ball to add Unity to your list of projects. If the project is greyed out then make sure that you have selected Unity 2020.3.15f2 as your project version.
  
-![ScreenShot](Screenshots/image1.png)
+![ScreenShot](Screenshots/image1.png)<br>
 To create a new scene, first open the project and navigate to ```Assets->Create->Scene```. You can name your scene whatever you want.
  
 ## Navigating your workspace
-![ScreenShot](Screenshots/image2.PNG)
+![ScreenShot](Screenshots/image2.PNG)<br>
 There are several different Windows that should be visible by default. Here is a brief description of them.
  
 **Hierarchy**: Displays every GameObject in a Scene. You can add GameObjects by right clicking on this window and selecting a type of GameObject. You can also search for specific GameObjects using the search bar above.<br>
@@ -69,10 +69,10 @@ The following are the default controls for navigating the scene view.
  ---
 
 ## Setting up an input system
-![Screenshot](Screenshots/image4.png)
+![Screenshot](Screenshots/image4.png)<br>
 To ensure that you have the new input system installed (not the legacy version), go to ```Window->Package Manager->Input System```. If you don’t see the Input System package, verify that you have *Packages:Unity Packages* selected on the top left of the Package Manager. If there is a green checkmark next to the Input System, then it is correctly installed.
  
-![Screenshot](Screenshots/image5.png)
+![Screenshot](Screenshots/image5.png)<br>
 Next, create an Input Actions Asset by going to ```Create->Input Actions```. Double-clicking on this asset will bring up several panels, which you can use to configure control schemes for different controllers. For this tutorial, we’ll be using the default generated control scheme as shown above.
  
 ## Creating a level
@@ -87,7 +87,7 @@ After creating a material, we can assign it to a GameObject by dragging it from 
 A prefab is a special type of component that allows GameObjects to be saved in the project for reuse. Prefabs are useful when you intend to have multiple instances of the same GameObject in a scene and do not want to configure every GameObject with identical components. Additionally, any change made to a prefab asset will be reflected across all copies of that GameObject in a scene. You can create a prefab from an existing GameObject in a scene by dragging the name of the GameObject from the *Hierarchy* window to the *Project* window.
 
 ## Setting up the ball
-![Screenshot](Screenshots/image6.png)
+![Screenshot](Screenshots/image6.png)<br>
 To create a ball, which will be controlled by the player, create a 3D sphere
 and add the following components in the inspector:
 
@@ -189,7 +189,7 @@ public class PlayerController : MonoBehaviour
 }
 ```
 ## Setting up the camera
-![Screenshot](Screenshots/image7.png)
+![Screenshot](Screenshots/image7.png)<br>
 If you enter *Play Mode*, the ball should move when pressing the appropriate input controls, but the camera does not follow correctly. To resolve this, we need to add a camera controller script.<br> 
 
 ```csharp
