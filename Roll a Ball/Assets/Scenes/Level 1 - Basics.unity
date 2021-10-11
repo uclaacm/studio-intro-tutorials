@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.44657898, g: 0.49641287, b: 0.5748173, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657826, g: 0.49641263, b: 0.57481676, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -687,13 +687,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
-  m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
+  m_LocalRotation: {x: 0.0991862, y: 0.7001158, z: -0.0991862, w: 0.7001158}
   m_LocalPosition: {x: -8.27, y: 2.484, z: 0.01}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
+  m_LocalEulerAnglesHint: {x: 16.127, y: 90, z: 0}
 --- !u!114 &963194229
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -706,7 +706,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3784dd2ec02c9eb43b83f15106c425bc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 1793082325}
+  camTarget: {fileID: 2036635539}
+  posLerp: 1.2
 --- !u!1001 &1556567748
 PrefabInstance:
   m_ObjectHideFlags: 0

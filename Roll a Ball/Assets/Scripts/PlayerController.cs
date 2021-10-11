@@ -86,5 +86,5 @@ public class PlayerController : MonoBehaviour
         Quaternion rotationCamera = Quaternion.LookRotation(cameraForward, Vector3.up);
 
         rb.AddForce(rotationCamera * movement * speed);
-    }   
+    }    
 }
