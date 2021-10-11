@@ -7,9 +7,9 @@ In this weekly workshop series, you will learn the fundamentals of game developm
 We also offer the [Advanced Track](https://github.com/uclaacm/studio-advanced-tutorials-f21) and [Creative Track](https://github.com/uclaacm/studio-creative-tutorials-f21). The Advanced Track covers more complex coding concepts and systems, but we encourage you to check it out if you have prior coding experience, even if you haven't used Unity before. The Creative Track focuses on non-coding aspects of game development, such as animation, writing, and sound design, and is also open to newcomers learning Unity through our beginner track.
 
 ## Curriculum Overview
-| Tutorials                           | Topics Covered                                                                                                | Slides | Live Schedule |
-|-------------------------------------|---------------------------------------------------------------------------------------------------------------|--------|---------------|
-| Week 3: Roll a Ball Part 1          | <ul> <li>Scenes                </li> <li>Scripting              </li> <li>GameObjects & components</li> </ul> | [Slides](https://docs.google.com/presentation/d/1jJV7GuUdXfJm5YG7ruv3OJBBqoY1VfJ1LB5PPNmsd1w/edit?usp=sharing) | October 12th  |
+| Tutorials                           | Topics Covered                                                                                                | Slides | Live Schedule | Video Recording |
+|-------------------------------------|---------------------------------------------------------------------------------------------------------------|--------|---------------|-----------------|
+| Week 3: Roll a Ball Part 1          | <ul> <li>Scenes                </li> <li>Scripting              </li> <li>GameObjects & components</li> </ul> | [Slides](https://docs.google.com/presentation/d/1jJV7GuUdXfJm5YG7ruv3OJBBqoY1VfJ1LB5PPNmsd1w/edit?usp=sharing) | October 12th  | [Video](https://youtu.be/oB3sk4a3VkE)
 | Week 4: Roll a Ball Part 2          | <ul> <li>User interface        </li> <li>Physics                </li> <li>Scene management        </li> </ul> | Slides | October 19th  |
 | Week 5: 2D Platformer Part 1        | <ul> <li>Movement and platforms</li> <li>Tilemaps & 2D animation</li> <li>Audio management        </li> </ul> | Slides | October 26th  |
 | Week 6: 2D Platformer Part 2        | <ul> <li>Enemy AI              </li> <li>Platformer mechanics   </li> <li>Level design            </li> </ul> | Slides | November 2nd  |
