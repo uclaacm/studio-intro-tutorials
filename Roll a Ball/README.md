@@ -6,7 +6,7 @@
  
 ## Resources
 [Slides](https://docs.google.com/presentation/d/1jJV7GuUdXfJm5YG7ruv3OJBBqoY1VfJ1LB5PPNmsd1w/edit?usp=sharing)<br>
-[Video]()<br>
+[Video](https://youtu.be/oB3sk4a3VkE)<br>
  
 ## Topics Covered
 * Setting up a scene
