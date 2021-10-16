@@ -13,7 +13,7 @@ We also offer the [Advanced Track](https://github.com/uclaacm/studio-advanced-tu
 | Week 4: Roll a Ball Part 2 | <ul> <li>User interface</li> <li>Checkpoints</li> <li>Scene management</li> </ul> | October 19th | Slides | Video |
 | Week 5: 2D Platformer Part 1 | <ul> <li>Movement and platforms</li> <li>Tilemaps & 2D animation</li> <li>Audio management</li> </ul> | October 26th | | |
 | Week 6: 2D Platformer Part 2 | <ul> <li>Enemy AI</li> <li>Platformer mechanics</li> <li>Level design</li> </ul> | November 2nd | | |
-| Week 7: 2D Platformer Part 3 | <ul> <li>Persistent settings</li> <li>Cutscenes & cinemachine</li> </ul> | November 9th | Slides | |
+| Week 7: 2D Platformer Part 3 | <ul> <li>Persistent settings</li> <li>Cutscenes & cinemachine</li> </ul> | November 9th | | |
 | Week 8: First Person Shooter Part 1 | <ul> <li>3D animation & rigging</li> <li>3D movement</li> <li>More cinemachine</li> </ul> | November 16th | |
 | Week 9: First Person Shooter Part 2 | <ul> <li>Projectiles</li> <li>Raycasting</li> <li>Particle effects</li> </ul> | November 23rd | | |
 
