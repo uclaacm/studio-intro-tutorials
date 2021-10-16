@@ -10,12 +10,12 @@ We also offer the [Advanced Track](https://github.com/uclaacm/studio-advanced-tu
 | Tutorials | Topics Covered | Live Schedule | Slides | Video |
 |-----------|----------------|---------------|--------|-------|
 | [Week 3: Roll a Ball Part 1](https://github.com/uclaacm/studio-beginner-tutorials-f21/blob/main/Roll%20a%20Ball/README.md) | <ul> <li>Scenes</li> <li>Scripting</li> <li>GameObjects & components</li> </ul> | October 12th | [Slides](https://docs.google.com/presentation/d/1jJV7GuUdXfJm5YG7ruv3OJBBqoY1VfJ1LB5PPNmsd1w/edit?usp=sharing) | [Video](https://youtu.be/oB3sk4a3VkE) |
-| Week 4: Roll a Ball Part 2 | <ul> <li>User interface</li> <li>Checkpoints</li> <li>Scene management</li> </ul> | October 19th | Slides | |
-| Week 5: 2D Platformer Part 1 | <ul> <li>Movement and platforms</li> <li>Tilemaps & 2D animation</li> <li>Audio management</li> </ul> | October 26th | Slides | |
-| Week 6: 2D Platformer Part 2 | <ul> <li>Enemy AI</li> <li>Platformer mechanics</li> <li>Level design</li> </ul> | November 2nd | Slides | |
+| Week 4: Roll a Ball Part 2 | <ul> <li>User interface</li> <li>Checkpoints</li> <li>Scene management</li> </ul> | October 19th | Slides | Video |
+| Week 5: 2D Platformer Part 1 | <ul> <li>Movement and platforms</li> <li>Tilemaps & 2D animation</li> <li>Audio management</li> </ul> | October 26th | | |
+| Week 6: 2D Platformer Part 2 | <ul> <li>Enemy AI</li> <li>Platformer mechanics</li> <li>Level design</li> </ul> | November 2nd | | |
 | Week 7: 2D Platformer Part 3 | <ul> <li>Persistent settings</li> <li>Cutscenes & cinemachine</li> </ul> | November 9th | Slides | |
-| Week 8: First Person Shooter Part 1 | <ul> <li>3D animation & rigging</li> <li>3D movement</li> <li>More cinemachine</li> </ul> | November 16th | Slides |
-| Week 9: First Person Shooter Part 2 | <ul> <li>Projectiles</li> <li>Raycasting</li> <li>Particle effects</li> </ul> | November 23rd | Slides | |
+| Week 8: First Person Shooter Part 1 | <ul> <li>3D animation & rigging</li> <li>3D movement</li> <li>More cinemachine</li> </ul> | November 16th | |
+| Week 9: First Person Shooter Part 2 | <ul> <li>Projectiles</li> <li>Raycasting</li> <li>Particle effects</li> </ul> | November 23rd | | |
 
 ## Essential Links
 - [Studio Discord](https://discord.com/invite/bBk2Mcw)
