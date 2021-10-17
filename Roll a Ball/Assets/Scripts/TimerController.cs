@@ -5,26 +5,36 @@ using TMPro;
 
 public class TimerController : MonoBehaviour
 {
-    // Time remaining in seconds
+    // Time to count down from
     [SerializeField] private int countdownTime;
+
+    // When we started counting down
+    private float startTime;
+
     // UI component for time
-    public TextMeshProUGUI countText;
+    [SerializeField] private TextMeshProUGUI countText;
 
     // Start is called before the first frame update
     void Start()
     {
-        StartCoroutine(CountdownTimer());
+        startTime = Time.time;
+        Debug.Assert(countText != null, "TextController missing TextMeshProUGUI component.");
     }
 
-   IEnumerator CountdownTimer()
-   {
-       while(countdownTime > 0)
-       {
-           yield return new WaitForSeconds(1f);
-           countText.text = string.Format("{0:D2}:{1:D2}", countdownTime / 60, countdownTime % 60);
-           countdownTime--;
-       }
-       
-       // Should display game over (restart scren)
-   }
+    void Update()
+    {
+    	float timeElapsed = Time.time - startTime;
+
+    	int timeRemaining;
+    	if (timeElapsed < countdownTime)
+    	{
+    		timeRemaining = (int) (countdownTime - timeElapsed);
+    	}
+    	else
+    	{
+    		timeRemaining = 0; // Time remaining cannot go negative
+    	}
+
+    	countText.text = string.Format("{0:D2}:{1:D2}", timeRemaining / 60, timeRemaining % 60);
+    }
 }
