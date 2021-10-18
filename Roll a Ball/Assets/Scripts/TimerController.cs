@@ -39,6 +39,7 @@ public class TimerController : MonoBehaviour
     	{
     		timeRemaining = 0; // Time remaining cannot go negative
             gameOver.DisplayFinalScore(ScoreController.score);
+            Destroy(this);
     	}
 
     	countText.text = string.Format("{0:D2}:{1:D2}", timeRemaining / 60, timeRemaining % 60);
