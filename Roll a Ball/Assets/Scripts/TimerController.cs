@@ -20,6 +20,7 @@ public class TimerController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        Time.timeScale = 1;
         startTime = Time.time;
         Debug.Assert(countText != null, "TextController missing TextMeshProUGUI component.");
         gameOver = (GameOver)GameObject.FindObjectOfType(typeof(GameOver));
