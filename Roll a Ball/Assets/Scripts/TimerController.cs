@@ -14,11 +14,15 @@ public class TimerController : MonoBehaviour
     // UI component for time
     [SerializeField] private TextMeshProUGUI countText;
 
+    // UI Game Over component
+    private GameOver gameOver;
+
     // Start is called before the first frame update
     void Start()
     {
         startTime = Time.time;
         Debug.Assert(countText != null, "TextController missing TextMeshProUGUI component.");
+        gameOver = (GameOver)GameObject.FindObjectOfType(typeof(GameOver));
     }
 
     void Update()
@@ -33,6 +37,7 @@ public class TimerController : MonoBehaviour
     	else
     	{
     		timeRemaining = 0; // Time remaining cannot go negative
+            gameOver.DisplayFinalScore(ScoreController.score);
     	}
 
     	countText.text = string.Format("{0:D2}:{1:D2}", timeRemaining / 60, timeRemaining % 60);
