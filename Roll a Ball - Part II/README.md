@@ -7,6 +7,7 @@
 ## Resources
 [Slides](https://docs.google.com/presentation/d/1N__34gQRdCBV8gSB7huCgWJGKWnnMpdQAGUF3QjkW_k/edit?usp=sharing)<br>
 [Video](https://youtu.be/AAJRsnKxLKk)<br>
+[Unity Package for Part 1 (in case you missed it)](https://drive.google.com/file/d/1s9E6elKknWeoaUj-9DM1qlYfSwgamIsx/view?usp=sharing)
  
 ## Topics Covered
 * UI Elements
