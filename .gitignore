@@ -62,3 +62,4 @@ Roll a Ball/Temp/UnityLockfile
 */UserSettings/EditorUserSettings.asset
 *.DS_Store
 */.vscode
+*.vsconfig
