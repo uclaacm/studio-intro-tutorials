@@ -10,9 +10,8 @@ public class PlayerMovement : MonoBehaviour
     private float vertical;
     private Rigidbody2D rb;
     private Vector2 position;
-    private bool grounded;
-
-
+    
+    public bool grounded;
     public float speed;
     public float jumpHeight;
     public Animator animator;
@@ -24,45 +23,21 @@ public class PlayerMovement : MonoBehaviour
         grounded = false;
     }
 
-    void OnMove(InputValue input)
+    void OnMove(InputValue movementVal)
     {
-        Vector2 inputVec = input.Get<Vector2>();
-        Debug.Log("test");
-
-    }
-
-    /*public void OnMove(InputValue movementVal)
-    {
-        Debug.Log("test");
         horizontal = 0;
         vertical = 0;
         Vector2 movement = movementVal.Get<Vector2>();
         horizontal = movement.x * speed;
-        vertical = movement.y;
-        Debug.Log(vertical);
-        if (vertical == 1 && grounded) 
+        if (movement.y > 0 && grounded) 
         {
-            vertical *= jumpHeight;
+            vertical = jumpHeight;
 
         }
-    }*/
+    }
 
     void Update()
     {
-        //horizontal = 0;
-        //vertical = 0;
-        /*if (Input.GetKey(KeyCode.A))
-        {
-            horizontal -= speed;
-        }
-        if (Input.GetKey(KeyCode.D))
-        {
-            horizontal += speed;
-        }
-        if (Input.GetKeyDown(KeyCode.W) && grounded)
-        {
-            vertical = jumpHeight;
-        }*/
         if(horizontal != 0)
         {
             animator.SetBool("isRunning", true);
@@ -76,23 +51,21 @@ public class PlayerMovement : MonoBehaviour
     }
     private void FixedUpdate()
     {
-        if (vertical != 0)
-            Debug.Log(vertical);
         rb.velocity = new Vector2(horizontal, vertical <= 0 ? rb.velocity.y : vertical);
+        vertical = 0;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.GetComponent<Platform>())
+        if (collision.gameObject.tag == "ground")
         {
-            Debug.Log("ground");
             grounded = true;
         }
     }
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if (collision.gameObject.GetComponent<Platform>())
+        if (collision.gameObject.tag == "ground")
         {
             grounded = false;
         }
