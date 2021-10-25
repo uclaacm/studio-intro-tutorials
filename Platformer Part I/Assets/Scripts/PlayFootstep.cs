@@ -19,8 +19,13 @@ public class PlayFootstep : MonoBehaviour
             Debug.LogWarning("PlayFootstep script not provided with AudioClip.");
     }
 
-    void PlayRandomFootstep()
+    void PlayFootsteps()
     {
     	source.PlayOneShot(footsteps);
+    }
+
+    void StopPlaying()
+    {
+        source.Stop();
     }
 }

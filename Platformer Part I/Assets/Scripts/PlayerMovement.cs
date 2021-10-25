@@ -3,22 +3,27 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
+[RequireComponent(typeof(Rigidbody2D))]
+[RequireComponent(typeof(Animator))]
 
 public class PlayerMovement : MonoBehaviour
 {
     private float horizontal;
     private float vertical;
-    private Rigidbody2D rb;
     private Vector2 position;
+
+    private Rigidbody2D rb;
+    private Animator animator;
     
     public bool grounded;
     public float speed;
     public float jumpHeight;
-    public Animator animator;
 
     void Start()
     {
-        rb = this.GetComponent<Rigidbody2D>();
+        rb = GetComponent<Rigidbody2D>();
+        animator = GetComponent<Animator>();
+
         position = rb.position;
         grounded = false;
     }
@@ -29,23 +34,23 @@ public class PlayerMovement : MonoBehaviour
         vertical = 0;
         Vector2 movement = movementVal.Get<Vector2>();
         horizontal = movement.x * speed;
+
         if (movement.y > 0 && grounded) 
         {
             vertical = jumpHeight;
-
         }
     }
 
     void Update()
     {
-        if(horizontal != 0)
+        if (horizontal == 0)
         {
-            animator.SetBool("isRunning", true);
+            animator.SetBool("isRunning", false);
         }
         else
         {
-            animator.SetBool("isRunning", false);
-
+            animator.SetBool("isRunning", true);
+            transform.localScale = new Vector3((horizontal < 0 ? -1 : 1), 1, 1);
         }
 
     }
@@ -55,19 +60,21 @@ public class PlayerMovement : MonoBehaviour
         vertical = 0;
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.tag == "ground")
+        if (collision.gameObject.tag == "Ground")
         {
             grounded = true;
+            animator.SetBool("isJumping", false);
         }
     }
 
-    private void OnTriggerExit2D(Collider2D collision)
+    private void OnCollisionExit2D(Collision2D collision)
     {
-        if (collision.gameObject.tag == "ground")
+        if (collision.gameObject.tag == "Ground")
         {
             grounded = false;
+            animator.SetBool("isJumping", true);
         }
     }
 }
