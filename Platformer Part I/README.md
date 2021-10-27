@@ -1,4 +1,4 @@
-# Studio Beginner Tutorials - 2D Platformer Part 1 (WORK IN PROGRESS)
+# Studio Beginner Tutorials - 2D Platformer Part 1 
   
 **Date**: October 26, 2021, 7:00 pm - 9:00 pm<br>
 **Location**: Faraday Room 67-124 (Engineering IV)<br>
