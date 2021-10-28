@@ -6,7 +6,7 @@
  
 ## Resources
 [Slides](https://docs.google.com/presentation/d/1pfJ3OuMaTnBttJlBjijEGwMq7aT6koFEN7K3zYEDpoI/edit?usp=sharing)<br>
-Video Coming Soon
+[Video](https://youtu.be/AIczuDBT6ac)
  
 ## Topics Covered
 * Tilemaps and platforms
