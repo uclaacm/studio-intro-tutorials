@@ -30,7 +30,7 @@ public class EnemyMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        Move(Direction.left);
     }
     
     void Move(Direction dir)
@@ -38,7 +38,10 @@ public class EnemyMovement : MonoBehaviour
         // Set animator boolean for movement
 
         // Flip the sprite if moving left
-        this.gameObject.transform.localScale = new Vector3(Mathf.Abs(initScale.x) * (int) dir, initScale.y, initScale.z);
-        
+        transform.localScale = new Vector3(Mathf.Abs(initScale.x) * (int) dir, initScale.y, initScale.z);
+
+        // Have enemy move in the specified direction
+        rb.velocity = new  Vector2(speed * Time.fixedDeltaTime, rb.velocity.y);
+
     }
 }
