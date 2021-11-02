@@ -13,11 +13,15 @@ public class EnemyMovement : MonoBehaviour
     private Animator animator;
     public float speed;
     
+    // Initial orientation of the sprite renderer
     private Vector3 initScale;
 
-    // Enemy will idle for a certain amount of time and then continue moving
-    [SerializeField] private float idleDuration;
-    private float idleTimer;
+    // Set boundaries for patrol
+    [SerializeField] private Vector3 leftEdge;
+    [SerializeField] private Vector3 rightEdge;
+
+    // Check if we're moving in a certain direction
+    private bool movingLeft;
 
     // Start is called before the first frame update
     void Start()
@@ -25,12 +29,25 @@ public class EnemyMovement : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
         initScale = transform.localScale;
+        movingLeft = true;
     }
 
     // Update is called once per frame
     void Update()
-    {
-        Move(Direction.left);
+    {   
+        if (movingLeft)
+        {
+            // If we hit the boundary, have the enemy switch direction
+            if ( transform.position.x < leftEdge[0])
+                movingLeft = false;
+            Move(Direction.left);
+        }
+        else
+        {
+            if ( transform.position.x > rightEdge[0])
+                movingLeft = true;
+            Move(Direction.right);
+        }
     }
     
     void Move(Direction dir)
@@ -41,11 +58,12 @@ public class EnemyMovement : MonoBehaviour
         switch (dir)
         {
             case Direction.left:
-                // Flip the sprite if moving right
-                transform.localScale = new Vector3(Mathf.Abs(initScale.x) * (int) dir* -1, initScale.y, initScale.z);
+                // Keep initial orientation of sprite is moving left
+                transform.localScale = new Vector3(Mathf.Abs(initScale.x), initScale.y, initScale.z);
                 break;
             case Direction.right:
-                transform.localScale = new Vector3(Mathf.Abs(initScale.x) * (int) dir, initScale.y, initScale.z);
+                // Otherwise, we flip the sprite
+                transform.localScale = new Vector3(Mathf.Abs(initScale.x) * -1, initScale.y, initScale.z);
                 break;
         }
 

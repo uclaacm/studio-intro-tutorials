@@ -143,7 +143,7 @@ GameObject:
   - component: {fileID: 353792099}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -7935,7 +7935,7 @@ GameObject:
   - component: {fileID: 1614616305}
   m_Layer: 0
   m_Name: Pig
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -8046,7 +8046,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1614616299}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 4.358444, y: -2.031, z: -5.7553277}
+  m_LocalPosition: {x: 3.995, y: -2.031, z: -5.7553277}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -8083,5 +8083,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 42c014d3425d2354c9a1ffba63d7a108, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 3
-  idleDuration: 0
+  speed: 0.5
+  leftEdge: {x: 2.361, y: 0, z: 0}
+  rightEdge: {x: 5.431, y: 0, z: 0}
