@@ -36,12 +36,20 @@ public class EnemyMovement : MonoBehaviour
     void Move(Direction dir)
     {
         // Set animator boolean for movement
+        animator.SetBool("isRunning", true);
 
-        // Flip the sprite if moving left
-        transform.localScale = new Vector3(Mathf.Abs(initScale.x) * (int) dir, initScale.y, initScale.z);
+        switch (dir)
+        {
+            case Direction.left:
+                // Flip the sprite if moving right
+                transform.localScale = new Vector3(Mathf.Abs(initScale.x) * (int) dir* -1, initScale.y, initScale.z);
+                break;
+            case Direction.right:
+                transform.localScale = new Vector3(Mathf.Abs(initScale.x) * (int) dir, initScale.y, initScale.z);
+                break;
+        }
 
         // Have enemy move in the specified direction
-        rb.velocity = new  Vector2(speed * Time.fixedDeltaTime, rb.velocity.y);
-
+        rb.velocity = new Vector2(speed * (int) dir, rb.velocity.y);
     }
 }
