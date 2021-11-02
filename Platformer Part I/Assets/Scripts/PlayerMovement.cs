@@ -14,10 +14,16 @@ public class PlayerMovement : MonoBehaviour
 
     private Rigidbody2D rb;
     private Animator animator;
-    
+
+    private bool moveLock;
+ 
     public bool grounded;
     public float speed;
     public float jumpHeight;
+
+    public int health;
+    public float knockback;
+
 
     void Start()
     {
@@ -26,21 +32,34 @@ public class PlayerMovement : MonoBehaviour
 
         position = rb.position;
         grounded = false;
+
+        health = 3;
+
+        moveLock = false;
     }
 
     void OnMove(InputValue movementVal)
     {
-        horizontal = 0;
-        vertical = 0;
-        Vector2 movement = movementVal.Get<Vector2>();
-        horizontal = movement.x * speed;
-
-        if (movement.y > 0 && grounded) 
+        if (!moveLock)
         {
-            vertical = jumpHeight;
+            horizontal = 0;
+            vertical = 0;
+            Vector2 movement = movementVal.Get<Vector2>();
+            horizontal = movement.x * speed;
+
+            if (movement.y > 0 && grounded)
+            {
+                vertical = jumpHeight;
+            }
         }
+
     }
 
+    void OnFire()
+    {
+        if(!animator.GetBool("isJumping"))
+            animator.SetTrigger("attack");
+    }
     void Update()
     {
         if (horizontal == 0)
@@ -56,7 +75,11 @@ public class PlayerMovement : MonoBehaviour
     }
     private void FixedUpdate()
     {
-        rb.velocity = new Vector2(horizontal, vertical <= 0 ? rb.velocity.y : vertical);
+        Debug.Log(moveLock);
+        if (!moveLock)
+        {
+            rb.velocity = new Vector2(horizontal, vertical <= 0 ? rb.velocity.y : vertical);
+        }
         vertical = 0;
     }
 
@@ -67,6 +90,20 @@ public class PlayerMovement : MonoBehaviour
             grounded = true;
             animator.SetBool("isJumping", false);
         }
+        if (collision.gameObject.tag == "Enemy")
+        {
+            Debug.Log("hit");
+            health--;
+            int dir = collision.gameObject.GetComponent<Transform>().position.x > rb.position.x ? -1 : 1;
+            horizontal = 0;
+            vertical = 0;
+            moveLock = true;
+            rb.velocity = new Vector2(-1.5f, 2);
+            //rb.AddForce(new Vector2(-10, 3));
+            Debug.Log(rb.velocity.x);
+            animator.SetBool("isJumping", false);
+            animator.SetBool("hit", true);
+        }
     }
 
     private void OnCollisionExit2D(Collision2D collision)
@@ -76,5 +113,12 @@ public class PlayerMovement : MonoBehaviour
             grounded = false;
             animator.SetBool("isJumping", true);
         }
+    }
+
+    public void endHit()
+    {
+        Debug.Log("end");
+        animator.SetBool("hit", false);
+        moveLock = false;
     }
 }
