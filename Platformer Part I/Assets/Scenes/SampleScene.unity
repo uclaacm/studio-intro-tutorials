@@ -140,6 +140,7 @@ GameObject:
   - component: {fileID: 353792095}
   - component: {fileID: 353792097}
   - component: {fileID: 353792098}
+  - component: {fileID: 353792099}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -435,6 +436,22 @@ MonoBehaviour:
   m_DefaultActionMap: Player
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
+--- !u!58 &353792099
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 353792089}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 0.185
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
