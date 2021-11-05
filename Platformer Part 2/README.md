@@ -9,9 +9,9 @@ Slides<br>
 Video
  
 ## Topics Covered
-* Tilemaps and platforms
-* Basic 2D animation with spritesheets
-* Basic audio management
+* Destructible tiles
+* Cinemachine
+* Enemies and combat
  
 ## What you'll need
 * [Unity Hub](https://unity.com/download)
@@ -22,8 +22,12 @@ Video
 ---
 
 ## Destructible Tilemaps
+
 ### Setup
 A common mechanic in platformers are destructible walls and platforms. To add this into our platformer, we will write a script which will delete tiles from our `Tilemap` when something collides with the tile. But first, create a new `2D Object → Tilemap → Rectangular` as a child of the `Grid` game object that already holds our existing tilemaps. We need a separate `Tilemap` since we don't want to delete tiles from platforms that aren't supposed to be destructible. Remember to attach `Tilemap Collider 2D` and `Composite Collider 2D` components, and set the `Rigidbody2D` to static so that other things will be able to collide with our new `Tilemap`!
+
+## Deleting Tiles
+Create a new [`DestructibleTilemap` script](https://github.com/uclaacm/studio-beginner-tutorials-f21/blob/main/Platformer%20Part%20I/Assets/Scripts/DestructibleTilemap.cs) and attach it to your new `Tilemap`. Add a member variable referencing the `Tilemap` that's attached to the same game object as our script. You'll also need to add `using UnityEngine.Tilemaps;` at the top of your script.
 
 ---
 ## Essential Links
