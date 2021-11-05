@@ -79,6 +79,91 @@ You can also extend your newfound knowledge to create moving platforms! By movin
 
 Finally, our tilemap currently deletes tiles whenever anything collides with it - not just the player. While this can be a good thing (such as allowing enemies to destroy platforms by running over them!), you may also want to have platforms that are only destroyed by certain objects or types of objects. For example, you could modify your DestructibleTilemap script to only delete tiles when the tile touches a bomb!
 
+## Enemies and Combat
+
+### Setup 
+Similar to the player, we'll be setting up the sprite sheet for the enemy which will be a pig. Navigate to the folder called `Kings and Pigs->Sprites-> 03-Pig`. We'll be configuring spritesheets for the running, idle, and death animation. Click on one of the sprites and set the `Sprite Mode` to `Multiple`. Next, click `Sprite Editor` in the inspector and slice the sprites according the cell size (34 x 28). We won't be using the automatic setting since sprite won't always be centered across different animations.
+
+### Animator Controller
+![ScreenShot](Screenshots/image1.png) <br>
+Add an animation controller with the following animation states and parameter. If you need a refresher on how to configure animations in Unity, you can refer to [Part I](https://github.com/uclaacm/studio-beginner-tutorials-f21/tree/main/Platformer%20Part%20I) of this tutorial series!
+
+### Enemy Movement
+Finally, we can configure a movement script for the enemy, which will cause it to patrol back and forth between two points that we specify. Note that we will also need to manually flip the sprite when it is moving to the right, similar to the player.
+```csharp
+public class EnemyMovement : MonoBehaviour
+{
+    enum Direction {left = -1, right = 1};
+    private Rigidbody2D rb;
+    private Animator animator;
+    public float speed;
+    
+    // Initial orientation of the sprite renderer
+    private Vector3 initScale;
+
+    // Set boundaries for patrol
+    [SerializeField] private Vector3 leftEdge;
+    [SerializeField] private Vector3 rightEdge;
+
+    // Check if we're moving in a certain direction
+    private bool movingLeft;
+
+    // Start is called before the first frame update
+    void Start()
+    {
+        rb = GetComponent<Rigidbody2D>();
+        animator = GetComponent<Animator>();
+        initScale = transform.localScale;
+        movingLeft = true;
+    }
+
+    // Update is called once per frame
+    void Update()
+    {   
+        if (movingLeft)
+        {
+            // If we hit the boundary, have the enemy switch direction
+            if ( transform.position.x < leftEdge[0])
+                movingLeft = false;
+            Move(Direction.left);
+        }
+        else
+        {
+            if ( transform.position.x > rightEdge[0])
+                movingLeft = true;
+            Move(Direction.right);
+        }
+    }
+    
+    void Move(Direction dir)
+    {
+        // Set animator boolean for movement
+        animator.SetBool("isRunning", true);
+
+        switch (dir)
+        {
+            case Direction.left:
+                // Keep initial orientation of sprite is moving left
+                transform.localScale = new Vector3(Mathf.Abs(initScale.x), initScale.y, initScale.z);
+                break;
+            case Direction.right:
+                // Otherwise, we flip the sprite
+                transform.localScale = new Vector3(Mathf.Abs(initScale.x) * -1, initScale.y, initScale.z);
+                break;
+        }
+
+        // Have enemy move in the specified direction
+        rb.velocity = new Vector2(speed * (int) dir, rb.velocity.y);
+    }
+}
+```
+### Bonus Sidequests
+Instead of having the enemy move back and forth between two points, would it be possible to make the pig move in a random direction for a certain amount of time? 
+
+Can you implement enemies jumping?
+
+What if enemies locked on to the player once they approached a certain distance?
+
 ---
 ## Essential Links
 - [Studio Discord](https://discord.com/invite/bBk2Mcw)
