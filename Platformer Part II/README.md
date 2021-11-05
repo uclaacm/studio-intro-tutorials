@@ -72,6 +72,13 @@ private IEnumerator DeleteTileDelayed(Vector3 tilePosition)
 
 The function above shows an implementation of waiting a number of seconds before deleting tiles. If you call `DeleteTileDelayed()` from `TriggerDeletions()` and play the game, you should now see that a tile that you walk into or onto will only delete itself after a short delay. However, if you have multiple destructible tiles next to each other and walk over them, you may notice that only the first tile you touch is deleted. This is because we called `TriggerDeletions()` from `OnCollisionEnter2D` — when we move from one tile to the next we don't enter the collider again, since we no longer exit the collider when the tile is instantaneously deleted. To fix this, also call `TriggerDeletions()` from `OnCollisionStay2D`. Now you should be able to run over a destructible platform and have it collapse behind you!
 
+### Bonus Sidequests
+One disadvantage of calling `TriggerDeletions()` from `OnCollisionStay2D` is that our player will trigger the deletion of the same tile many times before the tile is actually deleted, slowing down our game. This problem is worsened by longer delays before deletion, and could cause problems down the line if we need to add back a tile in the same position, since it could be deleted by the deletions that have been "buffered". You can solve this by checking whether the tile has already been marked for destruction in your coroutine - the example implementation uses `HashSet<>` to keep track of which tiles are marked for deletion.
+
+You can also extend your newfound knowledge to create moving platforms! By moving a tilemap around, you can move all of the platforms within the tilemap. You can use coroutines or the animation state machine to create platforms that move in a specific pattern.
+
+Finally, our tilemap currently deletes tiles whenever anything collides with it - not just the player. While this can be a good thing (such as allowing enemies to destroy platforms by running over them!), you may also want to have platforms that are only destroyed by certain objects or types of objects. For example, you could modify your DestructibleTilemap script to only delete tiles when the tile touches a bomb!
+
 ---
 ## Essential Links
 - [Studio Discord](https://discord.com/invite/bBk2Mcw)
