@@ -52,7 +52,25 @@ Call this function within `void OnCollisionStay2D(Collision2D collision)` so tha
 ### Coroutines
 Couroutines are a special type of function in Unity which allow you to pause execution of your code and then return to it later. In our case, we can start the process of deleting a tile, pause our coroutine, and then actually delete the tile after the delay.
 
-Coroutines always have an `IEnumerator` return type, and within your coroutine you will need to use `yield return` instead of just `return`. Unity provides some very useful `YieldInstructions` that can be used with `yield return`, such as `new WaitForSeconds(float seconds)` which will pause the coroutine for approximately the provided number of seconds. You can also use `yield return null` to only pause your coroutine until the next frame of the game. Finally, to actually run a coroutine, instead of calling it like a regular function (`ExampleCoroutine(inputParameter);`), coroutines are started with `StartCoroutine()` (`StartCoroutine(ExampleCoroutine(inputParameter));`).
+Coroutines always have an `IEnumerator` return type, and within your coroutine you will need to use `yield return` instead of just `return`. Unity provides some very useful `YieldInstructions` that can be used with `yield return`, such as `new WaitForSeconds(float seconds)` which will pause the coroutine for approximately the provided number of seconds. You can also use `yield return null` to only pause your coroutine until the next frame of the game. Finally, to actually run a coroutine, instead of calling it like a regular function (`ExampleCoroutine(inputParameter);`), coroutines are started with `StartCoroutine()` (`StartCoroutine(ExampleCoroutine(inputParameter));`). If you would like to learn more about coroutines and how to use them, you can take a look at the [Programming Essential workshop](https://github.com/uclaacm/studio-advanced-tutorials-f21/tree/main/Programming%20Essentials) from the Advanced Track.
+
+```c#
+[SerializeField] private float deletionDelay = 0.5f;	// How long to wait before deleting a tile
+
+private IEnumerator DeleteTileDelayed(Vector3 tilePosition)
+{
+	// Only need to wait if delay is non-negative
+	if (deletionDelay > 0)
+	{
+		yield return new WaitForSeconds(deletionDelay);
+	}
+
+	// Actually delete tile after delay
+	tilemap.SetTile(tilemap.WorldToCell(tilePosition), null);
+}
+```
+
+The function above shows an implementation of waiting a number of seconds before deleting tiles. If you call `DeleteTileDelayed()` from `TriggerDeletions()` and play the game, you should now see that a tile that you walk into or onto will only delete itself after a short delay. However, if you have multiple destructible tiles next to each other and walk over them, you may notice that only the first tile you touch is deleted. This is because we called `TriggerDeletions()` from `OnCollisionEnter2D` — when we move from one tile to the next we don't enter the collider again, since we no longer exit the collider when the tile is instantaneously deleted. To fix this, also call `TriggerDeletions()` from `OnCollisionStay2D`. Now you should be able to run over a destructible platform and have it collapse behind you!
 
 ---
 ## Essential Links
