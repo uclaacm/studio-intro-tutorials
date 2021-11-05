@@ -47,7 +47,10 @@ private void TriggerDeletions(Collision2D collision)
 }
 ```
 
-Call this function in `void OnCollisionStay2D(Collision2D collision)`. If you play your platformer, you should see that when you run into or onto a destructible tile, it gets deleted instantly.
+Call this function in `void OnCollisionStay2D(Collision2D collision)`. If you play the game, you should see that when the player runs into or onto a destructible tile, the tile is instantly deleted. While you can now create hidden rooms and fake walls, deleting tiles instantly isn't so great if we want a platform that will collapse after we run over it. To implement a delay between detecting the collisions and actually deleting the tiles, we can use coroutines.
+
+### Coroutines
+Couroutines are a special type of function in Unity which allow you to pause execution of your code and then return to it later. In our case, we can start the process of deleting a tile, pause our coroutine, and then actually delete the tile after the delay.
 
 ---
 ## Essential Links
