@@ -22,8 +22,8 @@ public class PlayerMovement : MonoBehaviour
     public float jumpHeight;
 
     public int health;
-    public float knockback;
-
+    public float knockbackX;
+    public float knockbackY;
 
     void Start()
     {
@@ -33,7 +33,6 @@ public class PlayerMovement : MonoBehaviour
         position = rb.position;
         grounded = false;
 
-        health = 3;
 
         moveLock = false;
     }
@@ -57,7 +56,7 @@ public class PlayerMovement : MonoBehaviour
 
     void OnFire()
     {
-        if(!animator.GetBool("isJumping"))
+        if(!animator.GetBool("isJumping") || !animator.GetBool("hit"))
             animator.SetTrigger("attack");
     }
     void Update()
@@ -92,15 +91,12 @@ public class PlayerMovement : MonoBehaviour
         }
         if (collision.gameObject.tag == "Enemy")
         {
-            Debug.Log("hit");
             health--;
             int dir = collision.gameObject.GetComponent<Transform>().position.x > rb.position.x ? -1 : 1;
             horizontal = 0;
             vertical = 0;
             moveLock = true;
-            rb.velocity = new Vector2(-1.5f, 2);
-            //rb.AddForce(new Vector2(-10, 3));
-            Debug.Log(rb.velocity.x);
+            rb.velocity = new Vector2(knockbackX*dir, knockbackY);
             animator.SetBool("isJumping", false);
             animator.SetBool("hit", true);
         }
