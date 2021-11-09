@@ -20,6 +20,30 @@ Video
 * [Kings and Pigs Assets](https://pixelfrog-assets.itch.io/kings-and-pigs)
 
 ---
+## Cinemachine
+
+### Setup
+Currently, we have the `Main Camera` as a child of the `Player`, which will cause the camera to always have the player be at the center of the screen. One issue is this camera setup is that it can be difficult for the player to see what's in front of them. To solve this issue, we can make the camera to be more dynamic and configurable such that it reacts to where the player is on the screen and movement.
+
+`Cinemachine` is a state-driven suite of camera modules that allows us to easily configure animation states, implement tracking, dolly, shake, and more. To setup `Cinemachine`, first install the package by navigating to `Window->Package Manager` and install the `Cinemachine` package in the `Unity Registry` section.
+
+### Implementing the camera
+After installing `Cinemachine`, a new tab should appear to right of `Component` in the upper taskbar. Click `2D Virtual Camera` to add a `CM virtual camera` to our scene. This will be a camera with some settings configured for a 2D scene. Specifically, the `Framing Transposer` under the `Body` settings window will follow a target on the camera's X-Y plane, and prevent rotation.
+
+We'll set the `Follow` setting to the `Player` transform. You should see a grid appear in the game view with a yellow dot on the target we're tracking.
+![Screenshot](Screenshots/image2.png)<br>
+
+### Settings Overview
+**Lookahead Time**:  The composer will adjust its target offset to look at a point where the target may be in x seconds into the future. This setting is useful for tracking the target if it's moving fast towards the edge of the frame.<br>
+
+**X, Y, Z Damping**: Determines how aggressively the camera maintains the offset on a specified axis. A low damping value means the camera snap faster to its target offset while a larger damping value means the camera will respond slower to the target offset, yielding in smoother movement.<br>
+
+**Screen X, Y:** Moves the camera such that the target is positioned to the corresponding X,Y screen coordinates. Note that screen coordinates of (0,0) correspond to the bottom left of the screen while the coordinates of (1,1) correspond to the bottom right of the scren. <br>
+
+**Dead Zone Width/Height/Depth**: Increasing this value will cause the blue lines to expand either horizontally or vertically. Any movement of the target within this area will not cause the camera move.<br>
+
+**Soft Zone Width/Height**<br>
+If the target enters the soft zone, the camera will reorient itself to frame the target in the dead zone. Note that damping values affect how quickly this readjustment occurs.
 
 ## Destructible Tilemaps
 
