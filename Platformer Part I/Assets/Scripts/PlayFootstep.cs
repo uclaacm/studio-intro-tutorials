@@ -11,21 +11,21 @@ public class PlayFootstep : MonoBehaviour
 	[SerializeField] private AudioClip footsteps;
 	private AudioSource source;
 
-    // Start is called before the first frame update
-    void Awake()
-    {
-        source = GetComponent<AudioSource>();
-        if (footsteps == null)
-            Debug.LogWarning("PlayFootstep script not provided with AudioClip.");
-    }
+	// Start is called before the first frame update
+	void Awake()
+	{
+		source = GetComponent<AudioSource>();
+		if (footsteps == null)
+			Debug.LogWarning("PlayFootstep script not provided with AudioClip.");
+	}
 
-    void PlayFootsteps()
-    {
-    	source.PlayOneShot(footsteps);
-    }
+	void PlayFootsteps()
+	{
+		source.PlayOneShot(footsteps);
+	}
 
-    void StopPlaying()
-    {
-        source.Stop();
-    }
+	void StopPlaying()
+	{
+		source.Stop();
+	}
 }

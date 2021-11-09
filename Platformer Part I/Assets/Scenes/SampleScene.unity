@@ -405,7 +405,8 @@ MonoBehaviour:
   speed: 1
   jumpHeight: 3
   health: 0
-  knockback: 0
+  knockbackX: 0
+  knockbackY: 0
 --- !u!114 &353792098
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -165,6 +165,126 @@ Can you implement enemies jumping?
 What if enemies locked on to the player once they approached a certain distance?
 
 ---
+## Player Combat
+
+### Player Taking Damage
+Now we want the player to be able to take damage when it comes in contact with the enemy. To do this we are going to modify the `PlayerMovement` script that we made in [Part I](https://github.com/uclaacm/studio-beginner-tutorials-f21/tree/main/Platformer%20Part%20I) of this tutorial series. First we will add some variables that will be used to implement this feature.
+
+```csharp
+public class PlayerMovement : MonoBehaviour
+{
+    private float horizontal;
+    private float vertical;
+    private Vector2 position;
+
+    private Rigidbody2D rb;
+    private Animator animator;
+
+    private bool moveLock;
+ 
+    public bool grounded;
+    public float speed;
+    public float jumpHeight;
+
+    public int health;
+    public float knockbackX;
+    public float knockbackY;
+
+    void Start()
+    {
+        rb = GetComponent<Rigidbody2D>();
+        animator = GetComponent<Animator>();
+
+        position = rb.position;
+        grounded = false;
+
+
+        moveLock = false;
+    }
+```
+We add `movelock` to lock the players movement when it is knocked back from the enemy, `knockbackX` and `knockbackY` to control how much the player gets knocked back, and `health` to make the player take damage. 
+
+Now we want the player to take damage and be knocked back if it collides with the enemy, so we modify the `OnCollisionEnter2D` function. 
+```csharp
+private void OnCollisionEnter2D(Collision2D collision)
+{
+    if (collision.gameObject.tag == "Ground")
+    {
+        grounded = true;
+        animator.SetBool("isJumping", false);
+    }
+    if (collision.gameObject.tag == "Enemy")
+    {
+        health--;
+        int dir = collision.gameObject.GetComponent<Transform>().position.x > rb.position.x ? -1 : 1;
+        horizontal = 0;
+        vertical = 0;
+        moveLock = true;
+        rb.velocity = new Vector2(knockbackX*dir, knockbackY);
+        animator.SetBool("isJumping", false);
+        animator.SetBool("hit", true);
+    }
+}
+```
+We need to make sure that we add the `Enemy` tag to the enemy for this to work. Don't worry about the animator booleans, we will take care of those in a bit. We set the `movelock` variable on here to make the player get knocked back from the enemy without interference from player input. For this to work we need to now modify the `OnMove` and `FixedUpdate` functions as follows
+
+```csharp
+void OnMove(InputValue movementVal)
+{
+    if (!moveLock)
+    {  
+        horizontal = 0;
+        vertical = 0;
+        Vector2 movement = movementVal.Get<Vector2>();
+        horizontal = movement.x * speed;
+        if (movement.y > 0 && grounded)
+        {
+            vertical = jumpHeight;
+        }
+    }
+}
+private void FixedUpdate()
+{    
+    if (!moveLock)
+    {
+        rb.velocity = new Vector2(horizontal, vertical <= 0 ? rb.velocity.y : vertical);
+    }
+    vertical = 0;
+}
+```
+Now there won't be any interference in the knockback due to user input. But we need a way to set `movelock` back after the player has been knocked back. We will add the `endHit` function below which we will call as an animation event.
+```csharp
+public void endHit()
+{
+    Debug.Log("end");
+    animator.SetBool("hit", false);
+    moveLock = false;
+}
+```
+
+### Animation
+We will be setting up another sprite sheet and creating an animation for the player taking damage. Navigate to the folder called `Kings and Pigs->Sprites->01-King Human`, select the `Hit` spritesheet and set the `Sprite Mode` to `Multiple` and the `filter mode` to `point (no filter)`. Next, click `Sprite Editor` in the inspector and we will just use the automatic slicing. Use these sprites to make an animation for the player. Add an `Animation Event` to the last frame of the animation that calls the `endHit` function.
+
+In the animation controller we now have a `hit` state. Create a `hit` boolean and add a transition from `Any State` to the `hit` state that occurs when the `hit` variable is true. When clicking on the transition, in the `Inspector`  window turn off `Has Exit Time` and expand the `Settings` dropdown to disable `Can Transition To Self`. This will make it so the animation will play out one full time and then transition to the next state instead of constantly restarting as long as the `hit` boolean is `true`. Now we want the player taking damage animation to override the jump animation, so add the requirement that `hit` is `false` to the transition from `Any State` to `Jump`.
+
+### Player Attacking
+To make the player attack we are again going to be modifying the `PlayerMovement` script. We will add an `OnFire` function to attack when the `Fire` input is detected
+```csharp
+void OnFire()
+{
+    if(!animator.GetBool("isJumping") && !animator.GetBool("hit"))
+        animator.SetTrigger("attack");
+}
+```
+Now go back to the `Kings and Pigs->Sprites->01-King Human` folder and select the `Attack` spritesheet. set the `Sprite Mode` to `Multiple` and the `filter mode` to `point (no filter)`, then click `Sprite Editor` in the inspector and slice the sprites according the cell size (78 x 58). Create a new animation for the player and drag these sprites to add them to the animation. To make it so we can detect if the player's attack hits we can add a hitbox. For this we will use a `CircleCollider2D`. Add this to the player and turn on `IsTrigger`. Uncheck the box at the top of the component in the `Inspector` window to set it inactive. We only want this collider to be active when the player is attacking; we can do this in the `animation` window. Select the player and select the `Attack` animation in the animation window. Click the recording button. Now we can make changes to the components of the player and these changes will be added to the animation. When on the first frame of the animation, turn on the `CircleCollider2D` and edit the collider to cover the area that you want to be included in the attack. Adjust the size of the collider at the different frames of the animation to fit where you want the attack range to be and then in the last frame deactivate the collider. Now to make the animation activatable, add a trigger called `attack` in the animation controller for the player and make a transition from `Any State` to the `attack` state. Make sure to set it to set it to have no exit time. Now the player can attack.
+
+### Bonus Sidequests
+Add a death animation for the player so that something happens when the player reaches zero health.
+
+Edit the `PlayerMovement` or `EnemyMovement` scripts to make it so that the enemy takes damage from the player's attack.
+
+---
+
 ## Essential Links
 - [Studio Discord](https://discord.com/invite/bBk2Mcw)
 - [Linktree](https://linktr.ee/acmstudio)
