@@ -17,7 +17,7 @@ Video
 * [Unity Hub](https://unity.com/download)
 * [Unity 2020.3.15f2](https://unity3d.com/unity/qa/lts-releases)
 * [Git](https://git-scm.com/downloads)
-* [Kings and Pigs Assets](https://pixelfrog-assets.itch.io/kings-and-pigs)
+* [Starter Package (if you missed Part 1](https://drive.google.com/file/d/11ANYfLUXLUnoQi1N4jcTQxKhSQFRiUmj/view?usp=sharing)
 
 ---
 ## Cinemachine
