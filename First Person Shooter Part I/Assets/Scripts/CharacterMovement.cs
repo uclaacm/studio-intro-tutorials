@@ -35,7 +35,7 @@ public class CharacterMovement : MonoBehaviour
 
     }
 
-    void Update()
+    void FixedUpdate()
     {
         // Determine the direction that the player's head is facing (not taking into account the y-axis). This is the
         // direction we want our player to move in.
