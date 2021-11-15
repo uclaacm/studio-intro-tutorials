@@ -8,10 +8,16 @@ public class CharacterMovement : MonoBehaviour
 {
     [SerializeField] Camera headCamera;
     [SerializeField] float maxSpeed = 5;
+    [SerializeField] float jumpHeight = 5;
     Vector2 desiredDirection = Vector2.zero;
     Vector2 currentVelocity = Vector2.zero;
+    float verticalSpeed = 0;
     InputAction movementAction;
+    InputAction jumpAction;
     Animator animator;
+
+    const float GRAVITY = 9.8f;
+    bool isGrounded = false;
 
     // SMOOTHING VARS
     float smoothTime = 0.1f;
@@ -22,6 +28,7 @@ public class CharacterMovement : MonoBehaviour
         // Get a reference to the specific InputAction of the object. This is the component that will broadcast an event
         // whenever it receives a new WASD input from the user (including letting go of keys).
         movementAction = GetComponent<UnityEngine.InputSystem.PlayerInput>().actions.FindActionMap("Player").FindAction("Movement");
+        jumpAction = GetComponent<UnityEngine.InputSystem.PlayerInput>().actions.FindActionMap("Player").FindAction("Jump");
 
         // Get a reference to the animator. This is the component that will help us play the correct movement animations
         // based on the velocity of the player.
@@ -53,14 +60,44 @@ public class CharacterMovement : MonoBehaviour
         currentVelocity.x = Mathf.SmoothDamp(currentVelocity.x, desiredDirection.x * maxSpeed, ref refCurVel.x, smoothTime);
         currentVelocity.y = Mathf.SmoothDamp(currentVelocity.y, desiredDirection.y * maxSpeed, ref refCurVel.y, smoothTime);
 
+        // Check whether the player is on the ground (as it will affect the velocity)
+        if(!isGrounded)
+            verticalSpeed -= GRAVITY * Time.deltaTime;
+        else if(verticalSpeed <= -0.1f)     // IF player was just falling and is now grounded, set their speed to 0
+        {
+            verticalSpeed = 0;
+            animator.ResetTrigger("HasJumped");
+        }
+            
+        // else, don't change the vertical speed (since this means the player is grounded and does not have any vertical velocity)
+
         // Finally, move the player
-        transform.Translate(new Vector3(currentVelocity.x, 0, currentVelocity.y) * Time.deltaTime);
+        transform.Translate(new Vector3(currentVelocity.x, verticalSpeed, currentVelocity.y) * Time.deltaTime);
 
         // Tell the animator what the player's velocity is so that it knows how to animate the character
         animator.SetFloat("VelocityX", currentVelocity.x);
         animator.SetFloat("VelocityZ", currentVelocity.y);
     }
 
+    
+
+    [Header("Ground Check Box")]
+    [SerializeField] Transform feetTransform;
+    [SerializeField] float groundCastDist = 1f;
+    [SerializeField] float sideLength = 0.5f;
+    [SerializeField] float boxDepth = 0.1f;
+    void FixedUpdate()
+    {
+        isGrounded = Physics.BoxCast(feetTransform.position, new Vector3(sideLength/2, boxDepth, sideLength/2), 
+                        Vector3.down, Quaternion.identity, groundCastDist);
+        animator.SetBool("IsGrounded", isGrounded);
+    }
+
+    void OnDrawGizmos()
+    {
+        Gizmos.color = Color.green;
+        Gizmos.DrawWireCube(feetTransform.position + Vector3.down * groundCastDist, new Vector3(sideLength, boxDepth, sideLength));
+    }
 
     
     void OnEnable()
@@ -70,14 +107,17 @@ public class CharacterMovement : MonoBehaviour
         // when there's new information for us (which is much better than polling for input).
         movementAction.performed += HandleChangedMoveDirection;
         movementAction.canceled += HandleCanceledMoveDirection;
+        jumpAction.performed += HandleJump;
     }
 
+    
     void OnDisable()
     {
         // It's best practice to unsubscribe from events before you "leave" so that the event doesn't
         // try to invoke any methods that no longer function.
         movementAction.performed -= HandleChangedMoveDirection;
         movementAction.canceled -= HandleCanceledMoveDirection;
+        jumpAction.performed -= HandleJump;
     }
 
     // This is the method that is triggered when a new direction is pressed, not including when directions are released, which
@@ -92,6 +132,17 @@ public class CharacterMovement : MonoBehaviour
     {
         desiredDirection = Vector2.zero;
     }
+
+    private void HandleJump(InputAction.CallbackContext inputContext)
+    {
+        if(!isGrounded) {return;}
+        
+        verticalSpeed = Mathf.Sqrt(2*GRAVITY*jumpHeight);
+        animator.SetTrigger("HasJumped");
+    }
+
+
+
 
 
     
