@@ -1,4 +1,4 @@
-# Studio Beginner Tutorials - FPS Shooter Part 1
+# Studio Beginner Tutorials - First Person Shooter Part 1
   
 **Date**: November 14, 2021, 7:00 pm - 9:00 pm<br>
 **Location**: Faraday Room 67-124 (Engineering IV)<br>
@@ -33,15 +33,17 @@
  
 ## Player
 ### Setup + Movement
-Create an empty GameObject. Add a Rigidbody and Capsule Collider. `Idk why Aaron added the Capsule Collider`. Make sure that the Rigidbody has 'Use Gravity' checked and has mass so that the character is effected normally by gravity.
+Create an empty GameObject. Add a Rigidbody and Capsule Collider. `Idk why Aaron added the Capsule Collider`. Make sure that the Rigidbody has 'Use Gravity' checked and has mass so that the character is affected normally by gravity.
 
-To get our player movement, we attach a `PlayerInput` component with the default action map and a [`CharacterController` script](https://github.com/uclaacm/studio-beginner-tutorials-f21/blob/3d-fps-part-i/First%20Person%20Shooter%20Part%20I/Assets/Scripts/CharacterMovement.cs) which is similar to the Roll a Ball and 2D Platformer movement scripts but with some unique attributes.
+To get our player movement, we attach a `PlayerInput` component with the default action map and a `CharacterController` [script](https://github.com/uclaacm/studio-beginner-tutorials-f21/blob/3d-fps-part-i/First%20Person%20Shooter%20Part%20I/Assets/Scripts/CharacterMovement.cs) which is similar to the Roll a Ball and 2D Platformer movement scripts but with some unique attributes.
 
-Within our CharacterController script, we start by defining a few SerializeField variables: headCamera and maxSpeed. These variables will help with attaching the camera to the head of the player and making our character's speed editable from the inspector. Then a few variables are initialized for future use. The `Awake()` function is called once before the game starts and is often used to set up references to other scripts and GameObjects, which is exactly what we're doing in our `Awake()` funciton. Specifically, we are retrieving references to the InputAction from the keyboard, animator, and additionally initializing the cursor to being locked and invisible.
+Within our CharacterController script, we start by defining a few SerializeField variables: headCamera and maxSpeed. These variables will help with attaching the camera to the head of the player and making our character's speed editable from the inspector. Then a few variables are initialized for future use. The `Awake()` function is called once before the game starts and is often used to set up references to other scripts and GameObjects, which is exactly what we're doing in our `Awake()` function. Specifically, we are retrieving references to the InputAction from the keyboard, animator, and additionally initializing the cursor to be locked and invisible.
 
-`Gonna write more tomorrow (11/15)`
+The next part of our code focuses on calling the `FixedUpdate()` function. We call `FixedUpdate()` instead of `Update()` to keep our frames in-check with the physics engine. Within this function, we set a new `Vector3 deisredForwardVector` to be in the direction that the player is facing (which is based off the camera) without accounting for the y-axis yet because it doesn’t affect movement. Then we rotate the player in this direction with `transform.forward = desiredFowardVector` so that the player is facing the desired direction. After that, we calculate the velocity of the player based on their current velocity and the desired velocity obtained from player input. We use the `Mathf.SmoothDamp` to calculate this velocity because it allows for smooth transitions between movements. Lastly, we move the player with `transform.Translate` and animate the character by calling `animator.SetFloat`.
 
-### Animation
+Moving on to the smaller functions of our code, we call `OnEnable()` and `OnDisable()` to set up listeners to perform actions only when inputs are received from the keyboard. `HandleChangedMoveDirection` and `HandleCanceledMoveDirection` are used to detect when new directions are inputted into the keyboard and released from the keyboard.
+
+## Animation
 Lorem ipsum deez
 --- 
 
@@ -57,6 +59,4 @@ empty script.
 - [Unity Documentation](https://docs.unity3d.com/Manual/index.html)
 - [ACM Website](https://www.uclaacm.com/)
 - [ACM Discord](https://discord.com/invite/eWmzKsY)
- 
- 
  
