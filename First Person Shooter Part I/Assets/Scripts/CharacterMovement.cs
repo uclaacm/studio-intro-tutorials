@@ -42,7 +42,7 @@ public class CharacterMovement : MonoBehaviour
 
     }
 
-    void FixedUpdate()
+    void Update()
     {
         // Determine the direction that the player's head is facing (not taking into account the y-axis). This is the
         // direction we want our player to move in.
@@ -136,7 +136,7 @@ public class CharacterMovement : MonoBehaviour
     private void HandleJump(InputAction.CallbackContext inputContext)
     {
         if(!isGrounded) {return;}
-        
+
         verticalSpeed = Mathf.Sqrt(2*GRAVITY*jumpHeight);
         animator.SetTrigger("HasJumped");
     }
