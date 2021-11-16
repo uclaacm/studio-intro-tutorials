@@ -79,8 +79,6 @@ public class CharacterMovement : MonoBehaviour
         animator.SetFloat("VelocityZ", currentVelocity.y);
     }
 
-    
-
     [Header("Ground Check Box")]
     [SerializeField] Transform feetTransform;
     [SerializeField] float groundCastDist = 1f;
@@ -140,10 +138,4 @@ public class CharacterMovement : MonoBehaviour
         verticalSpeed = Mathf.Sqrt(2*GRAVITY*jumpHeight);
         animator.SetTrigger("HasJumped");
     }
-
-
-
-
-
-    
 }
