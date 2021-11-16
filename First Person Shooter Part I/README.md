@@ -22,8 +22,7 @@
 ---
 
 ## Setting Up Your Scene
-In order to start, please download and import the [TODO: skeleton package](package_link) into your own Unity 3D project.
-
+In order to start, please download and import the [TODO: skeleton package](package_link) into your own Unity 3D project. Also make sure that the `Input System`, `Cinemachine`, and `Universal RP` packages are installed. To do this go to Window -> Package Manager -> Unity Registry and install the packages. Then in the project tab under the packages folder inside the assets folder, right click and select Create -> Rendering -> Universal Render Pipeline -> Pipeline Asset (Foward Renderer). Then go back to your main screen and click Edit -> Project Settings -> Graphics and drag your newly created `UniversalRenderPipelineAsset` into the `Scriptable Render Pipeline Settings`.
 ---
 
 ## Player
