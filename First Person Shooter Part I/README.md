@@ -43,8 +43,18 @@ The next part of our code focuses on calling the `FixedUpdate()` function. We ca
 
 Moving on to the smaller functions of our code, we call `OnEnable()` and `OnDisable()` to set up listeners to perform actions only when inputs are received from the keyboard. `HandleChangedMoveDirection` and `HandleCanceledMoveDirection` are used to detect when new directions are inputted into the keyboard and released from the keyboard.
 
-## Animation
-Lorem ipsum deez
+## Reading User Input
+In previous tutorials you learned that Unity's new input system can notify scripts when new inputs have been received by invoking special functions you implement in those scripts that have names corresponding to your defined Actions. In those special functions, scripts can process the new input data however it needs (such as moving the character forward or jumping). 
+
+In this tutorial, we will be using a slightly different approach that makes use of C# events. The base concept is the same -- implement a special function in your script that will process incoming inputs from the input system. The main difference is that instead of letting Unity wire up these special functions to be called by the input system, we will be the ones to do it this time.
+
+Well then why would I want to wire it up myself when Unity can do it for me?
+
+As with all things, doing things yourself gives you more flexibility since you are in control of the implementation. One strength of C# events is that it is 
+
+## Using Cinemachine for FPS POV
+
+
 --- 
 
 ```c#   
