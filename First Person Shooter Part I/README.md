@@ -22,8 +22,7 @@
 ---
 
 ## Setting Up Your Scene
-In order to start, please download and import the [TODO: skeleton package](package_link) into your own Unity 3D project.
-
+In order to start, please download and import the [TODO: skeleton package](package_link) into your own Unity 3D project. Also make sure that the `Input System`, `Cinemachine`, and `Universal RP` packages are installed. To do this go to Window -> Package Manager -> Unity Registry and install the packages. Then in the project tab under the packages folder inside the assets folder, right click and select Create -> Rendering -> Universal Render Pipeline -> Pipeline Asset (Foward Renderer). Then go back to your main screen and click Edit -> Project Settings -> Graphics and drag your newly created `UniversalRenderPipelineAsset` into the `Scriptable Render Pipeline Settings`.
 ---
 
 ## Player
@@ -42,16 +41,6 @@ We want to next check if our player is grounded or not. To do this, we first cre
 
 Moving on to the smaller functions of our code, we call `OnEnable()` and `OnDisable()` to set up listeners to perform actions only when inputs are received from the keyboard. `HandleChangedMoveDirection` and `HandleCanceledMoveDirection` are used to detect when new directions are inputted into the keyboard and released from the keyboard and changes `desiredDirection` to correspond with them, which is like `OnMove()` from previous tutorials. The last function, `HandleJump()`, is similar to `OnJump()` from previous tutorials and handles the jumping mechanics of the player. The player only jumps when grounded and the vertical speed of the player is also calculated here. 
 
-### Is the player touching the ground?
-
-
-### Jumping
-We will now implement jumping! We want our character to jump when the input system notifies it that the user has pressed the jump button (in this case, the space key). To do this, all we need to do is set `verticalSpeed` to a positive value and our update loop will translate our character upwards (taking into account the effects of gravity, of course). To make the character jump higher, all we need to do is increase `verticalSpeed`.
-
-However, we can do better than this. A good practice in game development is to make the variables you expose in project editors easily understandable for your fellow game designers. Level designers think in terms of level geometry (like how high a wall should be so that the player cannot jump over it) and would much more appreciate a metric to measure jump power that reflects this way of thinking. Instead of exposing `verticalSpeed` in the editor, We will expose a field called `jumpHeight` which we as the programmers can then use to derive what `verticalSpeed` should be.
-
-Recall that the kinematics equation for the initial velocity of a mass given the distance traveled **d** through an opposing acceleration of magnitude **a** is sqrt(-2 * **a** * **d**). 
-
 ## Reading User Input
 In previous tutorials you learned that Unity's new input system can notify scripts when new inputs have been received by invoking special functions you implement in those scripts that have names corresponding to your defined Actions. In those special functions, scripts can process the new input data however it needs (such as moving the character forward or jumping). 
 
@@ -62,7 +51,6 @@ Well then why would I want to wire it up myself when Unity can do it for me?
 As with all things, doing things yourself gives you more flexibility since you are in control of the implementation. One strength of C# events is that they can be heard by GameObjects that are not directly connected to the PlayerInput object.
 
 ## Using Cinemachine for FPS POV
-
 
 
 --- 
