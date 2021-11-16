@@ -10,8 +10,7 @@
  
 ## Topics Covered
 * 3D Movement
-* Basic 3D animation
-* Some Cinemachine
+* Cinemachine
  
 ## What you'll need
 * [Unity Hub](https://unity.com/download)
