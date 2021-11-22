@@ -734,8 +734,6 @@ MonoBehaviour:
   headCamera: {fileID: 1022098143}
   maxSpeed: 10
   jumpHeight: 1
-  muzzleFlash: {fileID: 1038233153}
-  impactEffect: {fileID: 1908046322}
   feetTransform: {fileID: 1783093706}
   groundCastDist: 0.1
   sideLength: 1
@@ -11523,6 +11521,7 @@ GameObject:
   - component: {fileID: 6868762222754195518}
   - component: {fileID: 372812886}
   - component: {fileID: 372812892}
+  - component: {fileID: 3202995908940371299}
   m_Layer: 0
   m_Name: Robot Player
   m_TagString: Untagged
@@ -11530,6 +11529,21 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &3202995908940371299
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3202995908940371298}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 43220be92c9f09940a0af7168f4d84cf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  headCamera: {fileID: 1022098143}
+  muzzleFlash: {fileID: 1038233153}
+  impactEffect: {fileID: 1908046322}
 --- !u!4 &3228142972735991798
 Transform:
   m_ObjectHideFlags: 0
