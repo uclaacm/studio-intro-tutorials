@@ -94,7 +94,7 @@ The `HandleFire()` method will cast a ray from the `CM Virtual Camera` represent
 ## Bullet impacts using Particle System
 To generate particles that'll be used in our bullet impact effect, we can leverage Unity's Particle System. It's a powerful tool that can be used to generate a variety of effects from liquids, smoke, clouds, flames, and more! Navigate to `GameObject->Effects->Particle Systems` which should add a `Particle System` to your game hierarchy. In the inspector, a window with the following properties should appear.
 
-![Screenshot](Screenshots/particle_system.png)<br>
+![Screenshot](Screenshots/particle_system.PNG)<br>
 
 We'll use these settings to create a small spark effect that will be played whenever a raycast is drawn from the gun. These are the settings to create the effect used in this tutorial with brief explanation of each property. Feel free to experiment with the other modules and settings in the particle system editor to create something unique! Additionally, you can refer to [Unity's documentation](https://docs.unity3d.com/ScriptReference/ParticleSystem.html) on particle systems for more information.
 
