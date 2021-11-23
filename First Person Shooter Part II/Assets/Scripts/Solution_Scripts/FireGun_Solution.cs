@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
-public class FireGun : MonoBehaviour
+public class FireGun_Solution : MonoBehaviour
 {
     [SerializeField] Camera headCamera;
     public ParticleSystem muzzleFlash;
@@ -12,23 +12,21 @@ public class FireGun : MonoBehaviour
 
     void Awake()
     {
-        fireAction = GetComponent<UnityEngine.InputSystem.PlayerInput>().actions.FindActionMap("Player").FindAction("Click"); // PART 2
+        fireAction = GetComponent<UnityEngine.InputSystem.PlayerInput>().actions.FindActionMap("Player").FindAction("Click");
     }
 
     void OnEnable()
     {
-        fireAction.performed += HandleFire;     // PART 2
+        fireAction.performed += HandleFire;
     }
     void OnDisable()
     {
-        fireAction.performed -= HandleFire; // PART 2
+        fireAction.performed -= HandleFire;
     }
 
     private void HandleFire(InputAction.CallbackContext inputContext)
     {
-        // playing muzzle flash particle effect
         muzzleFlash.Play();
-
         // defining raycast variable to store later
         RaycastHit hit;
 
@@ -40,7 +38,7 @@ public class FireGun : MonoBehaviour
             Debug.Log(hit.transform.name);
 
             // getting target hit
-            Target target = hit.transform.GetComponent<Target>();
+            Target_Solution target = hit.transform.GetComponent<Target_Solution>();
 
             // if a target was actually hit
             if (target != null)
@@ -48,10 +46,6 @@ public class FireGun : MonoBehaviour
                 // decrease hp of target by 1
                 target.TakeDamage(1f);
             }
-
-            // creating impact particle effect. instantiating the particle effect at the object's location and setting the particle effect to point out
-            // from the direction we shot in. The Instantiate function takes in a Quaternion so we use Quaternion.LookRotation() to take in a direction
-            // and turn it into a Quaternion. The direction we want is the normal vector because it will point out from the direction we shot in, so we pass in 'hit.normal'.
             GameObject impactGameObject = Instantiate(impactEffect, hit.point, Quaternion.LookRotation(hit.normal));
             Destroy(impactGameObject, 2f);
         }

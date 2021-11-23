@@ -15,20 +15,24 @@
 * [Unity Hub](https://unity.com/download)
 * [Unity 2020.3.15f2](https://unity3d.com/unity/qa/lts-releases)
 * [Git](https://git-scm.com/downloads)
-* [Skeleton Package](https://tinyurl.com/fps-pt2-package)
+* [Skeleton Package](https://drive.google.com/file/d/1iBEHVB0h4kvV9vrjSQu67mH5sxpSFgXY/view?usp=sharing)
 
 ---
 
 ## Setting Up Your Scene
-In order to start, please download and import the [skeleton package](https://tinyurl.com/fps-pt2-package) into your own Unity 3D project. Also make sure that the `Input System`, `Cinemachine`, and `Universal RP` packages are installed. To do this go to Window -> Package Manager -> Unity Registry and install the packages. Then in the project tab under the packages folder inside the assets folder, right click and select Create -> Rendering -> Universal Render Pipeline -> Pipeline Asset (Foward Renderer). Then go back to your main screen and click Edit -> Project Settings -> Graphics and drag your newly created `UniversalRenderPipelineAsset` into the `Scriptable Render Pipeline Settings`.
+In order to start, please download and import the [skeleton package](https://drive.google.com/file/d/1iBEHVB0h4kvV9vrjSQu67mH5sxpSFgXY/view?usp=sharing) into your own Unity 3D project and open the `Tutorial_Scene`. Also make sure that the `Input System`, `Cinemachine`, and `Universal RP` packages are installed. To do this go to Window -> Package Manager -> Unity Registry and install the packages. Then in the project tab under the packages folder inside the assets folder, right click and select Create -> Rendering -> Universal Render Pipeline -> Pipeline Asset (Foward Renderer). Then go back to your main screen and click Edit -> Project Settings -> Graphics and drag your newly created `UniversalRenderPipelineAsset` into the `Scriptable Render Pipeline Settings`.
 
 ---
 
 ## Shooting
 ### Setup + Target
-Before we start writing our script to implement our shooting mechanics, let's add a reticle. Create a canvas and add an image as its child. Set the anchor of the image to be centered and the adjust the size to your liking. Next, let's set up target. To accomplish this, create an empty GameObject and add a Sphere Collider. The Collider will be used for detecting collisions with the raycast drawn from our gun.
+Before we start writing our script to implement our shooting mechanics, let's add a reticle. Create a canvas and add an image as its child. Set the anchor of the image to be centered and the adjust the size to your liking. Usually, FPS games have it so that you can see your gun the entire time you're playing and it makes it a little nicer. But right now, the gun doesn't follow our camera movements and we can't see it for the most part. In order to quickly fix that, we can go to the gun prefab on our player model (which can be found in Robot Player -> Bip001 -> Pelvis -> Spine -> Spine1 -> R Clavicle -> R UpperArm -> R Forearm -> R Hand; or by double clicking the gun in the scene). We can then drag the gun from this position into the Main Camera, making it a child of the Main Camera, meaning that each movement of the camera will be mirrored to the gun. Next, we can change the Transform of the gun to fit our screen better.
 
-We can add the following `Target` script to our GameObject, which will initialize an HP value that will be subtracted whenever the target is hit. We define a public method `TakeDamage()` that will subtract the specified amount of HP and call the methodd `Die()` that will destroy the object when the target's HP reaches zero.
+![Screenshot](Screenshots/ar_location_&_transform.png)<br>
+
+![Screenshot](Screenshots/gun_&_reticle.png)<br>
+
+Next, let's set up target. To accomplish this, create an empty GameObject and add a Sphere Collider. The Collider will be used for detecting collisions with the raycast drawn from our gun. We can add the following `Target` script to our GameObject, which will initialize an HP value that will be subtracted whenever the target is hit. We define a public method `TakeDamage()` that will subtract the specified amount of HP and call the methodd `Die()` that will destroy the object when the target's HP reaches zero.
 
 ```csharp
 public class Target : MonoBehaviour
@@ -109,6 +113,15 @@ We'll also need to add the following lines of code in our `HandleFire()` method 
 ...
 GameObject impactGameObject = Instantiate(impactEffect, hit.point, Quaternion.LookRotation(hit.normal));
 Destroy(impactGameObject, 2f);
+```
+
+## Sidequest
+Right now the game is pretty boring since we just shoot a target and it dies. To make it more fun, we can have the target spawn a new target somewhere else each time it dies. By adding the below code into the Target Die() function and attaching a new target GameObject and headCamera reference, we can generate a new target each time one dies.
+
+```csharp
+Instantiate(newTarget, new Vector3(headCamera.transform.position.x + Random.Range(5, 15),
+            headCamera.transform.position.y + Random.Range(0, 3), headCamera.transform.position.z + Random.Range(5, 15)),
+                Quaternion.LookRotation(headCamera.transform.forward));
 ```
 
 ---
