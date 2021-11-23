@@ -14,7 +14,7 @@ We also offer the [Advanced Track](https://github.com/uclaacm/studio-advanced-tu
 | [Week 5: 2D Platformer Part 1](https://github.com/uclaacm/studio-beginner-tutorials-f21/tree/main/Platformer%20Part%20I) | <ul> <li>Movement and platforms</li> <li>Tilemaps & 2D animation</li> <li>Audio management</li> </ul> | October 26th | [Slides](https://docs.google.com/presentation/d/1pfJ3OuMaTnBttJlBjijEGwMq7aT6koFEN7K3zYEDpoI/edit?usp=sharing) | [Video](https://www.youtube.com/watch?v=sxFkzWTz08Ec) |
 | [Week 7: 2D Platformer Part 2](https://github.com/uclaacm/studio-beginner-tutorials-f21/tree/main/Platformer%20Part%20II) | <ul> <li>Platformer mechanics</li> <li>Cinemachine</li> <li>Enemies and Combat</li> </ul> | November 9th | N/A | Coming Soon! |
 | [Week 8: First Person Shooter Part 1](https://github.com/uclaacm/studio-beginner-tutorials-f21/tree/main/First%20Person%20Shooter%20Part%20I) | <ul> <li>3D movement</li> <li>More cinemachine</li> </ul> | November 16th | [Slides](https://docs.google.com/presentation/d/1HeNhXbYw5ydabzrZ79q-_CXQgvbaTx2jRu7gqmSFw3M/edit?usp=sharing) | Coming Soon! |
-| Week 9: First Person Shooter Part 2 | <ul> <li>Projectiles</li> <li>Raycasting</li> <li>Particle effects</li> </ul> | November 23rd | | |
+| [Week 9: First Person Shooter Part 2](https://github.com/uclaacm/studio-beginner-tutorials-f21/tree/main/First%20Person%20Shooter%20Part%20II) | <ul> <li>Projectiles</li> <li>Raycasting</li> <li>Particle effects</li> </ul> | November 23rd | | |
 
 ## Essential Links
 - [Studio Discord](https://discord.com/invite/bBk2Mcw)
