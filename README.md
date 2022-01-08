@@ -1,20 +1,20 @@
-# Studio Beginner Tutorials - Fall 2021
+# Studio Beginner Tutorials - Winter 2022
 ## Welcome to the Beginner Track!
 Unity is a powerful cross-platform game engine that's also great for getting started with game development. Many popular games you may have played, including *Pokémon Go*, *Hearthstone*, *Ori*, and *Escape from Tarkov*, were developed with Unity, but the engine also provides many tools for newcomers to learn with minimal coding.
 
-In this weekly workshop series, you will learn the fundamentals of game development and the Unity game engine, skills which can also be applied to other game engines and projects. If you have never coded or used a game engine before, this is the perfect series for you! Live workshops will take place at the **Faraday Room in Engineering IV** from **7 PM - 9 PM on Tuesdays**, but if you can't attend in person, you can also watch edited recordings on our YouTube channel.
+In this four-part workshop series, you will be constructing a 2D RPG, similar to Pokemon! The goal of this series is to construct multiple systems from the ground up and connect them to establish a simple gameplay loop. Live workshops will take place on **Zoom (until in-person events are permitted) Tuesdays 7:00 PM - 9:00 PM PST**,  but if you can't attend, you can also watch edited recordings on our YouTube channel.
 
-We also offer the [Advanced Track](https://github.com/uclaacm/studio-advanced-tutorials-f21) and [Creative Track](https://github.com/uclaacm/studio-creative-tutorials-f21). The Advanced Track covers more complex coding concepts and systems, but we encourage you to check it out if you have prior coding experience, even if you haven't used Unity before. The Creative Track focuses on non-coding aspects of game development, such as animation, writing, and sound design, and is also open to newcomers learning Unity through our beginner track.
+We are also offering [Advanced Track](https://github.com/uclaacm/studio-advanced-tutorials-f21) and [Creative Track](https://github.com/uclaacm/studio-creative-tutorials-f21) this quarter. The Advanced Track focuses on specfic programming concepts in game development, but we encourage you to check it out if you have prior coding experience, even if you haven't used Unity before. The Creative Track focuses on non-coding aspects of game development, such as animation, writing, and sound design, and is also open to newcomers learning Unity through our beginner track.
+
+*Note: If you are looking for tutorials taught in the fall, they can be found on the branch [fall-21](https://github.com/uclaacm/studio-beginner-tutorials-f21/tree/fall-21) of this repository.*
 
 ## Curriculum Overview
 | Tutorials | Topics Covered | Live Schedule | Slides | Video |
 |-----------|----------------|---------------|--------|-------|
-| [Week 3: Roll a Ball Part 1](https://github.com/uclaacm/studio-beginner-tutorials-f21/tree/main/Roll%20a%20Ball) | <ul> <li>Scenes</li> <li>Scripting</li> <li>GameObjects & components</li> </ul> | October 12th | [Slides](https://docs.google.com/presentation/d/1jJV7GuUdXfJm5YG7ruv3OJBBqoY1VfJ1LB5PPNmsd1w/edit?usp=sharing) | [Video](https://youtu.be/oB3sk4a3VkE) |
-| [Week 4: Roll a Ball Part 2](https://github.com/uclaacm/studio-beginner-tutorials-f21/tree/main/Roll%20a%20Ball%20-%20Part%20II) | <ul> <li>User interface</li> <li>Checkpoints</li> <li>Scene management</li> </ul> | October 19th | [Slides](https://docs.google.com/presentation/d/1N__34gQRdCBV8gSB7huCgWJGKWnnMpdQAGUF3QjkW_k/edit?usp=sharing) | [Video](https://youtu.be/AAJRsnKxLKk) |
-| [Week 5: 2D Platformer Part 1](https://github.com/uclaacm/studio-beginner-tutorials-f21/tree/main/Platformer%20Part%20I) | <ul> <li>Movement and platforms</li> <li>Tilemaps & 2D animation</li> <li>Audio management</li> </ul> | October 26th | [Slides](https://docs.google.com/presentation/d/1pfJ3OuMaTnBttJlBjijEGwMq7aT6koFEN7K3zYEDpoI/edit?usp=sharing) | [Video](https://www.youtube.com/watch?v=sxFkzWTz08Ec) |
-| [Week 7: 2D Platformer Part 2](https://github.com/uclaacm/studio-beginner-tutorials-f21/tree/main/Platformer%20Part%20II) | <ul> <li>Platformer mechanics</li> <li>Cinemachine</li> <li>Enemies and Combat</li> </ul> | November 9th | N/A | Coming Soon! |
-| [Week 8: First Person Shooter Part 1](https://github.com/uclaacm/studio-beginner-tutorials-f21/tree/main/First%20Person%20Shooter%20Part%20I) | <ul> <li>3D movement</li> <li>More cinemachine</li> </ul> | November 16th | [Slides](https://docs.google.com/presentation/d/1HeNhXbYw5ydabzrZ79q-_CXQgvbaTx2jRu7gqmSFw3M/edit?usp=sharing) | Coming Soon! |
-| [Week 9: First Person Shooter Part 2](https://github.com/uclaacm/studio-beginner-tutorials-f21/tree/main/First%20Person%20Shooter%20Part%20II) | <ul> <li>Projectiles</li> <li>Raycasting</li> <li>Particle effects</li> </ul> | November 23rd | | |
+| RPG - Combat | <ul> <li>Setting up a battle scene</li> <li>Selection of actions</li> <li>Player and enemy attacks</li> </ul> | January 18th | Slides | Video |
+| RPG - Overworld | <ul> <li></li> <li></li> <li></li> </ul> | January 25th | Slides | Video |
+| RPG - Inventory | <ul> <li>Setting up the item class</li> <li>Managing item class objects using a separate Inventory class</li> <li>Displaying inventory in UI</li> </ul> | February 1st | Slides | Video |
+| RPG - Shop | <ul> <li>Buying and selling items in shops</li> <li>Subtracting coins</li> <li>Displaying purchased items in inventory</li> </ul> | February 8th | Slides | Video |
 
 ## Essential Links
 - [Studio Discord](https://discord.com/invite/bBk2Mcw)
