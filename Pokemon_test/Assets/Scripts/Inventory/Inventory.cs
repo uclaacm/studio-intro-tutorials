@@ -6,6 +6,12 @@ public class Inventory : MonoBehaviour
 {
     Dictionary<InventoryItem, int> inventory;
 
+    public enum Category
+    {
+        BattleItems,
+        Healing
+    }
+
     // Start is called before the first frame update
     void Start()
     {

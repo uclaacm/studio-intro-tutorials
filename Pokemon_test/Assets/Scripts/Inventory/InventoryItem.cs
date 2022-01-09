@@ -9,6 +9,7 @@ public class InventoryItem : ScriptableObject
     [SerializeField] string displayName;
     [SerializeField] [TextArea] string tooltip;
     [SerializeField] Sprite icon;
+    [SerializeField] Inventory.Category category;
     
 
     // PUBLIC 
