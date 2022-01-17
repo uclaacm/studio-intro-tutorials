@@ -7,7 +7,9 @@ public class dialogScript : MonoBehaviour
 {
     public Text DialogText;
     public GameObject ActionSelector;
+    public GameObject MoveSelector;
     public List<Text> actions;
+    public List<Text> moves;
 
     /*public IEnumerator typeText(string s)
     {
@@ -38,4 +40,31 @@ public class dialogScript : MonoBehaviour
         }
     }
 
+    public void highlightMove(int currentMove)
+    {
+        for(int i = 0; i < moves.Count; i++) { 
+            if(i == currentMove)
+            {
+                moves[i].color = Color.blue;
+            }
+            else
+            {
+                moves[i].color = Color.black;
+            }
+        }
+    }
+
+    public void actionToggle(bool on){
+        ActionSelector.SetActive(on);
+    }
+    
+    public void moveToggle(bool on){
+        MoveSelector.SetActive(on);
+    }
+
+    public void setMoves(List<string> movesList){
+        for(int i = 0; i < movesList.Count; i++){
+            moves[i].text = movesList[i];
+        }
+    }
 }
