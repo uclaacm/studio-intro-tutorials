@@ -11,16 +11,6 @@ public class dialogScript : MonoBehaviour
     public List<Text> actions;
     public List<Text> moves;
 
-    /*public IEnumerator typeText(string s)
-    {
-        DialogText.text = "";
-        foreach (char c in s.ToCharArray())
-        {
-            DialogText.text += c;
-            yield return new WaitForSeconds(.1f);
-        }
-    }*/
-
     public void dialogToggle(bool on)
     {
         DialogText.enabled = on;
@@ -40,6 +30,7 @@ public class dialogScript : MonoBehaviour
         }
     }
 
+    // Change the text color of the selected move to blue.
     public void highlightMove(int currentMove)
     {
         for(int i = 0; i < moves.Count; i++) { 
@@ -54,14 +45,17 @@ public class dialogScript : MonoBehaviour
         }
     }
 
+    // Toggles Action Select UI.
     public void actionToggle(bool on){
         ActionSelector.SetActive(on);
     }
     
+    // Toggles Move Select UI. 
     public void moveToggle(bool on){
         MoveSelector.SetActive(on);
     }
 
+    // Sets the placeholder move text to the moves of the player's pokemon. 
     public void setMoves(List<string> movesList){
         for(int i = 0; i < movesList.Count; i++){
             moves[i].text = movesList[i];
