@@ -1,11 +1,11 @@
 # Studio Beginner Tutorials - First Person Shooter Part 1
   
-**Date**: November 16, 2021, 7:00 pm - 9:00 pm<br>
-**Location**: Faraday Room 67-124 (Engineering IV)<br>
-**Instructors**: Aaron, Ryan
+**Date**: January 18, 2022, 7:00 pm - 9:00 pm<br>
+**Location**: Zoom<br>
+**Instructors**: Connor, Ryan
  
 ## Resources
-[Slides]() ADD SLIDES<br>
+[Slides](https://docs.google.com/presentation/d/11wem-UyzL3qNAjySi4kznZZQPnx7d6gA_zXDun6X59s/edit?usp=sharing)<br>
 [Video Soon!](Soon)
  
 ## Topics Covered
@@ -15,17 +15,17 @@
 * [Unity Hub](https://unity.com/download)
 * [Unity 2020.3.15f2](https://unity3d.com/unity/qa/lts-releases)
 * [Git](https://git-scm.com/downloads)
-* [Skeleton Package]() ADD PACKAGE
+* [Skeleton Package](https://drive.google.com/file/d/1_rJrWlnJ4S6iisUc1YaWXbiayqx7GPou/view?usp=sharing)
 
 ---
 
 ## Setting Up Your Scene
-In order to start, please download and import the [skeleton package]() ADD PACKAGE into your own Unity 2D project.
+In order to start, please download and import the [skeleton package](https://drive.google.com/file/d/1_rJrWlnJ4S6iisUc1YaWXbiayqx7GPou/view?usp=sharing) into your own Unity 2D project.
 ---
 
 ## The Scene
 ### Overview
-The [skeleton package]() ADD PACKAGE includes all the assets needed for the scene and has things set up so that we can add scripts to make it playable. Before we get into that though, we want to go over what is in the scene. The scene shoul look like this:
+The [skeleton package](https://drive.google.com/file/d/1_rJrWlnJ4S6iisUc1YaWXbiayqx7GPou/view?usp=sharing) includes all the assets needed for the scene and has things set up so that we can add scripts to make it playable. Before we get into that though, we want to go over what is in the scene. The scene should look like this:
 
 ![Screenshot]() ADD SCREENSHOT<br>
 
