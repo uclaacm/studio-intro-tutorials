@@ -1,6 +1,6 @@
 # Studio Beginner Tutorials - Build an RPG: Combat
 
-#### **This is still a work in progress, we'll try to get the whole README done soon** 
+### **This is still a work in progress, we'll try to get the whole README done soon** 
 <br>
 
 **Date**: January 18, 2022, 7:00 pm - 9:00 pm<br>
@@ -12,7 +12,9 @@
 [Video Soon!](Soon)
  
 ## Topics Covered
-* 
+* UI Elements
+* Creating Characters Using Scriptable Objects
+* Turn Based Combat Mechanics and Design
  
 ## What you'll need
 * [Unity Hub](https://unity.com/download)
@@ -38,7 +40,7 @@ The first thing to note is the BattleSystem object. This is an Empty to which we
 After the `Fight` option has been selected, we want to display the moves of the player's pokemon. In the skeleton package, we have already provided the canvas
 elements of placeholder moves and now we have to populate them with the player's pokemon's moves and activate them on the player's command. 
 
-#### Setting Inputs
+### Setting Inputs
 We can start by continuing to edit our BattleSystem script. After the player presses `Spacebar` or `Q` while hovering over the `Fight` button in the `ActionSelect` Phase, we want to change the current phase to the `MoveSelct` Phase. To do this, in the Update() function we can change the phase by setting `phase = Phases.MoveSelect`. Then we want to toggle the standard dialog **off**, the action select menu **off**, and the move select menu **on**. 
 
 <br>
@@ -49,7 +51,7 @@ Now we can move on to the MoveSelect case of our switch statement. First, if the
 
 Lastly, when the player presses the `Spacebar` key while hovering over a specific move, we want to execute the move. To begin this process, we can toggle the standard dialog **on** and the move select menu **off** since we'll need to see some dialog about the pokemon and move and we no longer need to see the move select menu. Then we will have to start executing the coroutine which actually executes the attacks. 
 
-#### Attacking
+### Attacking
 Lets begin by implementing the `ExecuteMoves()` function which will execute attacks from both the player and the enemy. We can start by getting the move which the player selected. In the previous section, we saved the index of the move the player selected in the `currentMove` int, so we can get the pokemon's move at that index by defining `string move = player.basePokemon.moves[currentMove];` which is the name of the move the player selected. Next we can display in the dialog box that the player's pokemon used that move by setting `dialogText.DialogText.text = $"{player.basePokemon.name} used {move}.";`.
 
 <br>
