@@ -1,6 +1,8 @@
 # Studio Beginner Tutorials - Build an RPG: Combat
 
-**This is still a work in progress, we'll try to get the whole README done soon**
+#### **This is still a work in progress, we'll try to get the whole README done soon** 
+<br>
+
 **Date**: January 18, 2022, 7:00 pm - 9:00 pm<br>
 **Location**: Zoom<br>
 **Instructors**: Connor, Ryan
