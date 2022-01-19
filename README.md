@@ -6,6 +6,8 @@ In this four-part workshop series, you will be constructing a 2D RPG, similar to
 
 We are also offering [Advanced Track](https://github.com/uclaacm/studio-advanced-tutorials-f21) and [Creative Track](https://github.com/uclaacm/studio-creative-tutorials-f21) this quarter. The Advanced Track focuses on specfic programming concepts in game development, but we encourage you to check it out if you have prior coding experience, even if you haven't used Unity before. The Creative Track focuses on non-coding aspects of game development, such as animation, writing, and sound design, and is also open to newcomers learning Unity through our beginner track.
 
+Additionally, if you'd like to get started with using version control with Unity, which is incredibly useful to know whether you're working alone or with a team, check out our [guide for using Unity with GitHub Desktop](./Using%20Unity%20with%20GitHub%20Desktop/README.md). 
+
 *Note: If you are looking for tutorials taught in the fall, they can be found on the branch [fall-21](https://github.com/uclaacm/studio-beginner-tutorials-f21/tree/fall-21) of this repository.*
 
 ## Curriculum Overview
