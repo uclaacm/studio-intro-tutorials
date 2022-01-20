@@ -31,7 +31,7 @@ In order to start, please download and import the [skeleton package](https://dri
 ## The Scene
 The [skeleton package](https://drive.google.com/file/d/1_rJrWlnJ4S6iisUc1YaWXbiayqx7GPou/view?usp=sharing) includes all the assets needed for the scene and has things set up so that we can add scripts to make it playable. Before we get into that though, we want to go over what is in the scene. The scene should look like this:
 
-![Screenshot](Screenshots/battle_scene) ADD SCREENSHOT<br>
+![Screenshot](Screenshots/battle_scene.png)<br>
 
 The first thing to note is the BattleSystem object. This is an Empty to which has the script that will run the battle. Nested under this is the UI canvas which everything you can see in the scene are on. We have set the `Render Mode` to `Screen Space - Camera` and we've set the `Render Camera` to the Main Camera. We also set the `UI Scale Mode` to `Scale With Screen Size` and the `Reference Pixels Per Unit` to 32. For the Main Camera, we set the `Projection` to `Orthographic`. This makes it so we can directly add UI elements where we want them on the scene.
 
@@ -61,9 +61,9 @@ public class BasePokemon : ScriptableObject
 
 We have also provided the instances for the Pokemon we will be using:
 
-![Screenshot](Screenshots/charizard_base)<br>
+![Screenshot](Screenshots/charizard_base.png)<br>
 
-![Screenshot](Screenshots/blastoise_base)<br>
+![Screenshot](Screenshots/blastoise_base.png)<br>
 
 ### Pokemon
 This creates the Pokemon class which has 2 varaibles: basePokemon, which stores the base information of the Pokemon, and hp, which will be the current hp of the pokemon.
