@@ -25,7 +25,7 @@
 ![](Screenshots/pokemonCombat.gif)
 
 ## Setting Up Your Scene
-In order to start, please download and import the [skeleton package](https://drive.google.com/file/d/1_rJrWlnJ4S6iisUc1YaWXbiayqx7GPou/view?usp=sharing) into your own Unity 2D project.
+In order to start, please download and import the [skeleton package](https://drive.google.com/file/d/1_rJrWlnJ4S6iisUc1YaWXbiayqx7GPou/view?usp=sharing) into your own Unity 2D project. Note: all finalized scripts can be found [here](https://github.com/uclaacm/studio-beginner-tutorials/tree/main/Pokemon_Combat/Assets/Scripts/Battle) or under `/Assets/Scripts/Battle/` within the readme. 
 ---
 
 ## The Scene
