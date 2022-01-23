@@ -1,8 +1,5 @@
 # Studio Beginner Tutorials - Build an RPG: Combat
 
-### **This is still a work in progress, we'll try to get the whole README done soon** 
-<br>
-
 **Date**: January 18, 2022, 7:00 pm - 9:00 pm<br>
 **Location**: Zoom<br>
 **Instructors**: Connor, Ryan
@@ -23,6 +20,9 @@
 * [Skeleton Package](https://drive.google.com/file/d/1_rJrWlnJ4S6iisUc1YaWXbiayqx7GPou/view?usp=sharing)
 
 ---
+
+## Final Product
+![](Screenshots/pokemonCombat.gif)
 
 ## Setting Up Your Scene
 In order to start, please download and import the [skeleton package](https://drive.google.com/file/d/1_rJrWlnJ4S6iisUc1YaWXbiayqx7GPou/view?usp=sharing) into your own Unity 2D project.
@@ -259,13 +259,196 @@ Now we can move on to the MoveSelect case of our switch statement. First, if the
 
 Lastly, when the player presses the `Spacebar` key while hovering over a specific move, we want to execute the move. To begin this process, we can toggle the standard dialog **on** and the move select menu **off** since we'll need to see some dialog about the pokemon and move and we no longer need to see the move select menu. Then we will have to start executing the coroutine which actually executes the attacks. 
 
+<br> 
+
+This all translates to code which looks like:
+
+```c#
+case Phases.MoveSelect:
+
+    // If player wants to return to the action select page, they can press escape.
+    if(Input.GetKeyDown(KeyCode.Escape)){
+        phase = Phases.ActionSelect;
+        dialogText.dialogToggle(true);
+        dialogText.actionToggle(true);
+        dialogText.moveToggle(false);
+    }
+
+    // Pressing the right arrow key or 'D' will set the currentMove value to '1' which indicates the second move.
+    else if(Input.GetKeyDown(KeyCode.RightArrow) || Input.GetKeyDown(KeyCode.D)){
+        if(currentMove < 1){
+            currentMove++;
+        }
+    }
+
+    // Pressing the left arrow key or 'A' will set the currentMove value to '0' which indicates the first move.
+    else if(Input.GetKeyDown(KeyCode.LeftArrow) || Input.GetKeyDown(KeyCode.A)){
+        if(currentMove > 0){
+            currentMove--;
+        }
+    }
+
+    // Pressing space will execute the move that the player has chosen.
+    else if(Input.GetKeyDown(KeyCode.Space)){
+        phase = Phases.Attacks;
+        dialogText.dialogToggle(true);
+        dialogText.moveToggle(false);
+        StartCoroutine(ExecuteMoves());
+    }
+    dialogText.highlightMove(currentMove);
+    break;
+```
+
 ### Attacking
 Lets begin by implementing the `ExecuteMoves()` function which will execute attacks from both the player and the enemy. We can start by getting the move which the player selected. In the previous section, we saved the index of the move the player selected in the `currentMove` int, so we can get the pokemon's move at that index by defining `string move = player.basePokemon.moves[currentMove];` which is the name of the move the player selected. Next we can display in the dialog box that the player's pokemon used that move by setting `dialogText.DialogText.text = $"{player.basePokemon.name} used {move}.";`.
 
 <br>
 
-In the way this project is structured, there are no speed stats so the player's pokemon always attacks before the enemy pokemon. So now we have to inflict damage onto the enemy pokemon by calling the `takeDamage` function. 
+In the way this project is structured, there are no speed stats so the player's pokemon always attacks before the enemy pokemon. So now we have to inflict damage onto the enemy pokemon by calling the `takeDamage` function. This function takes in a `curr_pokemon poke`, `hudScript hud`, and `string move`. It takes in a `curr_pokemon` to change the health of the pokemon being attacked and a `hudScript` to change the health bar of that same pokemon. Since we decided to store moves as strings for simplicity, we hard-coded damage values for specific moves (but in a more complex project, it's advised to make an object for moves which store both the name as a string and damage as an int or double). Then we decrement the pokemon's hp by that damage value we hard-coded and check if the pokemon has fainted. We defined this `takeDamage` function to return a boolean value and this represents whether or not the pokemon has fainted (true -> fainted, false -> still alive). So after decrementing the pokemon's hp, we check if it's less than or equal to zero, and if so, we set it's hp to zero, update the hud, and return true. If the pokemon is still alive, we just update the hud and return false. This translates to the following code: 
 
+```c#
+public bool takeDamage(curr_pokemon poke, hudScript hud, string move)
+    {
+        int damage = 0;
+        
+        // Hard coded damage values.
+        if(move == "Hydro Pump"){
+            damage = 50;
+        }
+        if(move == "Fire Blast"){
+            damage = 30;
+        }
+
+        // Decrement pokemon's hp based on damage. 
+        poke.pokemon.hp -= damage;
+
+        // If pokemon has fainted.
+        if(poke.pokemon.hp <= 0)
+        {
+            // Set pokemon's hp value to 0
+            poke.pokemon.hp = 0;
+
+            // Update pokemon's hp bar.
+            hud.hp.setHP(poke.pokemon.hp);
+
+            // Return true to say pokemon has fainted. 
+            return true;
+        }
+        // Update pokemon's hp bar and return false to say pokemon hasn't fainted. 
+        hud.hp.setHP(poke.pokemon.hp);
+        return false;
+
+    }
+```
+
+<br>
+
+Since our `takeDamage` function returns true or false depending on whether the pokemon fainted, we can store that result in a boolean called `isFainted` in our `ExecuteMoves()` function. If the enemy pokemon did faint, we display text which signals that and exit the scene (has not been implemented in this tutorial because no other scenes exist in this scope). And if the enemy pokemon did not faint, we want the enemy pokemon to attack the player with a random move from its moveset. To do this, we can copy a lot of the information used previously to execute the player's pokemon's move. Instead of indexing a move using the `currentMove` variable we stored in move selection, we can generate a random integer from `0` to `enemy.basePokemon.moves.Count` and use that to index the enemy's move. As we did previously, we can then display that the enemy pokemon used that move, pause for a second, call the takeDamage function (on the player's pokemon this time), and check whether or not the player's pokemon fainted as a result of the enemy's move. If the player's pokemon fainted, we display a quick message which shows they fainted and exit the scene and if not we want to return to the `ActionSelect` menu. The whole `ExecuteMoves()` function:
+
+```c#
+IEnumerator ExecuteMoves(){
+
+        // Gets the current move of the player's current pokemon that the player selected. And prints 
+        // the pokemon and move.
+        string move = player.basePokemon.moves[currentMove];
+        dialogText.DialogText.text = $"{player.basePokemon.name} used {move}.";
+
+        // Pausing for a second before move is executed
+        yield return new WaitForSeconds(1f);
+        
+        // Calling takeDamage function on the enemy to make the enemy take damage based on the move that was selected
+        bool isFainted = takeDamage(enemy, enemyHud, move);
+
+        // Checking if the enemy fainted due to the player's attack and if so, display faint message
+        if(isFainted){
+            dialogText.DialogText.text = $"{enemy.basePokemon.name} fainted.";
+            // EXIT SCENE
+        }
+
+        // If the enemy did not faint
+        else{
+            // Choosing a random move from the enemy's set of moves 
+            int rand = Random.Range(0, enemy.basePokemon.moves.Count);
+            string enemyMove = enemy.basePokemon.moves[rand];
+
+            // Displaying move and pausing
+            dialogText.DialogText.text = $"{enemy.basePokemon.name} used {enemyMove}.";
+            yield return new WaitForSeconds(1f);
+
+            // Damage player based on move
+            bool isPlayerFainted = takeDamage(player, playerHud, enemyMove);
+
+            if(isPlayerFainted){
+                dialogText.DialogText.text = $"{player.basePokemon.name} fainted.";
+                // EXIT SCENE
+            }
+            else{
+                // If neither the player nor the enemy fainted, return to action select menu.
+                phase = Phases.ActionSelect;
+                dialogText.dialogToggle(true);
+                dialogText.actionToggle(true);
+                dialogText.moveToggle(false);
+            }
+        }
+    }
+```
+
+## Finishing Up
+Within our `dialogScript.cs` we need implement similar functions as the two we previously implemented, a function to highlight the player's current move selection and toggle functions for the `ActionSelect` menu and `MoveSelect` menu. These are almost direct mirrors to the previously implemented functions so I'll just display the entire code for the functions here: 
+
+```c#
+public void highlightMove(int currentMove)
+    {
+        for(int i = 0; i < moves.Count; i++) { 
+            if(i == currentMove)
+            {
+                moves[i].color = Color.blue;
+            }
+            else
+            {
+                moves[i].color = Color.black;
+            }
+        }
+    }
+
+    // Toggles Action Select UI.
+    public void actionToggle(bool on){
+        ActionSelector.SetActive(on);
+    }
+    
+    // Toggles Move Select UI. 
+    public void moveToggle(bool on){
+        MoveSelector.SetActive(on);
+    }
+```
+
+<br>
+
+There is one last function we need to implement within `dialogScript.cs` and this is the `setMoves(List<string> movesList)` function. This function takes in a list of strings to display the possible move options the player could choose from in the `moveSelect` menu. To implement this function, we just loop through all the elements of the list that was passed in and change the corresponding UI's text elements to the strings in the player's pokemon's moveset.
+
+
+```c#
+// Sets the placeholder move text to the moves of the player's pokemon. 
+    public void setMoves(List<string> movesList){
+        for(int i = 0; i < movesList.Count; i++){
+            moves[i].text = movesList[i];
+        }
+    }
+```
+
+<br>
+
+Lastly, we need to implement the `setHP(int hp)` function in our `hpScript.cs`. This function will change the size of the health bar of the pokemon based on their amount of hp they have left over their total max hp. The way we implemented this function was a simple "hack-ish" method which scales the horizontal portion of the hp bar down based on the hp to maxHp ratio that exists. 
+
+```c#
+public void setHP(int hp)
+    {
+        this.transform.localScale = new Vector2((float) hp / (float) maxHp, 1f);
+    }
+```
+
+## Last Notes
+This project is pretty experimental, so if anything seems off please send a message in our discord's `#questions` channel. It's also an extremely downscaled version of a normal turn-based combat game so that we could quickly explain the fundamentals of turn-based combat instead of making our own fleshed out game (which could take very long). The key takeaways of what was covered in this tutorial is that turns should be split up between different phases and making transitions between these phases determines how the combat flows between player and enemy. There are several in-between factors that must be taken into account when dealing with phase transitions, like UI enabling/disabling and handling fainting, which are vital to ensuring smooth transitions. If you've made it this far, thank you and I hope you have a nice day!
 
 ---
 ## Essential Links
