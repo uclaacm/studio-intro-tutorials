@@ -1,22 +1,23 @@
-# [Title]
+# Studio Beginner Tutorials - Build an RPG: Overworld
  
-**Date**: [Month Date, Year], [Time slot]<br>
-**Location**: [Location]<br>
-**Instructors**: [Names]
+**Date**: January 25th, 2022, 7:00 pm - 9:00 pm<br>
+**Location**: Zoom<br>
+**Instructor**: Matthew Workman
  
 ## Resources
 [Slides]()<br>
-[Video]()<br>
+[Video Soon!](Soon)<br>
  
 ## Topics Covered
-* [Fill as needed]
-* [Fill as needed]
+* Setting up a player and movement
+* Creating boundaries/a route 
+* Creating an NPC and Wild Pokémon Encounters
  
 ## What you'll need
 * [Unity Hub](https://unity.com/download)
 * [Unity 2020.3.15f2](https://unity3d.com/unity/qa/lts-releases)
 * [Git](https://git-scm.com/downloads)
-* [Add as needed]
+* [Skeleton Package] (https://drive.google.com/file/d/1fwxSS-_M8ALAvDLSO5gfLTADQ4cnSV13/view?usp=sharing)
 
 ---
 
