@@ -17,7 +17,7 @@
 * [Unity Hub](https://unity.com/download)
 * [Unity 2020.3.15f2](https://unity3d.com/unity/qa/lts-releases)
 * [Git](https://git-scm.com/downloads)
-* [Skeleton Package] (https://drive.google.com/file/d/1fwxSS-_M8ALAvDLSO5gfLTADQ4cnSV13/view?usp=sharing)
+* [Skeleton Package](https://drive.google.com/file/d/1fwxSS-_M8ALAvDLSO5gfLTADQ4cnSV13/view?usp=sharing)
 
 ---
 
