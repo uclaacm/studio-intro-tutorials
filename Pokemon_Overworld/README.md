@@ -17,16 +17,16 @@
 * [Unity Hub](https://unity.com/download)
 * [Unity 2020.3.15f2](https://unity3d.com/unity/qa/lts-releases)
 * [Git](https://git-scm.com/downloads)
-* [Skeleton Package](https://drive.google.com/file/d/1fwxSS-_M8ALAvDLSO5gfLTADQ4cnSV13/view?usp=sharing)
+* [Skeleton Package](https://drive.google.com/file/d/1dfWnvE7orxTojZJ7phKna36nYpdVWnZr/view?usp=sharing)
 
 ---
 
 ## Setting Up Your Scene
-In order to start, please download and import the [skeleton package](https://drive.google.com/file/d/1fwxSS-_M8ALAvDLSO5gfLTADQ4cnSV13/view?usp=sharing) into your own Unity 2D project.
+In order to start, please download and import the [skeleton package]https://drive.google.com/file/d/1dfWnvE7orxTojZJ7phKna36nYpdVWnZr/view?usp=sharing) into your own Unity 2D project.
 
 ---
 ## The Scenes
-The [skeleton package](https://drive.google.com/file/d/1fwxSS-_M8ALAvDLSO5gfLTADQ4cnSV13/view?usp=sharing) includes all the assets needed for the Overworld scene (and a completed version of the previous week's Combat Scene) and has things set up so that we can add scripts to make it playable. Before we get into that though, we want to go over what is in the scene. The Overworld scene should look like this:
+The [skeleton package](https://drive.google.com/file/d/1dfWnvE7orxTojZJ7phKna36nYpdVWnZr/view?usp=sharing) includes all the assets needed for the Overworld scene (and a completed version of the previous week's Combat Scene) and has things set up so that we can add scripts to make it playable. Before we get into that though, we want to go over what is in the scene. The Overworld scene should look like this:
 
 ![Screenshot](Screenshots/SceneContentsAtStart.png)<br>
 
