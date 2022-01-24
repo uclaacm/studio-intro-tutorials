@@ -5,7 +5,7 @@
 **Instructor**: Matthew Workman
  
 ## Resources
-[Slides]()<br>
+[Slides](https://docs.google.com/presentation/d/1mX_tNAdCScIx0Qo3Y7ENI4bEb0RpwjQv5inyaSVVshQ/edit?usp=sharing)<br>
 [Video Soon!](Soon)<br>
  
 ## Topics Covered
