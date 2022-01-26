@@ -6,7 +6,7 @@
  
 ## Resources
 [Slides](https://docs.google.com/presentation/d/1mX_tNAdCScIx0Qo3Y7ENI4bEb0RpwjQv5inyaSVVshQ/edit?usp=sharing)<br>
-[Video Soon!](Soon)<br>
+[Video Soon!](https://youtu.be/QMbWMkJXs5g)<br>
  
 ## Topics Covered
 * Setting up a player and movement
