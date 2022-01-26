@@ -22,7 +22,7 @@
 ---
 
 ## Setting Up Your Scene
-In order to start, please download and import the [skeleton package]https://drive.google.com/file/d/1dfWnvE7orxTojZJ7phKna36nYpdVWnZr/view?usp=sharing) into your own Unity 2D project.
+In order to start, please download and import the [skeleton package](https://drive.google.com/file/d/1dfWnvE7orxTojZJ7phKna36nYpdVWnZr/view?usp=sharing) into your own Unity 2D project.
 
 ---
 ## The Scenes
