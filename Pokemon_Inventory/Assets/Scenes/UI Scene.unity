@@ -1084,10 +1084,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2ff167a80c318c546bbec9c1e23f9fc1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  img1: {fileID: 1354437485}
-  img2: {fileID: 242262346}
-  img3: {fileID: 1365909307}
+  images:
+  - {fileID: 1354437485}
+  - {fileID: 242262346}
+  - {fileID: 1365909307}
   player: {fileID: 684030255}
+  setNumber: 3
   scrollbar: {fileID: 681019572}
   actionsPanel: {fileID: 204914183}
   actionKey: 32

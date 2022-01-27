@@ -7,9 +7,7 @@ public class UIDisplay : MonoBehaviour
 {
     //INVENTORY LIST
     [Header("Inventory List")]
-    [SerializeField] Image img1;
-    [SerializeField] Image img2;
-    [SerializeField] Image img3;
+    [SerializeField] Image[] images;
 
     [SerializeField] Inventory player;
 
@@ -22,6 +20,7 @@ public class UIDisplay : MonoBehaviour
     int cursorPos = 0;  // Can go from 0-2, 0 being topmost, 2 being bottommost
 
     //Faustine's added fields
+    [SerializeField] int setNumber = 3; //number of items on screen at once
     [SerializeField] Scrollbar scrollbar;
     
     //actions
@@ -46,7 +45,7 @@ public class UIDisplay : MonoBehaviour
         }
         if (Input.GetKeyDown(KeyCode.UpArrow))
         {
-            MoveCursorDown(true);
+            MoveCursorDown(true); //the reversed booleans are a little confusing, perhaps make it so that when we are moving up, the bools say false?
         }
         GetInventory();
         RenderDisplay();
@@ -163,44 +162,26 @@ public class UIDisplay : MonoBehaviour
     // Display the Inventory slots, rendering each slot with its corresponding image
     void RenderDisplay()
     {
-        // img1.color = colors[dispIndex];
-        // img2.color = colors[dispIndex + 1];
-        // img3.color = colors[dispIndex + 2];
-        if (dispIndex < lstSize)
+        for (int i = 0; i < setNumber; i++)
         {
-            img1.GetComponentInChildren<Text>().text = displayList[dispIndex].GetDisplayName();
-        }
-        if (dispIndex + 1 < lstSize)
-        {
-            img2.GetComponentInChildren<Text>().text = displayList[dispIndex + 1].GetDisplayName();
-        }
-        if (dispIndex + 2 < lstSize)
-        {
-            img3.GetComponentInChildren<Text>().text = displayList[dispIndex + 2].GetDisplayName();
+            DisplayItemName(i); //display items corresponding to max number possible on screen (i.e. 3)
         }
 
         // Change the alpha to highlight the cursor
-
-        //alternative implementation: create an array of the images, if cursorpos = img index, set alpha to 1f, otherwise set it to 0.5f
-        switch (cursorPos)
+        foreach (Image image in images)
         {
-            case 0:
-                img1.color = new Color(img1.color.r, img1.color.g, img1.color.b, 1f);
-                img2.color = new Color(img2.color.r, img2.color.g, img2.color.b, 0.5f);
-                img3.color = new Color(img3.color.r, img3.color.g, img3.color.b, 0.5f);
-                break;
-            case 1:
-                img1.color = new Color(img1.color.r, img1.color.g, img1.color.b, 0.5f);
-                img2.color = new Color(img2.color.r, img2.color.g, img2.color.b, 1f);
-                img3.color = new Color(img3.color.r, img3.color.g, img3.color.b, 0.5f);
-                break;
-            case 2:
-                img2.color = new Color(img2.color.r, img2.color.g, img2.color.b, 0.5f);
-                img1.color = new Color(img1.color.r, img1.color.g, img1.color.b, 0.5f);
-                img3.color = new Color(img3.color.r, img3.color.g, img3.color.b, 1f);
-                break;
+            image.color = new Color(image.color.r, image.color.g, image.color.b, 0.5f); //first set all to half transparent
         }
+        images[cursorPos].color = new Color(images[cursorPos].color.r, images[cursorPos].color.g, images[cursorPos].color.b, 1f); //then set selected to opaque
 
+    }
+
+    private void DisplayItemName(int order) //taking image index as input
+    {
+        if (dispIndex + order < lstSize)
+        {
+            images[order].GetComponentInChildren<Text>().text = displayList[dispIndex + order].GetDisplayName(); //find corresponding item with its index, display
+        }
     }
 
     // Returns the InventoryItem that cursor is pointing at
