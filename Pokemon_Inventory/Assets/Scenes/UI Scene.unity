@@ -847,7 +847,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Navigation:
-    m_Mode: 3
+    m_Mode: 0
     m_WrapAround: 0
     m_SelectOnUp: {fileID: 0}
     m_SelectOnDown: {fileID: 0}
@@ -859,7 +859,7 @@ MonoBehaviour:
     m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
     m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
     m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
-    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
+    m_DisabledColor: {r: 0.8207547, g: 0.70925593, b: 0.70925593, a: 1}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
   m_SpriteState:
@@ -873,12 +873,12 @@ MonoBehaviour:
     m_PressedTrigger: Pressed
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
-  m_Interactable: 1
+  m_Interactable: 0
   m_TargetGraphic: {fileID: 1609557850}
   m_HandleRect: {fileID: 1609557849}
   m_Direction: 3
   m_Value: 0
-  m_Size: 0.2
+  m_Size: 0
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -1088,8 +1088,8 @@ MonoBehaviour:
   img2: {fileID: 242262346}
   img3: {fileID: 1365909307}
   player: {fileID: 684030255}
-  scrollbar: {fileID: 0}
-  actionsPanel: {fileID: 0}
+  scrollbar: {fileID: 681019572}
+  actionsPanel: {fileID: 204914183}
   actionKey: 32
   itemIcon: {fileID: 1230818126}
   itemDescription: {fileID: 1957867446}

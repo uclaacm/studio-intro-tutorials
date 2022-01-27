@@ -63,12 +63,8 @@ public class UIDisplay : MonoBehaviour
                                               //actions can display like inventory list OR like combat choices (how many total actions?) https://answers.unity.com/questions/420324/get-numeric-key.html
         {
             Debug.Log("action 1 initiated");
-            //DO SOMETHING
+            //DO SOMETHING with itemSelected
         }
-        
-        //SCROLLBAR MATH (OPTIONAL)
-
-
 
         //ITEM ICON AND TOOLTIP DISPLAY
         //canvas set to scale with screen size, note anchors (if not scale with screen size, it will scale based on the anchors)
@@ -78,11 +74,24 @@ public class UIDisplay : MonoBehaviour
         //different ways to manage icon size on the left:
         //itemIcon.SetNativeSize(); //IF you want to set your image to your item sprite native size
         itemDescription.text = itemSelected.GetToolTip(); //change the item description displayed
-        //.text takes in strings, which we return with the gettooltip function, if not .text the class type is Text, which is a mismatch
-        //optional: check "best fit" in the editor for text box
+                                                          //.text takes in strings, which we return with the gettooltip function, if not .text the class type is Text, which is a mismatch
+                                                          //optional: check "best fit" in the editor for text box
 
-        //Aspect Ratio Fitter Component: https://docs.unity3d.com/Packages/com.unity.ugui@1.0/manual/script-AspectRatioFitter.html#:~:text=The%20Aspect%20Ratio%20Fitter%20functions,parent%20or%20envelope%20its%20parent.
         //font type: keep in mind that this font type might be difficult to read for some people! Accessibility
+
+
+        //SCROLLBAR MATH (OPTIONAL); make uninteractable, change disabled color; just for a visual indicator
+        float listCount = displayList.Count; //a float to make sure later calculations are not rounded
+        int setNumber = 3; //every set has 3 objects on screen at a time
+        float setCount = listCount - setNumber; //max count for sets possible; for each one increase from set number, the set count increases by one
+
+        float handleSize = 1 / setCount; //what the set displayed on screen would be as a proportion of total number of sets
+        scrollbar.size = handleSize; //set handle size to represent sets of 3
+
+        float handleVal = dispIndex * handleSize; //how far the handle should go
+        scrollbar.value = handleVal; //set handle position to the distance down the list
+
+        //why did six lines of code take me two hours -- Faustine
     }
 
     private void Start()
