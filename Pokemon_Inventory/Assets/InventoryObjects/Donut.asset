@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1051c78b0f8ba38418fc371c6fd8c433, type: 3}
+  m_Name: Donut
+  m_EditorClassIdentifier: 
+  idName: Donut
+  displayName: Tasty Donut
+  tooltip: By comsuming this you trade long-term health hazards for a short-term
+    energy boost. Eh, who cares about health anyways. Heals 20 HP.
+  icon: {fileID: 21300000, guid: 63a7ca5b22c9ccd43b287b8955cd6801, type: 3}
