@@ -28,7 +28,6 @@ public class UIDisplay : MonoBehaviour
     [SerializeField] GameObject actionsPanel;
     bool actionsOn = false;
     [SerializeField] KeyCode actionKey = KeyCode.Space; //optional
-    //IDRK HOW WE'RE IMPLEMENTING THIS BUT-- Actions[] actions or actions<Actions>() or something
 
     //INVENTORY DISPLAY
     [Header("Item Displays")]
@@ -52,46 +51,10 @@ public class UIDisplay : MonoBehaviour
         GetInventory();
         RenderDisplay();
 
-        //ACTIONS
-        if (Input.GetKeyDown(actionKey)) //key choice can be changed
-        {
-            actionsOn = !actionsOn;
-        }
-        actionsPanel.SetActive(actionsOn);
-        
-        if (actionsOn && Input.GetKeyDown(KeyCode.Alpha1)) //accessing different actions via numeric keys, or shift cursor to actions panel;
-                                              //actions can display like inventory list OR like combat choices (how many total actions?) https://answers.unity.com/questions/420324/get-numeric-key.html
-        {
-            Debug.Log("action 1 initiated");
-            //DO SOMETHING with itemSelected
-        }
-
-        //ITEM ICON AND TOOLTIP DISPLAY
-        //canvas set to scale with screen size, note anchors (if not scale with screen size, it will scale based on the anchors)
-
-        itemSelected = GetItemOnCursor(); //get item currently selected
-        itemIcon.sprite = itemSelected.GetIcon(); //change the sprite icon displayed (.sprite takes in sprites, Image types doon't automatically do that)
-        //different ways to manage icon size on the left:
-        //itemIcon.SetNativeSize(); //IF you want to set your image to your item sprite native size
-        itemDescription.text = itemSelected.GetToolTip(); //change the item description displayed
-                                                          //.text takes in strings, which we return with the gettooltip function, if not .text the class type is Text, which is a mismatch
-                                                          //optional: check "best fit" in the editor for text box
-
-        //resolve overflow, easiest way is to use text mesh pro - reference past projects and set auto sizing to determine max and min font size and what to do with overflow text
-
-
-    //SCROLLBAR MATH (OPTIONAL); make uninteractable, change disabled color; just for a visual indicator
-    float listCount = displayList.Count; //a float to make sure later calculations are not rounded
-        int setNumber = 3; //every set has 3 objects on screen at a time
-        float setCount = listCount - setNumber; //max count for sets possible; for each one increase from set number, the set count increases by one
-
-        float handleSize = 1 / setCount; //what the set displayed on screen would be as a proportion of total number of sets
-        scrollbar.size = handleSize; //set handle size to represent sets of 3
-
-        float handleVal = dispIndex * handleSize; //how far the handle should go
-        scrollbar.value = handleVal; //set handle position to the distance down the list
-
-        //why did six lines of code take me two hours -- Faustine
+        //Faustine's added methods: visuals
+        SetScrollbar();
+        ActionPanelToggle();
+        DisplayItemInfo();
     }
 
     private void Start()
@@ -217,6 +180,8 @@ public class UIDisplay : MonoBehaviour
         }
 
         // Change the alpha to highlight the cursor
+
+        //alternative implementation: create an array of the images, if cursorpos = img index, set alpha to 1f, otherwise set it to 0.5f
         switch (cursorPos)
         {
             case 0:
@@ -238,9 +203,57 @@ public class UIDisplay : MonoBehaviour
 
     }
 
-    // Returns the InveentoryItem that cursor is pointing at
-    public InventoryItem GetItemOnCursor()
+    // Returns the InventoryItem that cursor is pointing at
+    private InventoryItem GetItemOnCursor()
     {
         return displayList[dispIndex + cursorPos];
+    }
+
+    private void SetScrollbar()
+    {
+        //SCROLLBAR MATH (OPTIONAL); make uninteractable, change disabled color; just for a visual indicator
+        int setNumber = 3; //every set has 3 objects on screen at a time
+        float setCount = lstSize - setNumber; //max count for sets possible; for each one increase from set number, the set count increases by one
+
+        float handleSize = 1 / setCount; //hand should represent one set out of total number of sets
+        scrollbar.size = handleSize; //set handle size to represent sets of 3
+
+        float handleVal = dispIndex * handleSize; //how far the handle should go
+        scrollbar.value = handleVal; //set handle position to the distance down the list
+
+        //why did six lines of code take me two hours -- Faustine
+    }
+
+    private void ActionPanelToggle()
+    {
+        //ACTIONS
+        if (Input.GetKeyDown(actionKey)) //key choice can be changed
+        {
+            actionsOn = !actionsOn;
+        }
+        actionsPanel.SetActive(actionsOn);
+
+        if (actionsOn && Input.GetKeyDown(KeyCode.Alpha1)) //accessing different actions via numeric keys, or shift cursor to actions panel;
+                                                           //actions can display like inventory list OR like combat choices (how many total actions?) https://answers.unity.com/questions/420324/get-numeric-key.html
+        {
+            Debug.Log("action 1 initiated");
+            //DO SOMETHING with itemSelected
+        }
+    }
+
+    private void DisplayItemInfo()
+    {
+        //ITEM ICON AND TOOLTIP DISPLAY
+        //canvas set to scale with screen size, note anchors (if not scale with screen size, it will scale based on the anchors)
+
+        itemSelected = GetItemOnCursor(); //get item currently selected
+        itemIcon.sprite = itemSelected.GetIcon(); //change the sprite icon displayed (.sprite takes in sprites, Image types doon't automatically do that)
+        //different ways to manage icon size on the left:
+        //itemIcon.SetNativeSize(); //IF you want to set your image to your item sprite native size
+        itemDescription.text = itemSelected.GetToolTip(); //change the item description displayed
+                                                          //.text takes in strings, which we return with the gettooltip function, if not .text the class type is Text, which is a mismatch
+                                                          //optional: check "best fit" in the editor for text box
+
+        //resolve overflow, easiest way is to use text mesh pro - reference past projects and set auto sizing to determine max and min font size and what to do with overflow text
     }
 }
