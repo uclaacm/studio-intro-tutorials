@@ -77,11 +77,11 @@ public class UIDisplay : MonoBehaviour
                                                           //.text takes in strings, which we return with the gettooltip function, if not .text the class type is Text, which is a mismatch
                                                           //optional: check "best fit" in the editor for text box
 
-        //font type: keep in mind that this font type might be difficult to read for some people! Accessibility
+        //resolve overflow, easiest way is to use text mesh pro - reference past projects and set auto sizing to determine max and min font size and what to do with overflow text
 
 
-        //SCROLLBAR MATH (OPTIONAL); make uninteractable, change disabled color; just for a visual indicator
-        float listCount = displayList.Count; //a float to make sure later calculations are not rounded
+    //SCROLLBAR MATH (OPTIONAL); make uninteractable, change disabled color; just for a visual indicator
+    float listCount = displayList.Count; //a float to make sure later calculations are not rounded
         int setNumber = 3; //every set has 3 objects on screen at a time
         float setCount = listCount - setNumber; //max count for sets possible; for each one increase from set number, the set count increases by one
 
