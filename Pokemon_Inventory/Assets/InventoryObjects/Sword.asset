@@ -17,4 +17,4 @@ MonoBehaviour:
   tooltip: Cutting-edge technology makes this sword edible. It tastes like metal,
     smells like metal, but doesn't offer any additional benefits. Dunno why you'd
     want to eat this, but hey, you only live once.
-  icon: {fileID: 21300000, guid: 63a7ca5b22c9ccd43b287b8955cd6801, type: 3}
+  icon: {fileID: 21300000, guid: bddbddd204ece904fbf8bc5d77d7823c, type: 3}

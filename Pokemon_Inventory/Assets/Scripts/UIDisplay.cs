@@ -22,6 +22,9 @@ public class UIDisplay : MonoBehaviour
     //Faustine's added fields
     [SerializeField] int setNumber = 3; //number of items on screen at once
     [SerializeField] Scrollbar scrollbar;
+
+    //UNUSED check for disabled inventory slots
+    //bool invDisabled = false;
     
     //actions
     [SerializeField] GameObject actionsPanel;
@@ -162,6 +165,24 @@ public class UIDisplay : MonoBehaviour
     // Display the Inventory slots, rendering each slot with its corresponding image
     void RenderDisplay()
     {
+        /*//inactivate empty inv slots, re-activate if it won't be empty (BROCKEN :<)
+        if (setNumber > lstSize && !invDisabled)
+        {
+            int beginHideIndex = lstSize; //which index to being to disable the empty slots (list size is larger than last index, so start from last index in the list + 1)
+            for(int i = beginHideIndex; i < setNumber; i++)
+            {
+                images[i].GetComponent<GameObject>().SetActive(false); //inactivate slots that are empty IDK HOW TO ACTIVATE/INACTIVATE GAME OBJECTS
+            }
+            
+            invDisabled = true;
+        } else if(invDisabled) //now the list size exceeds total items on screen + some slots are still inactive --> re-activate
+        {
+            foreach (Image image in images)
+            {
+                image.GetComponent<GameObject>().SetActive(false); //activate all slots when set number is not bigger than list size
+            }
+        }*/
+
         for (int i = 0; i < setNumber; i++)
         {
             DisplayItemName(i); //display items corresponding to max number possible on screen (i.e. 3)
@@ -195,6 +216,11 @@ public class UIDisplay : MonoBehaviour
         //SCROLLBAR MATH (OPTIONAL); make uninteractable, change disabled color; just for a visual indicator
         int setNumber = 3; //every set has 3 objects on screen at a time
         float setCount = lstSize - setNumber; //max count for sets possible; for each one increase from set number, the set count increases by one
+
+        if(setCount <= 0)
+        {
+            setCount = 1; //if the list is smaller than the possible number of items on screen, there could only be one set possible
+        }
 
         float handleSize = 1 / setCount; //hand should represent one set out of total number of sets
         scrollbar.size = handleSize; //set handle size to represent sets of 3
@@ -233,8 +259,7 @@ public class UIDisplay : MonoBehaviour
         //itemIcon.SetNativeSize(); //IF you want to set your image to your item sprite native size
         itemDescription.text = itemSelected.GetToolTip(); //change the item description displayed
                                                           //.text takes in strings, which we return with the gettooltip function, if not .text the class type is Text, which is a mismatch
-                                                          //optional: check "best fit" in the editor for text box
-
-        //resolve overflow, easiest way is to use text mesh pro - reference past projects and set auto sizing to determine max and min font size and what to do with overflow text
+        
+        //optional: check "best fit" in the editor for text box, set max and min font size and what to do with overflow text (textoverflow to determine whether to truncate or ellipses for overflow)
     }
 }
