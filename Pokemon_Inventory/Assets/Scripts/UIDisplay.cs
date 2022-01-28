@@ -45,7 +45,7 @@ public class UIDisplay : MonoBehaviour
         }
         if (Input.GetKeyDown(KeyCode.UpArrow))
         {
-            MoveCursorDown(true); //the reversed booleans are a little confusing, perhaps make it so that when we are moving up, the bools say false?
+            MoveCursorDown(false);
         }
         GetInventory();
         RenderDisplay();
@@ -103,20 +103,9 @@ public class UIDisplay : MonoBehaviour
     }
 
     // Move cursor 
-    void MoveCursorDown(bool reverse = false)
+    void MoveCursorDown(bool down = true)
     {
-        if (reverse)
-        {
-            if (cursorPos == 0)  // If cursor pointing at topmost slot
-            {
-                ShiftDisplayDown(true);  // Attempt to shift display up
-            }
-            else
-            {
-                cursorPos--;
-            }
-        }
-        else
+        if (down)
         {
             if (cursorPos == 2)
             {
@@ -127,12 +116,35 @@ public class UIDisplay : MonoBehaviour
                 cursorPos++;
             }
         }
+        else
+        {
+            if (cursorPos == 0)  // If cursor pointing at topmost slot
+            {
+                ShiftDisplayDown(false);  // Attempt to shift display up
+            }
+            else
+            {
+                cursorPos--;
+            }
+        }
     }
 
     // Attempts to shift the displayed section of array, returning false if unable to
-    bool ShiftDisplayDown(bool reverse = false)
+    bool ShiftDisplayDown(bool down = true)
     {
-        if (reverse)
+        if (down)
+        {
+            if (dispIndex + 1 >= lstSize - 2) 
+            {
+                return false;
+            }
+            else
+            {
+                dispIndex++; //shift down if you can
+                return true;
+            }
+        }
+        else
         {
             if (dispIndex - 1 < 0)
             {
@@ -140,20 +152,7 @@ public class UIDisplay : MonoBehaviour
             }
             else
             {
-                dispIndex--;
-                return true;
-            }
-
-        }
-        else
-        {
-            if (dispIndex + 1 >= lstSize - 2)
-            {
-                return false;
-            }
-            else
-            {
-                dispIndex++;
+                dispIndex--; //shift up if you can
                 return true;
             }
         }
