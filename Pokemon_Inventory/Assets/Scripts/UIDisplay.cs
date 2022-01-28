@@ -195,6 +195,11 @@ public class UIDisplay : MonoBehaviour
         //SCROLLBAR MATH (OPTIONAL); make uninteractable, change disabled color; just for a visual indicator
         int setNumber = 3; //every set has 3 objects on screen at a time
         float setCount = lstSize - setNumber; //max count for sets possible; for each one increase from set number, the set count increases by one
+        
+        if (setCount <= 0)
+        {
+            setCount = 1; //if the list is smaller than the possible number of items on screen, there could only be one set possible
+        }
 
         float handleSize = 1 / setCount; //hand should represent one set out of total number of sets
         scrollbar.size = handleSize; //set handle size to represent sets of 3
