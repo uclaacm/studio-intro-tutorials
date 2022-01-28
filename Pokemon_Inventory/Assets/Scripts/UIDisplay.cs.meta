@@ -3,7 +3,13 @@ guid: 2ff167a80c318c546bbec9c1e23f9fc1
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - invSlotPrefab: {fileID: 4693113655381686547, guid: 0d0112630d468d44db17a1ad6529f51b, type: 3}
+  - player: {instanceID: 0}
+  - scrollbar: {instanceID: 0}
+  - actionsPanel: {instanceID: 0}
+  - itemIcon: {instanceID: 0}
+  - itemDescription: {instanceID: 0}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

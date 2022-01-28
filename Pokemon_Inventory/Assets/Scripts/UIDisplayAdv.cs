@@ -3,12 +3,20 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class UIDisplay : MonoBehaviour
+public class UIDisplayAdv : MonoBehaviour
 {
     //INVENTORY LIST
     [Header("Inventory List")]
-    [SerializeField] Image[] images;
+    [SerializeField] GameObject inventoryWindow;
+    [SerializeField] GameObject invSlotPrefab; //inventory slot holder prefab
+    public List<GameObject> invSlotList = new List<GameObject>(); //queue of inventory slots
+    public List<Image> images = new List<Image>();
+    [SerializeField] [Range(1, 8)] int setNumber = 3;
+    int prevSetNum;
+    bool setNumChanged = false;
 
+    //INVENTORY LIST
+    [Header("Inventory List")]
     [SerializeField] Inventory player;
 
     InventoryItem[] invIndex;  // Master list of all InventoryItems
@@ -20,12 +28,11 @@ public class UIDisplay : MonoBehaviour
     int cursorPos = 0;  // Can go from 0-2, 0 being topmost, 2 being bottommost
 
     //Faustine's added fields
-    [SerializeField] int setNumber = 3; //number of items on screen at once
     [SerializeField] Scrollbar scrollbar;
 
     //UNUSED check for disabled inventory slots
     //bool invDisabled = false;
-    
+
     //actions
     [SerializeField] GameObject actionsPanel;
     bool actionsOn = false;
@@ -39,8 +46,26 @@ public class UIDisplay : MonoBehaviour
     InventoryItem itemSelected; //item currently being selected
 
     // Update is called once per frame
-    void Update()
+    private void Start()
     {
+        invIndex = Resources.FindObjectsOfTypeAll<InventoryItem>();
+        foreach (InventoryItem item in invIndex)
+        {
+            Debug.Log(item);
+        }
+        displayList = new List<InventoryItem>();
+        
+        CreateInvSlots();
+    }
+
+    private void Update()
+    {
+        if (setNumChanged)
+        {
+            CreateInvSlots();
+            setNumChanged = false;
+        }
+
         //INVENTORY LIST AND CURSOR CODE
         if (Input.GetKeyDown(KeyCode.DownArrow))
         {
@@ -59,14 +84,57 @@ public class UIDisplay : MonoBehaviour
         DisplayItemInfo();
     }
 
-    private void Start()
+    public void ValueChanged(float value) //when the slider is changed, update setnumber
     {
-        invIndex = Resources.FindObjectsOfTypeAll<InventoryItem>();
-        foreach (InventoryItem item in invIndex)
+        prevSetNum = setNumber;
+        setNumber = Mathf.RoundToInt(value);
+        setNumChanged = true;
+    }
+
+    void CreateInvSlots()
+    {
+        if(cursorPos > setNumber - 1) //if cursor is out of bounds, reset it
         {
-            Debug.Log(item);
+            cursorPos = setNumber - 1;
+        }else if (cursorPos < 0) //logically won't happen, but just in case
+        {
+            cursorPos = 0;
         }
-        displayList = new List<InventoryItem>();
+
+        if(dispIndex == lstSize - prevSetNum && (dispIndex - 1) >= 0 ) //if on last set, which causes bugs, shift up
+        {
+            dispIndex--;
+        }
+
+
+        int invSlotCount = invSlotList.Count; //count number of items in invSlotList (or a set)
+        images.Clear();
+        if (invSlotCount < setNumber) //if too few
+        {
+            for (int i = invSlotCount; i < setNumber; i++) //instantiate until you reach the set number needed
+            {
+                GameObject invSlot = Instantiate(invSlotPrefab, inventoryWindow.transform);
+                invSlot.SetActive(false);
+                invSlotList.Add(invSlot);
+            }
+        }
+        else if (invSlotCount > setNumber) //if too many, inactivate extras
+        {
+            for (int i = setNumber; i < invSlotCount; i++)
+            {
+                GameObject invSlot = invSlotList[i];
+                invSlot.SetActive(false);
+            }
+        }
+
+        for (int i = 0; i < setNumber; i++) //set remaining inventory slots active
+        {
+            GameObject invslot = invSlotList[i];
+            Image image = invslot.GetComponentInChildren<Image>();
+            images.Add(image); //add images to list to access
+            invslot.SetActive(true);
+        }
+        
     }
 
     // Update local inventory dictionary 
@@ -121,7 +189,7 @@ public class UIDisplay : MonoBehaviour
         }
         else
         {
-            if (cursorPos == 2)
+            if (cursorPos == setNumber - 1) //if the cursor position is the bottommost slot
             {
                 ShiftDisplayDown();
             }
@@ -150,7 +218,7 @@ public class UIDisplay : MonoBehaviour
         }
         else
         {
-            if (dispIndex + 1 >= lstSize - 2)
+            if (dispIndex + 1 > lstSize - setNumber) //if display of the set goes out of bounds
             {
                 return false;
             }
@@ -196,10 +264,9 @@ public class UIDisplay : MonoBehaviour
     private void SetScrollbar()
     {
         //SCROLLBAR MATH (OPTIONAL); make uninteractable, change disabled color; just for a visual indicator
-        int setNumber = 3; //every set has 3 objects on screen at a time
         float setCount = lstSize - setNumber; //max count for sets possible; for each one increase from set number, the set count increases by one
 
-        if(setCount <= 0)
+        if (setCount <= 0)
         {
             setCount = 1; //if the list is smaller than the possible number of items on screen, there could only be one set possible
         }
@@ -237,11 +304,6 @@ public class UIDisplay : MonoBehaviour
 
         itemSelected = GetItemOnCursor(); //get item currently selected
         itemIcon.sprite = itemSelected.GetIcon(); //change the sprite icon displayed (.sprite takes in sprites, Image types doon't automatically do that)
-        //different ways to manage icon size on the left:
-        //itemIcon.SetNativeSize(); //IF you want to set your image to your item sprite native size
         itemDescription.text = itemSelected.GetToolTip(); //change the item description displayed
-                                                          //.text takes in strings, which we return with the gettooltip function, if not .text the class type is Text, which is a mismatch
-        
-        //optional: check "best fit" in the editor for text box, set max and min font size and what to do with overflow text (textoverflow to determine whether to truncate or ellipses for overflow)
     }
 }
