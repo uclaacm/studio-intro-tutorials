@@ -42,17 +42,27 @@ public class UIDisplay : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.DownArrow) && !actionsOn)
         {
             MoveCursorDown();
+            RenderDisplay();
+            SetScrollbar();
+            DisplayItemInfo();
         }
         if (Input.GetKeyDown(KeyCode.UpArrow) && !actionsOn)
         {
             MoveCursorDown(false);
+            RenderDisplay();
+            SetScrollbar();
+            DisplayItemInfo();
         }
-        GetInventory();
-        RenderDisplay();
 
         //Faustine's added methods: visuals
-        SetScrollbar();
         ActionPanelToggle();
+    }
+
+    private void OnEnable()
+    {
+        GetInventory();
+        RenderDisplay();
+        SetScrollbar();
         DisplayItemInfo();
     }
 
@@ -64,6 +74,7 @@ public class UIDisplay : MonoBehaviour
             Debug.Log(item);
         }
         displayList = new List<InventoryItem>();
+        GetInventory();
     }
 
     // Update local inventory dictionary 
@@ -77,7 +88,7 @@ public class UIDisplay : MonoBehaviour
             {
                 displayList.Remove(item);
                 lstSize--;
-            }
+            }   
         }
         foreach (string IDName in inventory.Keys)  // Search through the inventory dictionary
         {
