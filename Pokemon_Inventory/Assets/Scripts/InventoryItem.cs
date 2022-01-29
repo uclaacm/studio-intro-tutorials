@@ -9,6 +9,12 @@ public class InventoryItem : ScriptableObject
     [SerializeField] string displayName;
     [SerializeField] [TextArea] string tooltip;
     [SerializeField] Sprite icon;
+    public enum Actions
+    {
+        use,
+        drop
+    }
+    [SerializeField] List<Actions> availableActions;
     
 
     // PUBLIC 
@@ -30,5 +36,10 @@ public class InventoryItem : ScriptableObject
     public string GetToolTip()
     {
         return tooltip;
+    }
+
+    public List<Actions> getAvailableActions()
+    {
+        return availableActions;
     }
 }
