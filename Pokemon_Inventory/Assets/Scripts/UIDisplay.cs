@@ -66,7 +66,7 @@ public class UIDisplay : MonoBehaviour
         DisplayItemInfo();
     }
 
-    private void Start()
+    private void Awake()
     {
         invIndex = Resources.FindObjectsOfTypeAll<InventoryItem>();
         foreach (InventoryItem item in invIndex)
