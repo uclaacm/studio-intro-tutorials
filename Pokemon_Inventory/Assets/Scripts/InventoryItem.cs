@@ -15,6 +15,7 @@ public class InventoryItem : ScriptableObject
         drop
     }
     [SerializeField] List<Actions> availableActions;
+    [SerializeField] int healPower;
     
 
     // PUBLIC 
@@ -41,5 +42,10 @@ public class InventoryItem : ScriptableObject
     public List<Actions> getAvailableActions()
     {
         return availableActions;
+    }
+
+    public int getHealPower()
+    {
+        return healPower;
     }
 }
