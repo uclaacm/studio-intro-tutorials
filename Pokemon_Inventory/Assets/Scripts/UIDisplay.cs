@@ -39,11 +39,11 @@ public class UIDisplay : MonoBehaviour
     void Update()
     {
         //INVENTORY LIST AND CURSOR CODE
-        if (Input.GetKeyDown(KeyCode.DownArrow))
+        if (Input.GetKeyDown(KeyCode.DownArrow) && !actionsOn)
         {
             MoveCursorDown();
         }
-        if (Input.GetKeyDown(KeyCode.UpArrow))
+        if (Input.GetKeyDown(KeyCode.UpArrow) && !actionsOn)
         {
             MoveCursorDown(false);
         }
