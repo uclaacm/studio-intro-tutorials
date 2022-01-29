@@ -369,9 +369,20 @@ MonoBehaviour:
   m_GameObject: {fileID: 305481971}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b541ef6b712e8444d8d05a1b6eacbfd5, type: 3}
+  m_Script: {fileID: 11500000, guid: 2ff167a80c318c546bbec9c1e23f9fc1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  images:
+  - {fileID: 1354437485}
+  - {fileID: 242262346}
+  - {fileID: 1365909307}
+  player: {fileID: 684030255}
+  setNumber: 3
+  scrollbar: {fileID: 681019572}
+  actionsPanel: {fileID: 204914183}
+  actionKey: 32
+  itemIcon: {fileID: 1230818126}
+  tooltip: {fileID: 0}
 --- !u!1 &437268329
 GameObject:
   m_ObjectHideFlags: 0
@@ -1081,20 +1092,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 954767681}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2ff167a80c318c546bbec9c1e23f9fc1, type: 3}
+  m_Script: {fileID: 11500000, guid: b541ef6b712e8444d8d05a1b6eacbfd5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  images:
-  - {fileID: 1354437485}
-  - {fileID: 242262346}
-  - {fileID: 1365909307}
-  player: {fileID: 684030255}
-  setNumber: 3
-  scrollbar: {fileID: 681019572}
-  actionsPanel: {fileID: 204914183}
-  actionKey: 32
-  itemIcon: {fileID: 1230818126}
-  itemDescription: {fileID: 1957867446}
+  canvasObject: {fileID: 305481971}
+  canvasToggle: 99
 --- !u!1 &1027302981
 GameObject:
   m_ObjectHideFlags: 0

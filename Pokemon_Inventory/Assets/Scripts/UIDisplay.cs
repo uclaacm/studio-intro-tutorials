@@ -31,7 +31,7 @@ public class UIDisplay : MonoBehaviour
     //INVENTORY DISPLAY
     [Header("Item Displays")]
     [SerializeField] Image itemIcon; //image of items in game
-    [SerializeField] Text itemDescription; //item description / tooltip in inventory
+    [SerializeField] Text tooltip; //item description / tooltip in inventory
 
     InventoryItem itemSelected; //item currently being selected
 
@@ -43,15 +43,11 @@ public class UIDisplay : MonoBehaviour
         {
             MoveCursorDown();
             RenderDisplay();
-            SetScrollbar();
-            DisplayItemInfo();
         }
         if (Input.GetKeyDown(KeyCode.UpArrow) && !actionsOn)
         {
             MoveCursorDown(false);
             RenderDisplay();
-            SetScrollbar();
-            DisplayItemInfo();
         }
 
         //Faustine's added methods: visuals
@@ -62,8 +58,6 @@ public class UIDisplay : MonoBehaviour
     {
         GetInventory();
         RenderDisplay();
-        SetScrollbar();
-        DisplayItemInfo();
     }
 
     private void Awake()
@@ -184,6 +178,12 @@ public class UIDisplay : MonoBehaviour
         }
         images[cursorPos].color = new Color(images[cursorPos].color.r, images[cursorPos].color.g, images[cursorPos].color.b, 1f); //then set selected to opaque
 
+        //OLD DISPLAY INFO FUNCTION
+        itemSelected = GetItemOnCursor(); //get item currently selected
+        itemIcon.sprite = itemSelected.GetIcon(); //change the sprite icon displayed (.sprite takes in sprites, Image types doon't automatically do that)
+        tooltip.text = itemSelected.GetToolTip(); //change the item description displayed
+
+        SetScrollbar(); //set the scroll bar when rendered
     }
 
     private void DisplayItemName(int order) //taking image index as input
@@ -216,8 +216,6 @@ public class UIDisplay : MonoBehaviour
 
         float handleVal = dispIndex * handleSize; //how far the handle should go
         scrollbar.value = handleVal; //set handle position to the distance down the list
-
-        //why did six lines of code take me two hours -- Faustine
     }
 
     private void ActionPanelToggle()
@@ -235,21 +233,5 @@ public class UIDisplay : MonoBehaviour
             Debug.Log("action 1 initiated");
             //DO SOMETHING with itemSelected
         }
-    }
-
-    private void DisplayItemInfo()
-    {
-        //ITEM ICON AND TOOLTIP DISPLAY
-        //canvas set to scale with screen size, note anchors (if not scale with screen size, it will scale based on the anchors)
-
-        itemSelected = GetItemOnCursor(); //get item currently selected
-        itemIcon.sprite = itemSelected.GetIcon(); //change the sprite icon displayed (.sprite takes in sprites, Image types doon't automatically do that)
-        //different ways to manage icon size on the left:
-        //itemIcon.SetNativeSize(); //IF you want to set your image to your item sprite native size
-        itemDescription.text = itemSelected.GetToolTip(); //change the item description displayed
-                                                          //.text takes in strings, which we return with the gettooltip function, if not .text the class type is Text, which is a mismatch
-                                                          //optional: check "best fit" in the editor for text box
-
-        //resolve overflow, easiest way is to use text mesh pro - reference past projects and set auto sizing to determine max and min font size and what to do with overflow text
     }
 }
