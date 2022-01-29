@@ -21,7 +21,7 @@ public class UIController : MonoBehaviour
     {
         if (Input.GetKeyDown(canvasToggle)) //toggle canvas and uidisplay components enabled or disabled
         {
-            enabled = !enabled;
+            canvasEnabled = !canvasEnabled;
 
             canvasComp.enabled = enabled;
             uIDisplayComp.enabled = enabled;

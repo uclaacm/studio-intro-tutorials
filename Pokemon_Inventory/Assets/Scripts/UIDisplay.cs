@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class UIDisplay : MonoBehaviour
 {
@@ -31,7 +32,7 @@ public class UIDisplay : MonoBehaviour
     //INVENTORY DISPLAY
     [Header("Item Displays")]
     [SerializeField] Image itemIcon; //image of items in game
-    [SerializeField] Text tooltip; //item description / tooltip in inventory
+    [SerializeField] TextMeshProUGUI tooltip; //item description / tooltip in inventory
 
     InventoryItem itemSelected; //item currently being selected
 
@@ -190,7 +191,7 @@ public class UIDisplay : MonoBehaviour
     {
         if (dispIndex + order < lstSize)
         {
-            images[order].GetComponentInChildren<Text>().text = displayList[dispIndex + order].GetDisplayName(); //find corresponding item with its index, display
+            images[order].GetComponentInChildren<TextMeshProUGUI>().text = displayList[dispIndex + order].GetDisplayName(); //find corresponding item with its index, display
         }
     }
 
