@@ -16,3 +16,5 @@ MonoBehaviour:
   displayName: Donut XXL
   tooltip: Probably heals you. idk find out for yourself xd
   icon: {fileID: 21300000, guid: 4478d6692be659b409c5b124f23a2a06, type: 3}
+  availableActions: 0000000001000000
+  healPower: 40

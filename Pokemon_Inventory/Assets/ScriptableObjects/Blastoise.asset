@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0b60c972cd117114fa33ca867e5635c5, type: 3}
+  m_Name: Blastoise
+  m_EditorClassIdentifier: 
+  Name: Blastoise
+  maxHp: 100
+  moves:
+  - Hydro Pump
+  - Protect
+  front_sprite: {fileID: 21300000, guid: a3bff0078d7f2104e8dcf20a051beb3e, type: 3}
+  back_sprite: {fileID: 21300000, guid: f8a9d5ed100a7fe40b71211b4afe8529, type: 3}
