@@ -94,31 +94,13 @@ public class UIDisplay : MonoBehaviour
             displayList.Remove(item);
             lstSize--;
         }
-        foreach (InventoryItem IDName in inventoryDict.Keys)  // Search through the inventory dictionary
+        foreach (InventoryItem item in inventoryDict.Keys)  // Search through the inventory dictionary
         {
-            //bool found = false;
-            if (!displayList.Contains(IDName))
+            if (!displayList.Contains(item))
             {
-                displayList.Add(IDName);
+                displayList.Add(item);
                 lstSize++;
             }
-            //foreach (InventoryItem item in invIndex)  // Find matching InventoryItem with the IDName
-            //{
-            //    if (IDName == item)  // If match is found & the item is not already in displayList
-            //    {
-            //        if (!displayList.Contains(item))
-            //        {
-            //            displayList.Add(item);
-            //            lstSize++;
-            //        }
-            //        found = true;
-            //        break;
-            //    }
-            //}
-            //if (!found)
-            //{
-            //    Debug.LogError("No match found for item: " + IDName);
-            //}
         }
     }
 
