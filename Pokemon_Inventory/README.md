@@ -40,49 +40,68 @@ Everything else on the scene are UI elements, either images or text, that we hav
 ## Initial Scripts
 We have provided some initial scripts that we will be using in this project. These scripts are not too long, so we don't want to spend a long time going over them, but we will provide a brief description of what they do.
 
-### BasePokemon
-We are going to be using a ScriptableObject to store the base info for each of our Pokemon. ScriptableObjects allow us to create data containers that we can use to save data and use in multiple different class instances. This would be useful if we wanted to be able to create an instance of a Pokemon many times throughout the game, although now we will only be doing it once. This script has variables to store the info associated with a Pokemon that are the same among all instances of that Pokemon. (Note: We have the variables public, but a better practice would be to make them serialized fields and make getter methods since we never will be changing these values in the code, but we are making them public here just so it is quicker and simpler). The line `[CreateAssetMenu(fileName = "Pokemon", menuName = "ScriptableObjects/Pokemon")]` before the class declaration lets us make instances of this class from the Unity Editor by doing `Create → ScriptableObjects → Pokemon`. 
+### InventoryItem
 
 ```c#
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-[CreateAssetMenu(fileName = "Pokemon", menuName = "ScriptableObjects/Pokemon")]
-public class BasePokemon : ScriptableObject
+[CreateAssetMenu(fileName = "Data", menuName = "ScriptableObjects/InventoryItem", order=1)]
+public class InventoryItem : ScriptableObject
 {
-    public string Name;
-    public int maxHp;
-    public List<string> moves;
-    public Sprite front_sprite;
-    public Sprite back_sprite;
+    
 }
 ```
 
-We have also provided the instances for the Pokemon we will be using:
+In this file,  we want to define some variables that we will use. Let's define the following:
+
+```c#
+[SerializeField] string IDName;  // The name we will reference in our code
+[SerializeField] string displayName; // The name that the player sees
+[SerializeField] [TextArea] string tooltip; // Description for the object
+[SerializeField] Sprite icon;  // The icon displayed with the object
+
+```
+
+Note that each attribute is made Serializable for ease of access. SerializeField makes that variable appear in the "properties" section of Unity. For tooltip, we use TextArea in order to display a large text box for the SerializeField for tooltip. 
+
+It's good practice to always use getter functions to access member variables in classes, so even though it might seem like a massive waste of time, let's define them :>
+
+```c#
+// PUBLIC 
+    public string GetIDName()
+    {
+        return idName;
+    }
+
+    public string GetDisplayName()
+    {
+        return displayName;
+    }
+
+    public Sprite GetIcon()
+    {
+        return icon;
+    }
+    
+    public string GetToolTip()
+    {
+        return tooltip;
+    }
+```
 
 ![Screenshot](Screenshots/charizard_base.png)<br>
 
 ![Screenshot](Screenshots/blastoise_base.png)<br>
 
-### Pokemon
-This creates the Pokemon class which has 2 varaibles: basePokemon, which stores the base information of the Pokemon, and hp, which will be the current hp of the pokemon.
+### Inventory
+Now that we have our InventoryItem done, let's implement the Inventory that controls these objects. We'll leave Inventory as a MonoBehaviour. The main data structure within Inventory will be a Dictionary mapping a value of type int to a key of type InventoryItem. 
 
 ```c#
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.UI;
-public class Pokemon
-{
-    public BasePokemon basePokemon;
-    public int hp;
-    public Pokemon(BasePokemon basePoke)
-    {
-        basePokemon = basePoke;
-        hp = basePoke.maxHp;
-    }
-}
+Dictionary<InventoryItem, int> inventory;
 ```
+
+
 
 ### curr_pokemon
 This is on both the player and enemy objects. It will create a new instance of the Pokemon on setup and will display the correct sprite based on which Pokemon it is and if it is facing the player or the enemy
