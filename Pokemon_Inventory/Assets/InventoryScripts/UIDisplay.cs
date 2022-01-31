@@ -14,6 +14,7 @@ public class UIDisplay : MonoBehaviour
 
     InventoryItem[] invIndex;  // Master list of all InventoryItems
     Dictionary<string, int> inventory;  // Dictionary passed in from the Inventory class
+    Dictionary<InventoryItem, int> inventoryDict; 
     List<InventoryItem> displayList;  // List of items to be referenced by the display
     int lstSize = 0;
 
@@ -77,36 +78,47 @@ public class UIDisplay : MonoBehaviour
     // Update local inventory dictionary 
     void GetInventory()
     {
-        inventory = player.GetItemList();
+        // inventory = player.GetItemList();
+        inventoryDict = player.GetItemDict();
+        List<InventoryItem> killList = new List<InventoryItem>();
         // Remove any items no longer in inventory from display
         foreach (InventoryItem item in displayList)
         {
-            if (!inventory.ContainsKey(item.GetIDName()))
+            if (!inventoryDict.ContainsKey(item))
             {
-                displayList.Remove(item);
-                lstSize--;
+                killList.Add(item);
             }   
         }
-        foreach (string IDName in inventory.Keys)  // Search through the inventory dictionary
+        foreach (InventoryItem item in killList)
         {
-            bool found = false;
-            foreach (InventoryItem item in invIndex)  // Find matching InventoryItem with the IDName
+            displayList.Remove(item);
+            lstSize--;
+        }
+        foreach (InventoryItem IDName in inventoryDict.Keys)  // Search through the inventory dictionary
+        {
+            //bool found = false;
+            if (!displayList.Contains(IDName))
             {
-                if (IDName == item.GetIDName())  // If match is found & the item is not already in displayList
-                {
-                    if (!displayList.Contains(item))
-                    {
-                        displayList.Add(item);
-                        lstSize++;
-                    }
-                    found = true;
-                    break;
-                }
+                displayList.Add(IDName);
+                lstSize++;
             }
-            if (!found)
-            {
-                Debug.LogError("No match found for item: " + IDName);
-            }
+            //foreach (InventoryItem item in invIndex)  // Find matching InventoryItem with the IDName
+            //{
+            //    if (IDName == item)  // If match is found & the item is not already in displayList
+            //    {
+            //        if (!displayList.Contains(item))
+            //        {
+            //            displayList.Add(item);
+            //            lstSize++;
+            //        }
+            //        found = true;
+            //        break;
+            //    }
+            //}
+            //if (!found)
+            //{
+            //    Debug.LogError("No match found for item: " + IDName);
+            //}
         }
     }
 
@@ -233,10 +245,16 @@ public class UIDisplay : MonoBehaviour
         if (actionsOn && Input.GetKeyDown(KeyCode.Alpha1)) //accessing different actions via numeric keys, or shift cursor to actions panel;
                                                            //actions can display like inventory list OR like combat choices (how many total actions?) https://answers.unity.com/questions/420324/get-numeric-key.html
         {
+            // Should only be allowed in battle scene
             Debug.Log("action 1 initiated");
             UseItem(GetItemOnCursor());
+            GetInventory();
+        } else if (actionsOn && Input.GetKeyDown(KeyCode.Alpha2))
+        {
+            Debug.Log("action 2 initiated");
+            DropItem(GetItemOnCursor());
+            GetInventory();
         }
-        // GetInventory();
         RenderDisplay();
     }
 

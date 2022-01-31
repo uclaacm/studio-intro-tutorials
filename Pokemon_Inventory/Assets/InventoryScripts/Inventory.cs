@@ -68,4 +68,10 @@ public class Inventory : MonoBehaviour
         }
         return dict;
     }
+
+    // Returns the exact dictionary this object has 
+    public Dictionary<InventoryItem, int> GetItemDict()
+    {
+        return inventory;
+    }
 }

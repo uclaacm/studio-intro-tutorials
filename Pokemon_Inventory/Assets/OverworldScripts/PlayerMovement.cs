@@ -50,7 +50,7 @@ public class PlayerMovement : MonoBehaviour
             if (input.x != 0)
                 input.y = 0;
 
-            if (input != Vector2.zero && Time.timeScale != 0) {
+            if (input != Vector2.zero && Time.timeScale != 0) {  // INVENTORY: Added timeScale == 0 to coordinate with pausing
                 animator.SetFloat("moveX", input.x);
                 animator.SetFloat("moveY", input.y);
 
