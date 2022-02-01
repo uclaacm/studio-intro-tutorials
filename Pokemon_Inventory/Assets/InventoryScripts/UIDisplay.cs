@@ -184,6 +184,13 @@ public class UIDisplay : MonoBehaviour
         } catch
         {
             // TODO: Set all to a default blank display
+            itemIcon.sprite = null; //idk if this works
+            tooltip.text = "No Item Selected."; //make variable if wanted
+
+            if (actionsOn) //if they try to turn on action panel, it won't
+            {
+                actionsOn = false;
+            }
         }
 
         SetScrollbar(); //set the scroll bar when rendered
