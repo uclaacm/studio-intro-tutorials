@@ -76,29 +76,13 @@ public class UIDisplay : MonoBehaviour
     // Update local inventory dictionary - Ming
     void GetInventory()
     {
-        // inventory = player.GetItemList();
         inventoryDict = player.GetItemDict();
-        List<InventoryItem> killList = new List<InventoryItem>();
-        // Remove any items no longer in inventory from display
-        foreach (InventoryItem item in displayList)
-        {
-            if (!inventoryDict.ContainsKey(item))
-            {
-                killList.Add(item);
-            }   
-        }
-        foreach (InventoryItem item in killList)
-        {
-            displayList.Remove(item);
-            lstSize--;
-        }
+        // TODO: Remove any items no longer in inventory from display
+
+        // Add items to display
         foreach (InventoryItem item in inventoryDict.Keys)  // Search through the inventory dictionary
         {
-            if (!displayList.Contains(item))
-            {
-                displayList.Add(item);
-                lstSize++;
-            }
+            // TODO: Add new items to the display
         }
     }
 
@@ -107,24 +91,18 @@ public class UIDisplay : MonoBehaviour
     {
         if (down)
         {
-            if (cursorPos == 2)
-            {
-                ShiftDisplayDown();
-            }
-            else if (dispIndex + cursorPos + 1 < lstSize)  // Cursor is not pointing out of inventory range
-            {
-                cursorPos++;
-            }
+            // TODO: If cursor is at bottom of screen, shift screen down
+            // Otherwise, if cursor is not pointing out of inventory range, shift cursor down
         }
         else
         {
             if (cursorPos == 0)  // If cursor pointing at topmost slot
             {
-                ShiftDisplayDown(false);  // Attempt to shift display up
+                // TODO: Attempt to shift screen up
             }
             else
             {
-                cursorPos--;
+                // TODO: Shift cursor up
             }
         }
     }
@@ -134,25 +112,19 @@ public class UIDisplay : MonoBehaviour
     {
         if (down)
         {
-            if (dispIndex + 1 >= lstSize - 2) 
-            {
-                return false;
-            }
-            else
-            {
-                dispIndex++; //shift down if you can
+            // TODO: If shifting the screen down will go past the last item slot, return false
+            // Otherwise, shift screen down 
                 return true;
-            }
         }
         else
         {
-            if (dispIndex - 1 < 0)
+            if (dispIndex - 1 < 0)  // If shifting up hits the top of the item list, don't 
             {
                 return false;
             }
             else
             {
-                dispIndex--; //shift up if you can
+                // TODO: Shift up
                 return true;
             }
         }
@@ -163,7 +135,7 @@ public class UIDisplay : MonoBehaviour
     {
         for (int i = 0; i < setNumber; i++)
         {
-            DisplayItemName(i); //display items corresponding to max number possible on screen (i.e. 3)
+            DisplayItemName(i); // display items corresponding to max number possible on screen (i.e. 3)
         }
 
         // Change the alpha to highlight the cursor
@@ -208,7 +180,7 @@ public class UIDisplay : MonoBehaviour
     // Returns the InventoryItem that cursor is pointing at
     private InventoryItem GetItemOnCursor()
     {
-        return displayList[dispIndex + cursorPos];
+        return displayList[0];  // TODO: Fix this.
     }
 
     private void SetScrollbar()
@@ -243,12 +215,12 @@ public class UIDisplay : MonoBehaviour
         {
             // Should only be allowed in battle scene - Ming
             Debug.Log("action 1 initiated");
-            UseItem(GetItemOnCursor());
-            GetInventory();
+            // TODO: Use item
+            GetInventory();  // Update inventory 
         } else if (actionsOn && Input.GetKeyDown(KeyCode.Alpha2))
         {
             Debug.Log("action 2 initiated");
-            DropItem(GetItemOnCursor());
+            // TODO: Drop Item
             GetInventory();
         }
         RenderDisplay();
@@ -256,17 +228,18 @@ public class UIDisplay : MonoBehaviour
 
     // Actions
 
-    // Only intended for use in combat as of right now, returns the healPower of given item for healing - Ming
+    // Only intended for use in combat as of right now, communicate with combat script to heal, return the healPower of item
     int UseItem(InventoryItem item)
     {
-        player.RemoveItem(item);
-        GameObject.FindObjectOfType<BattleSystem>().ItemHeal(item.getHealPower());
-        return item.getHealPower();
+        // TODO: Implement this
+        return 0;
     }
 
+    // Deletes item
     bool DropItem(InventoryItem item)
     {
-        return player.RemoveItem(item);
+        // TODO: Implement this
+        return false;
     }
 
 

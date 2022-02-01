@@ -22,13 +22,11 @@ public class BattleSystem : MonoBehaviour
     private enum Phases {SetUp, ActionSelect, MoveSelect, ItemSelect, Attacks};
 
     // Inventory UI integration
-    private int healPower = 0;
-    private bool itemSelected = false;
-    private UIController ui;
+    // TODO: Hmm... we might need a few variables here to store some info from the UI
 
     void Start()
     {
-        ui = GameObject.FindObjectOfType<UIController>();
+        // TODO: A variable needs to be assigned here 
         StartCoroutine(Setup());
     }
 
@@ -119,11 +117,7 @@ public class BattleSystem : MonoBehaviour
                     dialogText.moveToggle(true);
                 } else if ((Input.GetKeyDown(KeyCode.Space) && selected == 1) || Input.GetKeyDown(KeyCode.C))  // Added key input for item use
                 {
-                    // Reset the healPower and the itemSelected flag
-                    itemSelected = false;
-                    healPower = 0;
-                    phase = Phases.ItemSelect;
-                    ui.Toggle(); // turn on the UI
+                    // TODO: Need to reset some values here, switch phases, and toggle on the UI
                 }
                 dialogText.highlightAction(selected);
                 break;
@@ -163,13 +157,12 @@ public class BattleSystem : MonoBehaviour
                 dialogText.highlightMove(currentMove);
                 break;
 
-            // Item select phase
+            // Item select phase: If an item was selected, switch phase back to ActionSelect, heal the pokemon, and switch off the UI
             case Phases.ItemSelect:
-                if (itemSelected)  // If an item was selected (from function called by broadcast) 
+                if (true) 
                 {
-                    phase = Phases.ActionSelect;
-                    healPokemon(player, playerHud, healPower);
-                    ui.Toggle();  // Switch off the UI
+                    // TODO: Implement this
+                    // Code below is for proper rendering for the Combat script
                     dialogText.dialogToggle(true);
                     dialogText.actionToggle(true);
                     dialogText.moveToggle(false);
@@ -180,17 +173,14 @@ public class BattleSystem : MonoBehaviour
 
     public void ItemHeal(int heal)
     {
-        healPower = heal;
-        itemSelected = true;
+        // TODO: Somehow receive commmunication from UIDisplay about the healPower of the item used
     }
 
-    // Function that increases health by healAmt
+    // Increases health of poke by healAmt, capped at 100 (max health)
     public void healPokemon(curr_pokemon poke, hudScript hud, int healAmt)
     {
-        poke.pokemon.hp += healAmt;
-        if (poke.pokemon.hp > 100)
-            poke.pokemon.hp = 100;
-        hud.hp.setHP(poke.pokemon.hp);
+        // TODO: Implement this
+        hud.hp.setHP(poke.pokemon.hp);  // Rendering with Combat UI, don't modify pls   
     }
 
     // Function to inflict damage onto pokemon based on moves.

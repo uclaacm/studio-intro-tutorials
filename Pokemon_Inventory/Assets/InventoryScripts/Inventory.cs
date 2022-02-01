@@ -6,10 +6,10 @@ public class Inventory : MonoBehaviour
 {
     Dictionary<InventoryItem, int> inventory;
     static Inventory instance;
-    [SerializeField] InventoryItem testItem;
 
     void Awake()
     {
+        // Makes Inventory a singleton
         if (instance != null)
         {
             Destroy(gameObject);
@@ -17,48 +17,34 @@ public class Inventory : MonoBehaviour
         else
         {
             instance = this;
-            DontDestroyOnLoad(gameObject);
         }
-        inventory = new Dictionary<InventoryItem, int>();
+        // TODO: create dictionary for inventory
         AddAll();   
     }
 
+    // For debugging - This should add one of each InventoryItem in the assets folder
     void AddAll()
     {
-        foreach(InventoryItem item in Resources.FindObjectsOfTypeAll<InventoryItem>()) //causes unscrollable bug
+        foreach(InventoryItem item in Resources.FindObjectsOfTypeAll<InventoryItem>()) 
         {
-            // Debug.Log("Adding " + item);
             AddItem(item);
         }
     }
 
+    // Adds an item to the dictionary, if an item already exists in the dictionary, increment its value by 1
     public void AddItem(InventoryItem item)
     {
-        if (inventory.ContainsKey(item))
-        {
-            inventory[item] += 1;
-        } else
-        {
-            inventory[item] = 1;
-        }
-        // Debug.Log("Added " + item);
+        // TODO: Implement this
     }
 
+    // Removes an item from the dictionary & return true by decrementing the value by 1. If the value is 0, delete the object from the dictionary. If item doesnt exist in the dict, return false 
     public bool RemoveItem(InventoryItem item)
     {
-        if (!inventory.ContainsKey(item))
-        {
-            return false;
-        }
-        inventory[item] -= 1;
-        if (inventory[item] == 0)
-        {
-            inventory.Remove(item);
-        }
+        // TODO: Implement this
         return true;
     }
     
-    // Returns a dictionary with the IDName and number of items in said Inventory object
+    // Returns a dictionary with the IDName and number of items in said Inventory object - not necessary to use
     public Dictionary<string, int> GetItemList()
     {
         Dictionary<string, int> dict = new Dictionary<string, int>();
@@ -66,7 +52,7 @@ public class Inventory : MonoBehaviour
         {
             dict[item.GetIDName()] = inventory[item];
         }
-        return dict;
+        return dict; 
     }
 
     // Returns the exact dictionary this object has 
