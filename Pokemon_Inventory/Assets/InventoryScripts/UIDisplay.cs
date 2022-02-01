@@ -8,16 +8,14 @@ public class UIDisplay : MonoBehaviour
 {
     //INVENTORY LIST
     [Header("Inventory List")]
-    [SerializeField] Image[] images;
-
+    [SerializeField] Image[] invSlots;
+    
+    // Ming
     [SerializeField] Inventory player;
-
     InventoryItem[] invIndex;  // Master list of all InventoryItems
-    Dictionary<string, int> inventory;  // Dictionary passed in from the Inventory class
-    Dictionary<InventoryItem, int> inventoryDict; 
+    Dictionary<InventoryItem, int> inventoryDict; // Dictionary passed in from the Inventory class
     List<InventoryItem> displayList;  // List of items to be referenced by the display
     int lstSize = 0;
-
     int dispIndex = 0;
     int cursorPos = 0;  // Can go from 0-2, 0 being topmost, 2 being bottommost
 
@@ -75,7 +73,7 @@ public class UIDisplay : MonoBehaviour
         // GetInventory();
     }
 
-    // Update local inventory dictionary 
+    // Update local inventory dictionary - Ming
     void GetInventory()
     {
         // inventory = player.GetItemList();
@@ -160,7 +158,7 @@ public class UIDisplay : MonoBehaviour
         }
     }
 
-    // Display the Inventory slots, rendering each slot with its corresponding image
+    // Display the Inventory slots, rendering each slot with its corresponding image - Faustine
     void RenderDisplay()
     {
         for (int i = 0; i < setNumber; i++)
@@ -169,11 +167,11 @@ public class UIDisplay : MonoBehaviour
         }
 
         // Change the alpha to highlight the cursor
-        foreach (Image image in images)
+        foreach (Image image in invSlots)
         {
             image.color = new Color(image.color.r, image.color.g, image.color.b, 0.5f); //first set all to half transparent
         }
-        images[cursorPos].color = new Color(images[cursorPos].color.r, images[cursorPos].color.g, images[cursorPos].color.b, 1f); //then set selected to opaque
+        invSlots[cursorPos].color = new Color(invSlots[cursorPos].color.r, invSlots[cursorPos].color.g, invSlots[cursorPos].color.b, 1f); //then set selected to opaque
 
         //OLD DISPLAY INFO FUNCTION
         try
@@ -200,15 +198,10 @@ public class UIDisplay : MonoBehaviour
     {
         if (dispIndex + order < lstSize)
         {
-            try
-            {
-                images[order].GetComponentInChildren<TextMeshProUGUI>().text = displayList[dispIndex + order].GetDisplayName(); //find corresponding item with its index, display
-            } catch {  // Poor practice but we know the escape clause won't break
-                images[order].GetComponentInChildren<TextMeshProUGUI>().text = " ";
-            }
+            invSlots[order].GetComponentInChildren<TextMeshProUGUI>().text = displayList[dispIndex + order].GetDisplayName(); //find corresponding item with its index, display
         } else
         {
-            images[order].GetComponentInChildren<TextMeshProUGUI>().text = " ";  // Set to blank
+            invSlots[order].GetComponentInChildren<TextMeshProUGUI>().text = " ";  // Set to blank
         }
     }
 
@@ -248,7 +241,7 @@ public class UIDisplay : MonoBehaviour
         if (actionsOn && Input.GetKeyDown(KeyCode.Alpha1)) //accessing different actions via numeric keys, or shift cursor to actions panel;
                                                            //actions can display like inventory list OR like combat choices (how many total actions?) https://answers.unity.com/questions/420324/get-numeric-key.html
         {
-            // Should only be allowed in battle scene
+            // Should only be allowed in battle scene - Ming
             Debug.Log("action 1 initiated");
             UseItem(GetItemOnCursor());
             GetInventory();
@@ -263,7 +256,7 @@ public class UIDisplay : MonoBehaviour
 
     // Actions
 
-    // Only intended for use in combat as of right now, returns the healPower of given item for healing
+    // Only intended for use in combat as of right now, returns the healPower of given item for healing - Ming
     int UseItem(InventoryItem item)
     {
         player.RemoveItem(item);
