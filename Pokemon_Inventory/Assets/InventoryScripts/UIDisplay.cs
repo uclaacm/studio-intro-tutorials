@@ -176,9 +176,15 @@ public class UIDisplay : MonoBehaviour
         images[cursorPos].color = new Color(images[cursorPos].color.r, images[cursorPos].color.g, images[cursorPos].color.b, 1f); //then set selected to opaque
 
         //OLD DISPLAY INFO FUNCTION
-        itemSelected = GetItemOnCursor(); //get item currently selected
-        itemIcon.sprite = itemSelected.GetIcon(); //change the sprite icon displayed (.sprite takes in sprites, Image types doon't automatically do that)
-        tooltip.text = itemSelected.GetToolTip(); //change the item description displayed
+        try
+        {
+            itemSelected = GetItemOnCursor(); //get item currently selected
+            itemIcon.sprite = itemSelected.GetIcon(); //change the sprite icon displayed (.sprite takes in sprites, Image types doon't automatically do that)
+            tooltip.text = itemSelected.GetToolTip(); //change the item description displayed
+        } catch
+        {
+            // TODO: Set all to a default blank display
+        }
 
         SetScrollbar(); //set the scroll bar when rendered
     }
@@ -187,7 +193,15 @@ public class UIDisplay : MonoBehaviour
     {
         if (dispIndex + order < lstSize)
         {
-            images[order].GetComponentInChildren<TextMeshProUGUI>().text = displayList[dispIndex + order].GetDisplayName(); //find corresponding item with its index, display
+            try
+            {
+                images[order].GetComponentInChildren<TextMeshProUGUI>().text = displayList[dispIndex + order].GetDisplayName(); //find corresponding item with its index, display
+            } catch {  // Poor practice but we know the escape clause won't break
+                images[order].GetComponentInChildren<TextMeshProUGUI>().text = " ";
+            }
+        } else
+        {
+            images[order].GetComponentInChildren<TextMeshProUGUI>().text = " ";  // Set to blank
         }
     }
 
