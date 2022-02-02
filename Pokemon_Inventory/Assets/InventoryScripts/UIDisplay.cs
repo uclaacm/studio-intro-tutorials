@@ -10,7 +10,6 @@ public class UIDisplay : MonoBehaviour
     [Header("Inventory List")]
     [SerializeField] Image[] invSlots;
     
-    // Ming
     [SerializeField] Inventory player;
     InventoryItem[] invIndex;  // Master list of all InventoryItems
     Dictionary<InventoryItem, int> inventoryDict; // Dictionary passed in from the Inventory class
@@ -18,7 +17,7 @@ public class UIDisplay : MonoBehaviour
     int lstSize = 0;
     int dispIndex = 0;
     int cursorPos = 0;  // Can go from 0-2, 0 being topmost, 2 being bottommost
-
+    
     //Faustine's added fields
     [SerializeField] int setNumber = 3; //number of items on screen at once
     [SerializeField] Scrollbar scrollbar;
@@ -49,7 +48,7 @@ public class UIDisplay : MonoBehaviour
             MoveCursorDown(false);
             RenderDisplay();
         }
-
+        
         
 
         //Faustine's added methods: visuals
