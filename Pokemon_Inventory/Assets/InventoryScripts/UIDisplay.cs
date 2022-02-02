@@ -70,10 +70,9 @@ public class UIDisplay : MonoBehaviour
             Debug.Log(item);
         }
         displayList = new List<InventoryItem>();
-        // GetInventory();
     }
 
-    // Update local inventory dictionary - Ming
+    // Update local inventory dictionary
     void GetInventory()
     {
         inventoryDict = player.GetItemDict();
@@ -213,7 +212,7 @@ public class UIDisplay : MonoBehaviour
         if (actionsOn && Input.GetKeyDown(KeyCode.Alpha1)) //accessing different actions via numeric keys, or shift cursor to actions panel;
                                                            //actions can display like inventory list OR like combat choices (how many total actions?) https://answers.unity.com/questions/420324/get-numeric-key.html
         {
-            // Should only be allowed in battle scene - Ming
+            // Should only be allowed in battle scene
             Debug.Log("action 1 initiated");
             // TODO: Use item
             GetInventory();  // Update inventory 
