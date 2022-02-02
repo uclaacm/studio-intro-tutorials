@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-// TODO: There's a way to easily create ScriptableObjects by writing something here...
+[CreateAssetMenu(fileName ="item", menuName ="ScriptableObjects/InventoryItem", order = 1)]
 public class InventoryItem : ScriptableObject
 {
     [SerializeField] string idName;

@@ -18,7 +18,7 @@ public class Inventory : MonoBehaviour
         {
             instance = this;
         }
-        // TODO: create dictionary for inventory
+        inventory = new Dictionary<InventoryItem, int>();
         AddAll();   
     }
 
@@ -34,13 +34,29 @@ public class Inventory : MonoBehaviour
     // Adds an item to the dictionary, if an item already exists in the dictionary, increment its value by 1
     public void AddItem(InventoryItem item)
     {
-        // TODO: Implement this
+        if (inventory.ContainsKey(item))  // If item exists in inventory
+        {
+            inventory[item]++;
+        } else
+        {
+            inventory[item] = 1;
+        }
     }
 
     // Removes an item from the dictionary & return true by decrementing the value by 1. If the value is 0, delete the object from the dictionary. If item doesnt exist in the dict, return false 
     public bool RemoveItem(InventoryItem item)
     {
-        // TODO: Implement this
+        if (!inventory.ContainsKey(item))
+        {
+            return false;
+        } else
+        {
+            inventory[item] -= 1;
+            if (inventory[item] == 0)
+            {
+                inventory.Remove(item);
+            }
+        }
         return true;
     }
     
