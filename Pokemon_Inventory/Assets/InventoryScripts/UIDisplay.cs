@@ -11,7 +11,6 @@ public class UIDisplay : MonoBehaviour
     [SerializeField] Image[] invSlots;
     
     [SerializeField] Inventory player;
-    InventoryItem[] invIndex;  // Master list of all InventoryItems
     Dictionary<InventoryItem, int> inventoryDict; // Dictionary passed in from the Inventory class
     List<InventoryItem> displayList;  // List of items to be referenced by the display
     int lstSize = 0;
@@ -63,11 +62,6 @@ public class UIDisplay : MonoBehaviour
 
     private void Awake()
     {
-        invIndex = Resources.FindObjectsOfTypeAll<InventoryItem>();
-        foreach (InventoryItem item in invIndex)
-        {
-            Debug.Log(item);
-        }
         displayList = new List<InventoryItem>();
     }
 
