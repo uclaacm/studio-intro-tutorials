@@ -172,21 +172,21 @@ public class UIDisplay : MonoBehaviour
     // Returns the InventoryItem that cursor is pointing at
     private InventoryItem GetItemOnCursor()
     {
-        return displayList[0];  // TODO: Fix this.
+        return displayList[dispIndex + cursorPos]; // TODO: Fix this.
     }
 
     private void SetScrollbar()
     {
         //SCROLLBAR MATH (OPTIONAL); make uninteractable, change disabled color; just for a visual indicator
-        int setNumber = 3; //every set has 3 objects on screen at a time
-        float setCount = lstSize - setNumber; //max count for sets possible; for each one increase from set number, the set count increases by one
+        int setNumber = 3; //every set has 3 items on screen at a time
+        float setIndex = lstSize - setNumber; //max count for sets possible; for each one increase from set number, the set count increases by one
         
-        if (setCount <= 0)
+        if (setIndex <= 0)
         {
-            setCount = 1; //if the list is smaller than the possible number of items on screen, there could only be one set possible
+            setIndex = 1; //if the list is smaller than the possible number of items on screen, there could only be one set possible
         }
 
-        float handleSize = 1 / setCount; //hand should represent one set out of total number of sets
+        float handleSize = 1 / setIndex; //hand should represent one set out of total number of sets
         scrollbar.size = handleSize; //set handle size to represent sets of 3
 
         float handleVal = dispIndex * handleSize; //how far the handle should go
