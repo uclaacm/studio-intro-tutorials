@@ -15,8 +15,8 @@ Additionally, if you'd like to get started with using version control with Unity
 |-----------|----------------|---------------|--------|-------|
 | [RPG - Combat](./Pokemon_Combat) | <ul> <li>Setting up a battle scene</li> <li>Selection of actions</li> <li>Player and enemy attacks</li> </ul> | January 18th | [Slides](https://docs.google.com/presentation/d/11wem-UyzL3qNAjySi4kznZZQPnx7d6gA_zXDun6X59s/edit?usp=sharing) | Video |
 | [RPG - Overworld](./Pokemon_Overworld) | <ul> <li>Setting up a player and movement</li> <li>Creating boundaries/a route</li> <li>Creating an NPC and Wild Pokémon Encounters</li> </ul> | January 25th | [Slides](https://docs.google.com/presentation/d/1mX_tNAdCScIx0Qo3Y7ENI4bEb0RpwjQv5inyaSVVshQ/edit?usp=sharing) | [Video](https://youtu.be/QMbWMkJXs5g) |
-| [RPG - Inventory](./Pokemon_Inventory) | <ul> <li>Setting up the item class</li> <li>Managing item class objects using a separate Inventory class</li> <li>Displaying inventory in UI</li> </ul> | February 1st | Slides | Video |
-| RPG - Shop | <ul> <li>Buying and selling items in shops</li> <li>Subtracting coins</li> <li>Displaying purchased items in inventory</li> </ul> | February 8th | [Slides](https://docs.google.com/presentation/d/1B2nlqguwmeTMIzJ7fGrFS8XrE7aNxKOUwePROp328Ac/edit?usp=sharing) | Video |
+| [RPG - Inventory](./Pokemon_Inventory) | <ul> <li>Setting up the item class</li> <li>Managing item class objects using a separate Inventory class</li> <li>Displaying inventory in UI</li> </ul> | February 1st | [Slides](https://docs.google.com/presentation/d/1B2nlqguwmeTMIzJ7fGrFS8XrE7aNxKOUwePROp328Ac/edit?usp=sharing) | Video |
+| RPG - Shop | <ul> <li>Buying and selling items in shops</li> <li>Subtracting coins</li> <li>Displaying purchased items in inventory</li> </ul> | February 8th | Slides | Video |
 
 ## Essential Links
 - [Studio Discord](https://discord.com/invite/bBk2Mcw)
