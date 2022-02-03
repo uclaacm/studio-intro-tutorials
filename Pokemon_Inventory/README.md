@@ -5,7 +5,7 @@
 **Instructors**: Faustine, Ming
 
 ## Resources
-[Slides]()<br>
+[Slides](https://docs.google.com/presentation/d/1B2nlqguwmeTMIzJ7fGrFS8XrE7aNxKOUwePROp328Ac/edit?usp=sharing)<br>
 [Video Soon!](Soon)
  
 ## Topics Covered
