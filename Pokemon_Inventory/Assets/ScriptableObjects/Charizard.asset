@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0b60c972cd117114fa33ca867e5635c5, type: 3}
+  m_Name: Charizard
+  m_EditorClassIdentifier: 
+  Name: Charizard
+  maxHp: 100
+  moves:
+  - Fire Blast
+  - Growl
+  front_sprite: {fileID: 21300000, guid: 16a0dbdd2e3383744aaeb769ae20adc8, type: 3}
+  back_sprite: {fileID: 21300000, guid: 57f7f6030f7e9024b838c11613416b45, type: 3}
