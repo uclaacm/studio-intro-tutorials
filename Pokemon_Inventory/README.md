@@ -6,7 +6,7 @@
 
 ## Resources
 [Slides](https://docs.google.com/presentation/d/1B2nlqguwmeTMIzJ7fGrFS8XrE7aNxKOUwePROp328Ac/edit?usp=sharing)<br>
-[Video Soon!](Soon)
+[Video](https://youtu.be/-oxSDSYRu-Y)
  
 ## Topics Covered
 * Managing Items using Scriptable Objects
