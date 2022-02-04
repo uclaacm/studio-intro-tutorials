@@ -6,7 +6,7 @@
 
 ## Resources
 [Slides](https://docs.google.com/presentation/d/11wem-UyzL3qNAjySi4kznZZQPnx7d6gA_zXDun6X59s/edit?usp=sharing)<br>
-[Video Soon!](Soon)
+[Video](https://youtu.be/2hHzbe3aSxE)
  
 ## Topics Covered
 * UI Elements
