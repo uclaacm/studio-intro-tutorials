@@ -1,6 +1,6 @@
 # Studio Beginner Tutorials - Build an RPG: Shop
  
-**Date**: Februrary 8th, 2022, 7:00 pm - 9:00 pm<br>
+**Date**: Februrary th, 2022, 7:00 pm - 9:00 pm<br>
 **Location**: Zoom<br>
 **Instructor**: Amy/Heqing Yin
  
