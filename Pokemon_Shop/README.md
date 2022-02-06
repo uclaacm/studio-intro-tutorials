@@ -5,7 +5,7 @@
 **Instructor**: Amy/Heqing Yin
  
 ## Resources
-[Slides]( )<br>
+[Slides](https://docs.google.com/presentation/d/1-Pkv1ArakrWpbGaBlzdFmZH7MKRcwZtHVb-EqT1kG5A/edit?usp=sharing )<br>
 [Video]( )<br>
  
 ## Topics Covered
