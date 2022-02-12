@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1051c78b0f8ba38418fc371c6fd8c433, type: 3}
+  m_Name: Max Potion
+  m_EditorClassIdentifier: 
+  idName: maxPotion
+  displayName: MAX Heal
+  tooltip: 'Bad news: you kinda suck at this game. Good news: no one will know if
+    you just heal back up & pretend that nothing went wrong! Heals HP to full.'
+  icon: {fileID: 21300000, guid: c8149eb21cf4da04ab926e4dda7ed137, type: 3}
+  availableActions: 0000000001000000
+  healPower: 100

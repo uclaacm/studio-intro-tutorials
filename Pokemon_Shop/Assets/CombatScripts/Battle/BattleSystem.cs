@@ -13,16 +13,24 @@ public class BattleSystem : MonoBehaviour
     public curr_pokemon player;
     public hudScript enemyHud;
     public curr_pokemon enemy;
-    
+    //public UIController ui;
+    public UIController ui;
+
 
     private Phases phase = Phases.SetUp;
     private int selected = 0;
     private int currentMove = 0;
 
-    private enum Phases {SetUp, ActionSelect, MoveSelect, ItemSelect, Attacks};
+    private enum Phases { SetUp, ActionSelect, MoveSelect, ItemSelect, Attacks };
+
+    // Inventory UI integration
+    private int healPower = 0;
+    private bool itemSelected = false;
+    //private UIController ui;
 
     void Start()
     {
+        //ui = GameObject.FindObjectOfType<UIController>();
         StartCoroutine(Setup());
     }
 
@@ -45,7 +53,8 @@ public class BattleSystem : MonoBehaviour
 
     // Executes the attack phases for both the player and the enemy. It's currently
     // set up so that the player always attacks before the enemy
-    IEnumerator ExecuteMoves(){
+    IEnumerator ExecuteMoves()
+    {
 
         // Gets the current move of the player's current pokemon that the player selected. And prints 
         // the pokemon and move.
@@ -54,19 +63,21 @@ public class BattleSystem : MonoBehaviour
 
         // Pausing for a second before move is executed
         yield return new WaitForSeconds(1f);
-        
+
         // Calling takeDamage function on the enemy to make the enemy take damage based on the move that was selected
         bool isFainted = takeDamage(enemy, enemyHud, move);
 
         // Checking if the enemy fainted due to the player's attack and if so, display faint message
-        if(isFainted){
+        if (isFainted)
+        {
             dialogText.DialogText.text = $"{enemy.basePokemon.name} fainted.";
             SceneManager.LoadScene("OverworldScene");
             // EXIT SCENE
         }
 
         // If the enemy did not faint
-        else{
+        else
+        {
             // Choosing a random move from the enemy's set of moves 
             int rand = Random.Range(0, enemy.basePokemon.moves.Count);
             string enemyMove = enemy.basePokemon.moves[rand];
@@ -78,11 +89,13 @@ public class BattleSystem : MonoBehaviour
             // Damage player based on move
             bool isPlayerFainted = takeDamage(player, playerHud, enemyMove);
 
-            if(isPlayerFainted){
+            if (isPlayerFainted)
+            {
                 dialogText.DialogText.text = $"{player.basePokemon.name} fainted.";
                 // EXIT SCENE
             }
-            else{
+            else
+            {
                 // If neither the player nor the enemy fainted, return to action select menu.
                 phase = Phases.ActionSelect;
                 dialogText.dialogToggle(true);
@@ -94,10 +107,10 @@ public class BattleSystem : MonoBehaviour
 
     void Update()
     {
-       switch (phase)
+        switch (phase)
         {
             case Phases.ActionSelect:
-                if(Input.GetKeyDown(KeyCode.DownArrow) || Input.GetKeyDown(KeyCode.S))
+                if (Input.GetKeyDown(KeyCode.DownArrow) || Input.GetKeyDown(KeyCode.S))
                 {
                     selected = (selected + 1) % 2;
                 }
@@ -112,6 +125,14 @@ public class BattleSystem : MonoBehaviour
                     dialogText.actionToggle(false);
                     dialogText.moveToggle(true);
                 }
+                else if ((Input.GetKeyDown(KeyCode.Space) && selected == 1) || Input.GetKeyDown(KeyCode.C))  // Added key input for item use
+                {
+                    // Reset the healPower and the itemSelected flag
+                    itemSelected = false;
+                    healPower = 0;
+                    phase = Phases.ItemSelect;
+                    ui.Toggle(); // turn on the UI
+                }
                 dialogText.highlightAction(selected);
                 break;
 
@@ -119,7 +140,8 @@ public class BattleSystem : MonoBehaviour
             case Phases.MoveSelect:
 
                 // If player wants to return to the action select page, they can press escape.
-                if(Input.GetKeyDown(KeyCode.Escape)){
+                if (Input.GetKeyDown(KeyCode.Escape))
+                {
                     phase = Phases.ActionSelect;
                     dialogText.dialogToggle(true);
                     dialogText.actionToggle(true);
@@ -127,21 +149,26 @@ public class BattleSystem : MonoBehaviour
                 }
 
                 // Pressing the right arrow key or 'D' will set the currentMove value to '1' which indicates the second move.
-                else if(Input.GetKeyDown(KeyCode.RightArrow) || Input.GetKeyDown(KeyCode.D)){
-                    if(currentMove < 1){
+                else if (Input.GetKeyDown(KeyCode.RightArrow) || Input.GetKeyDown(KeyCode.D))
+                {
+                    if (currentMove < 1)
+                    {
                         currentMove++;
                     }
                 }
 
                 // Pressing the left arrow key or 'A' will set the currentMove value to '0' which indicates the first move.
-                else if(Input.GetKeyDown(KeyCode.LeftArrow) || Input.GetKeyDown(KeyCode.A)){
-                    if(currentMove > 0){
+                else if (Input.GetKeyDown(KeyCode.LeftArrow) || Input.GetKeyDown(KeyCode.A))
+                {
+                    if (currentMove > 0)
+                    {
                         currentMove--;
                     }
                 }
 
                 // Pressing space will execute the move that the player has chosen.
-                else if(Input.GetKeyDown(KeyCode.Space)){
+                else if (Input.GetKeyDown(KeyCode.Space))
+                {
                     phase = Phases.Attacks;
                     dialogText.dialogToggle(true);
                     dialogText.moveToggle(false);
@@ -149,19 +176,49 @@ public class BattleSystem : MonoBehaviour
                 }
                 dialogText.highlightMove(currentMove);
                 break;
+
+            // Item select phase
+            case Phases.ItemSelect:
+                if (itemSelected)  // If an item was selected (from function called by broadcast) 
+                {
+                    phase = Phases.ActionSelect;
+                    healPokemon(player, playerHud, healPower);
+                    ui.Toggle();  // Switch off the UI
+                    dialogText.dialogToggle(true);
+                    dialogText.actionToggle(true);
+                    dialogText.moveToggle(false);
+                }
+                break;
         }
+    }
+
+    public void ItemHeal(int heal)
+    {
+        healPower = heal;
+        itemSelected = true;
+    }
+
+    // Function that increases health by healAmt
+    public void healPokemon(curr_pokemon poke, hudScript hud, int healAmt)
+    {
+        poke.pokemon.hp += healAmt;
+        if (poke.pokemon.hp > 100)
+            poke.pokemon.hp = 100;
+        hud.hp.setHP(poke.pokemon.hp);
     }
 
     // Function to inflict damage onto pokemon based on moves.
     public bool takeDamage(curr_pokemon poke, hudScript hud, string move)
     {
         int damage = 0;
-        
+
         // Hard coded damage values.
-        if(move == "Hydro Pump"){
+        if (move == "Hydro Pump")
+        {
             damage = 50;
         }
-        if(move == "Fire Blast"){
+        if (move == "Fire Blast")
+        {
             damage = 30;
         }
 
@@ -169,7 +226,7 @@ public class BattleSystem : MonoBehaviour
         poke.pokemon.hp -= damage;
 
         // If pokemon has fainted.
-        if(poke.pokemon.hp <= 0)
+        if (poke.pokemon.hp <= 0)
         {
             // Set pokemon's hp value to 0
             poke.pokemon.hp = 0;
