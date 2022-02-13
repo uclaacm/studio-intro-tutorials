@@ -34,7 +34,11 @@ The Shop scene should look like this:
 ## Initial Scripts
 We have provided some initial scripts that we will be using in this project. These scripts are not too long, so we don't want to spend a long time going over them, but we will provide a brief description of what they do.
 
-##
+## Setting Up A Shop Scene
+
+## Subtracting Coins and Updating Quantity
+
+## Connecting Everything Together
 
 
 ## Last Notes
