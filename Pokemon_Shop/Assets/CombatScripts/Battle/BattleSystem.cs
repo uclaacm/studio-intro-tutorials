@@ -13,8 +13,8 @@ public class BattleSystem : MonoBehaviour
     public curr_pokemon player;
     public hudScript enemyHud;
     public curr_pokemon enemy;
-    //public UIController ui;
     public UIController ui;
+    public UIController shop;
 
 
     private Phases phase = Phases.SetUp;
@@ -26,11 +26,10 @@ public class BattleSystem : MonoBehaviour
     // Inventory UI integration
     private int healPower = 0;
     private bool itemSelected = false;
-    //private UIController ui;
+
 
     void Start()
     {
-        //ui = GameObject.FindObjectOfType<UIController>();
         StartCoroutine(Setup());
     }
 

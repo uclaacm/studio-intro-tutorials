@@ -30,7 +30,11 @@ public class Inventory : MonoBehaviour
         foreach(InventoryItem item in Resources.FindObjectsOfTypeAll<InventoryItem>()) //causes unscrollable bug
         {
             // Debug.Log("Adding " + item);
-            AddItem(item);
+            //
+            
+                AddItem(item);
+            
+
         }
     }
 

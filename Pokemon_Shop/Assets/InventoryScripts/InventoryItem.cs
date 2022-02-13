@@ -9,6 +9,8 @@ public class InventoryItem : ScriptableObject
     [SerializeField] string displayName;
     [SerializeField] [TextArea] string tooltip;
     [SerializeField] Sprite icon;
+    //
+    [SerializeField] bool isPurchased;
     public enum Actions
     {
         use,
@@ -47,5 +49,16 @@ public class InventoryItem : ScriptableObject
     public int getHealPower()
     {
         return healPower;
+    }
+
+    //
+    public bool getPurchased()
+    {
+        return isPurchased;
+    }
+
+    void purchase()
+    {
+        isPurchased = true;
     }
 }

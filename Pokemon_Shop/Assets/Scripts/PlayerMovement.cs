@@ -8,6 +8,7 @@ public class PlayerMovement : MonoBehaviour
     public float moveSpeed;
     private bool isMoving;
     private Vector2 input;
+    public UIController shop;
 
     private Animator animator;
 
@@ -68,6 +69,11 @@ public class PlayerMovement : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Z)) {
             Interact();
         }
+
+        if (Input.GetKeyDown(KeyCode.S))
+        {
+            shop.Toggle();
+        }
         
     }
 
@@ -89,8 +95,9 @@ public class PlayerMovement : MonoBehaviour
 
     private bool IsWalkable(Vector3 targetPos) {
         if (Physics2D.OverlapCircle(targetPos, .1f, solidObjectsLayer|interactableLayer) != null) {
-            Debug.Log("can't walk there");
-            SceneManager.LoadScene("Shop");
+            //Debug.Log("can't walk there");
+            //SceneManager.LoadScene("Shop");
+            shop.Toggle();
             return false;
             
         }
@@ -108,6 +115,7 @@ public class PlayerMovement : MonoBehaviour
                 PlayerPrefs.SetFloat("facingX", animator.GetFloat("moveX"));
                 PlayerPrefs.SetFloat("facingY", animator.GetFloat("moveY"));
                 PlayerPrefs.SetFloat("justReturned", 1f);
+
                 SceneManager.LoadScene("Combat Scene");
             }
         }
@@ -125,12 +133,12 @@ public class PlayerMovement : MonoBehaviour
         }
         
     }
-
+/*
     private void OnCollisionEnter2D(Collision2D collision)
     {
         Debug.Log("test");
         SceneManager.LoadScene("Shop");
     }
 
-
+    */
 }

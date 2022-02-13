@@ -4,20 +4,17 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
-public class UIDisplay : MonoBehaviour
+public class ShopDisplay : MonoBehaviour
 {
     //INVENTORY LIST
     [Header("Inventory List")]
     [SerializeField] Image[] images;
-
     [SerializeField] Inventory player;
-
     InventoryItem[] invIndex;  // Master list of all InventoryItems
     Dictionary<string, int> inventory;  // Dictionary passed in from the Inventory class
     Dictionary<InventoryItem, int> inventoryDict;
     List<InventoryItem> displayList;  // List of items to be referenced by the display
     int lstSize = 0;
-
     int dispIndex = 0;
     int cursorPos = 0;  // Can go from 0-2, 0 being topmost, 2 being bottommost
 
@@ -84,7 +81,7 @@ public class UIDisplay : MonoBehaviour
         // Remove any items no longer in inventory from display
         foreach (InventoryItem item in displayList)
         {
-            if (!inventoryDict.ContainsKey(item))
+            if (!inventoryDict.ContainsKey(item) || !item.getPurchased())
             {
                 killList.Add(item);
             }
@@ -171,15 +168,9 @@ public class UIDisplay : MonoBehaviour
         // Change the alpha to highlight the cursor
         foreach (Image image in images)
         {
-            //Debug.Log(images[cursorPos]);
-            
-
             image.color = new Color(image.color.r, image.color.g, image.color.b, 0.5f); //first set all to half transparent
         }
-        Debug.Log(images.Length);
-        Debug.Log(cursorPos);
-        images[cursorPos].color = new Color(images[cursorPos].color.r, images[cursorPos].color.g, images[cursorPos].color.b, 1f); //then set selected to opaque
-        
+        //images[cursorPos].color = new Color(images[cursorPos].color.r, images[cursorPos].color.g, images[cursorPos].color.b, 1f); //then set selected to opaque
 
         //OLD DISPLAY INFO FUNCTION
         try
@@ -215,12 +206,11 @@ public class UIDisplay : MonoBehaviour
             {  // Poor practice but we know the escape clause won't break
                 images[order].GetComponentInChildren<TextMeshProUGUI>().text = " ";
             }
-
-            //Debug.Log(images.Length);
-            //Debug.Log(order);
-            images[order].GetComponentInChildren<TextMeshProUGUI>().text = " ";  // Set to blank
         }
-
+        else
+        {
+            //images[order].GetComponentInChildren<TextMeshProUGUI>().text = " ";  // Set to blank
+        }
     }
 
     // Returns the InventoryItem that cursor is pointing at
@@ -233,14 +223,14 @@ public class UIDisplay : MonoBehaviour
     {
         //SCROLLBAR MATH (OPTIONAL); make uninteractable, change disabled color; just for a visual indicator
         int setNumber = 3; //every set has 3 objects on screen at a time
-        float setCount = lstSize - setNumber; //max count for sets possible; for each one increase from set number, the set count increases by one
+        float setIndex = lstSize - setNumber; //max count for sets possible; for each one increase from set number, the set count increases by one
 
-        if (setCount <= 0)
+        if (setIndex <= 0)
         {
-            setCount = 1; //if the list is smaller than the possible number of items on screen, there could only be one set possible
+            setIndex = 1; //if the list is smaller than the possible number of items on screen, there could only be one set possible
         }
 
-        float handleSize = 1 / setCount; //hand should represent one set out of total number of sets
+        float handleSize = 1 / setIndex; //hand should represent one set out of total number of sets
         scrollbar.size = handleSize; //set handle size to represent sets of 3
 
         float handleVal = dispIndex * handleSize; //how far the handle should go
