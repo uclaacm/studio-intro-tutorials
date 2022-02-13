@@ -22,7 +22,7 @@ public class Inventory : MonoBehaviour
             DontDestroyOnLoad(gameObject);
         }
         inventory = new Dictionary<InventoryItem, int>();
-        AddAll();   
+        AddAll();
     }
 
     void AddAll()

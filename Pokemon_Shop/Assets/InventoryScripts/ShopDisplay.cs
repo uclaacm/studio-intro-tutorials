@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.Assertions;
 
 public class ShopDisplay : MonoBehaviour
 {
@@ -61,7 +62,7 @@ public class ShopDisplay : MonoBehaviour
         RenderDisplay();
     }
 
-    private void Awake()
+    private void Start()
     {
         invIndex = Resources.FindObjectsOfTypeAll<InventoryItem>();
         foreach (InventoryItem item in invIndex)
@@ -77,6 +78,7 @@ public class ShopDisplay : MonoBehaviour
     {
         // inventory = player.GetItemList();
         inventoryDict = player.GetItemDict();
+        Assert.IsNotNull(inventoryDict); // Testing if the inventory dictionary is nulll
         List<InventoryItem> killList = new List<InventoryItem>();
         // Remove any items no longer in inventory from display
         foreach (InventoryItem item in displayList)
