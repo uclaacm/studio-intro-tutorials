@@ -37,6 +37,7 @@ We have provided some initial scripts that we will be using in this project. The
 ## Setting Up A Shop Scene
 
 ## Subtracting Coins and Updating Quantity
+scripts: initialize coins, quantities, and names
 
 ## Connecting Everything Together
 
