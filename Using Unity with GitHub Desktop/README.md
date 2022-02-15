@@ -19,6 +19,8 @@
 * [GitHub Desktop](https://desktop.github.com/), signed in with your GitHub account
 * *NOT* the GitHub for Unity extension
 
+Note: We are not specifically recommending GitHub Desktop over other Git GUI clients or command line! It is just easier to write a more specialized guide rather than a generalized one, and much of the content is applicable generally as well.
+
 ---
 ## Why version control?
 
@@ -97,9 +99,9 @@ Click the "Add" button and find your folder in the file explorer. Reread the las
 
 ### Preparation
 
-A good reference for best practices is [Richard's Programming Essentials tutorial](https://github.com/uclaacm/studio-advanced-tutorials-f21/tree/main/Programming%20Essentials) (link will probably be out of date in the future)!
+A good reference for best practices is [Richard's Programming Essentials tutorial](https://github.com/uclaacm/studio-advanced-tutorials/tree/fall-21/Programming%20Essentials)!
 
-Establish standards (naming, folders, etc.) ASAP. Modularize code as much as possible, for example, separate character movement from character attacks. Divide work such that people are working independently of one another, unless it's intended that people are working on the same thing.
+Establish standards (naming, folders, etc.) ASAP. Modularize code as much as possible; for example, separate character movement from character attacks. Divide work such that people are working independently of one another, unless it's intended that people are working on the same thing.
 
 
 ### Git stuff
