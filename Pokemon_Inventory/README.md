@@ -98,40 +98,102 @@ It's good practice to always use getter functions to access member variables in 
 Now that we have our InventoryItem done, let's implement the Inventory that controls these objects. We'll leave Inventory as a MonoBehaviour. The main data structure within Inventory will be a Dictionary mapping a value of type int to a key of type InventoryItem. 
 
 ```c#
-Dictionary<InventoryItem, int> inventory;
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class Inventory : MonoBehaviour
+{
+    Dictionary<InventoryItem, int> inventory;
+}
 ```
-
-
-
-### curr_pokemon
-This is on both the player and enemy objects. It will create a new instance of the Pokemon on setup and will display the correct sprite based on which Pokemon it is and if it is facing the player or the enemy
+Now let's setup some ways to access the inventory. We'll define two public functions, each taking an InventoryItem as a parameter. We'll name these AddItem() and RemoveItem().
 
 ```c#
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
-public class curr_pokemon : MonoBehaviour
+
+public class Inventory : MonoBehaviour
 {
-    public bool isPlayer;
-    public BasePokemon basePokemon;
-    public Pokemon pokemon;
-    public void SetUp()
-    {
-        pokemon = new Pokemon(basePokemon);   
-        if (isPlayer)
-        {
-            this.GetComponent<Image>().sprite = basePokemon.back_sprite;
-        }
-        else
-        {
-            this.GetComponent<Image>().sprite = basePokemon.front_sprite;
-        }
+    Dictionary<InventoryItem, int> inventory;
+
+    public void AddItem(InventoryItem item) {
+
+    }
+
+    public bool RemoveItem(InventoryItem item) {
+
     }
 }
 ```
+Note that we made the return type of the RemoveItem function to be a bool. This will return false if the item to be removed didn't exist in the inventory to begin with. Though we may not actively use this feature in this tutorial, it's easy to implement and may benefit other scripts that reference this class.
 
-We have added the BasePokemon we created earlier into the variable for basePokemon for the enemy and player objects.
+Let's fill out these functions with some code.
+
+```c#
+    public void AddItem(InventoryItem item)
+    {
+        if (inventory.ContainsKey(item))  // If item exists in our inventory
+        {
+            inventory[item] += 1;  // Increment quantity
+        } else
+        {
+            inventory[item] = 1;  // Add item to the inventory
+        }
+    }
+
+    public bool RemoveItem(InventoryItem item)
+    {
+        if (!inventory.ContainsKey(item))
+        {
+            return false;  // No such item exists!
+        }
+        inventory[item] -= 1;  // Decrement the item's quantity
+        if (inventory[item] == 0)
+        {
+            inventory.Remove(item);  // Remove the item from the dictionary if we have none
+        }
+        return true;
+    }
+```
+
+The final essential feature we need is a getter function for our inventory, as we don't want other scripts to modify our inventory directly. 
+
+If the first getter function doesn't make much sense, don't worry. It exists for some extra versatility for other scripts that call the Inventory class :)
+
+```c#
+    // Returns a dictionary with the IDName and number of items in said Inventory object. This function is nonessential, but offers an alternate return type if the caller wants a list of item names
+    public Dictionary<string, int> GetItemList()
+    {
+        Dictionary<string, int> dict = new Dictionary<string, int>();
+        foreach (InventoryItem item in inventory.Keys)
+        {
+            dict[item.GetIDName()] = inventory[item];
+        }
+        return dict;
+    }
+
+    // Returns the exact dictionary this object has 
+    public Dictionary<InventoryItem, int> GetItemDict()
+    {
+        return inventory;
+    }
+```
+Now for some finishing touches, let's add some items to our inventory so our scripts can test them.
+
+Define an AddAll() function that will search our project for all InventoryItem objects and add one of each
+
+```c#
+    void AddAll()
+    {
+        foreach(InventoryItem item in Resources.FindObjectsOfTypeAll<InventoryItem>())
+        {
+            AddItem(item);
+        }
+    }
+```
+
 
 ### HudScript
 This script is on each of the Hud objects and will have as variables the name text and the instance of the hpScript that is on the Hp object in that Hud. This script has one function that takes a Pokemon object as input will change the name text to the correct name and set the maxHp of that pokemon in the hpScript (which we will show later)
