@@ -16,6 +16,8 @@ MonoBehaviour:
   displayName: Hyper Potion
   tooltip: Getting your @ss kicked by Cynthia? Use this to get back on your feet!
     Heals 80 HP.
-  icon: {fileID: 21300000, guid: e5706c1eb8ea7ef48b47e9569659769e, type: 3}
+  icon: {fileID: 21300000, guid: 5756ed9b0dda54c14b26c4a3831db5b4, type: 3}
+  isPurchased: 0
+  price: 40
   availableActions: 0000000001000000
   healPower: 80

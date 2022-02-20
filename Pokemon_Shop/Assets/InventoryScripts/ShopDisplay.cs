@@ -24,7 +24,6 @@ public class ShopDisplay : MonoBehaviour
     //Faustine's added fields
     [SerializeField] int setNumber = 3; //number of items on screen at once // change
     [SerializeField] Scrollbar scrollbar;
-
     //actions
     [SerializeField] GameObject actionsPanel;
     bool actionsOn = false;
@@ -36,8 +35,9 @@ public class ShopDisplay : MonoBehaviour
     [SerializeField] TextMeshProUGUI tooltip;
     [SerializeField] TextMeshProUGUI price;
     [SerializeField] TextMeshProUGUI coinstext;
+    [SerializeField] TextMeshProUGUI inventoryList;
     int coins = 100;
-
+    string temp = "";
 
     InventoryItem itemSelected; //item currently being selected
 
@@ -56,14 +56,12 @@ public class ShopDisplay : MonoBehaviour
             RenderDisplay();
         }
         if (Input.GetKeyDown(KeyCode.E))
-        {
             SceneManager.LoadScene("OverworldScene");
-        }
 
 
 
-            //Faustine's added methods: visuals
-            ActionPanelToggle();
+        //Faustine's added methods: visuals
+        ActionPanelToggle();
     }
 
     private void OnEnable()
@@ -72,7 +70,7 @@ public class ShopDisplay : MonoBehaviour
         RenderDisplay();
     }
 
-    private void Start()
+    private void Awake()
     {
         invIndex = Resources.FindObjectsOfTypeAll<InventoryItem>();
         foreach (InventoryItem item in invIndex)
@@ -80,7 +78,7 @@ public class ShopDisplay : MonoBehaviour
             Debug.Log(item);
         }
         displayList = new List<InventoryItem>();
-        GetInventory();
+        // GetInventory();
     }
 
     // Update local inventory dictionary 
@@ -88,13 +86,11 @@ public class ShopDisplay : MonoBehaviour
     {
         // inventory = player.GetItemList();
         inventoryDict = player.GetItemDict();
-        //Assert.IsNotNull(inventoryDict); // Testing if the inventory dictionary is nulll
         List<InventoryItem> killList = new List<InventoryItem>();
         // Remove any items no longer in inventory from display
-        
         foreach (InventoryItem item in displayList)
         {
-            if (item.getPurchased())
+            if (!inventoryDict.ContainsKey(item) || item.getPurchased())
             {
                 killList.Add(item);
             }
@@ -104,11 +100,11 @@ public class ShopDisplay : MonoBehaviour
             displayList.Remove(item);
             lstSize--;
         }
-        
         foreach (InventoryItem item in inventoryDict.Keys)  // Search through the inventory dictionary
         {
-            if (!displayList.Contains(item)&&!item.getPurchased())
+            if (!displayList.Contains(item) && !item.getPurchased())
             {
+                Debug.Log(item.getPurchased());
                 displayList.Add(item);
                 lstSize++;
             }
@@ -184,20 +180,21 @@ public class ShopDisplay : MonoBehaviour
         {
             image.color = new Color(image.color.r, image.color.g, image.color.b, 0.5f); //first set all to half transparent
         }
-        //images[cursorPos].color = new Color(images[cursorPos].color.r, images[cursorPos].color.g, images[cursorPos].color.b, 1f); //then set selected to opaque
+
+        images[cursorPos].color = new Color(images[cursorPos].color.r, images[cursorPos].color.g, images[cursorPos].color.b, 1f); //then set selected to opaque
 
         //OLD DISPLAY INFO FUNCTION
         try
         {
             itemSelected = GetItemOnCursor(); //get item currently selected
             itemIcon.sprite = itemSelected.GetIcon(); //change the sprite icon displayed (.sprite takes in sprites, Image types doon't automatically do that)
-            tooltip.text = itemSelected.GetToolTip();
+            tooltip.text = itemSelected.GetToolTip(); //change the item description displayed
             price.text = "Price: " + itemSelected.getPrice().ToString();
-            coinstext.text = "Coins: " + coins.ToString();
+            coinstext.text = "Coins: " + coins;
+            inventoryList.text = getInventory();
         }
         catch
         {
-            // TODO: Set all to a default blank display
             itemIcon.sprite = null; //idk if this works
             tooltip.text = "No Item Selected."; //make variable if wanted
             price.text = "N/A";
@@ -214,7 +211,6 @@ public class ShopDisplay : MonoBehaviour
 
     private void DisplayItemName(int order) //taking image index as input
     {
-
         if (dispIndex + order < lstSize)
         {
             // find corresponding item with its index, display
@@ -222,11 +218,9 @@ public class ShopDisplay : MonoBehaviour
         }
         else
         {
-         
             images[order].GetComponentInChildren<TextMeshProUGUI>().text = " ";  // Set to blank
         }
     }
-
 
     // Returns the InventoryItem that cursor is pointing at
     private InventoryItem GetItemOnCursor()
@@ -287,7 +281,21 @@ public class ShopDisplay : MonoBehaviour
         {
             item.purchase();
             coins -= item.getPrice();
+            Debug.Log("buy");
         }
+    }
+
+    string getInventory()
+    {
+        string inventory = "Inventory List: \n";
+
+        foreach (InventoryItem item in Resources.FindObjectsOfTypeAll<InventoryItem>()) 
+        {
+            if (item.getPurchased()) 
+                inventory = inventory + item.GetDisplayName() + "\n";
+                    
+        }
+        return inventory;
     }
 
     

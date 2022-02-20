@@ -36,6 +36,11 @@ public class UIDisplay : MonoBehaviour
 
     InventoryItem itemSelected; //item currently being selected
 
+    private void Start()
+    {
+        actionsOn = false;
+    }
+
     // Update is called once per frame
     void Update()
     {
@@ -50,10 +55,10 @@ public class UIDisplay : MonoBehaviour
             MoveCursorDown(false);
             RenderDisplay();
         }
+       
 
 
-
-        //Faustine's added methods: visuals
+        Debug.Log(actionsOn);
         ActionPanelToggle();
     }
 
@@ -207,8 +212,6 @@ public class UIDisplay : MonoBehaviour
         }
         else
         {
-
-
             images[order].GetComponentInChildren<TextMeshProUGUI>().text = " ";  // Set to blank
         }
     }
