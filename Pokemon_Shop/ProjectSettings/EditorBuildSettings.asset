@@ -14,4 +14,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/PokemonScenes/Combat Scene.unity
     guid: 4f440bc9b9c92ee47bc3eea7b5fb23be
+  - enabled: 1
+    path: Assets/PokemonScenes/StartScene.unity
+    guid: b2a81a88879c14bada7006e1c9d98181
   m_configObjects: {}

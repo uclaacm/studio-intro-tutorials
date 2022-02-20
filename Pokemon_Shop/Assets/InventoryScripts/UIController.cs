@@ -11,6 +11,7 @@ public class UIController : MonoBehaviour
     Canvas canvasComp; //canvas component
     UIDisplay uIDisplayComp; //UI Display script
 
+
     bool canvasEnabled;
 
     private void Awake()

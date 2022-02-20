@@ -36,7 +36,7 @@ public class ShopDisplay : MonoBehaviour
     [SerializeField] TextMeshProUGUI price;
     [SerializeField] TextMeshProUGUI coinstext;
     [SerializeField] TextMeshProUGUI inventoryList;
-    int coins = 100;
+    int coins = StartScene.coins;
     string temp = "";
 
     InventoryItem itemSelected; //item currently being selected

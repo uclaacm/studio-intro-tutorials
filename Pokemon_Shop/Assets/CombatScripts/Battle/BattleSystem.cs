@@ -22,7 +22,7 @@ public class BattleSystem : MonoBehaviour
     private int currentMove = 0;
 
     private enum Phases { SetUp, ActionSelect, MoveSelect, ItemSelect, Attacks };
-
+     
     // Inventory UI integration
     private int healPower = 0;
     private bool itemSelected = false;
@@ -92,6 +92,8 @@ public class BattleSystem : MonoBehaviour
             if (isPlayerFainted)
             {
                 dialogText.DialogText.text = $"{player.basePokemon.name} fainted.";
+                SceneManager.LoadScene("StartScene");
+                Debug.Log("faint");
                 // EXIT SCENE
             }
             else
@@ -107,6 +109,7 @@ public class BattleSystem : MonoBehaviour
 
     void Update()
     {
+
         switch (phase)
         {
             case Phases.ActionSelect:
@@ -179,7 +182,7 @@ public class BattleSystem : MonoBehaviour
 
             // Item select phase
             case Phases.ItemSelect:
-                if (itemSelected)  // If an item was selected (from function called by broadcast) 
+                if (itemSelected||Input.GetKeyDown(KeyCode.E))   // If an item was selected (from function called by broadcast) 
                 {
                     phase = Phases.ActionSelect;
                     healPokemon(player, playerHud, healPower);
@@ -189,7 +192,10 @@ public class BattleSystem : MonoBehaviour
                     dialogText.moveToggle(false);
                 }
                 break;
+
         }
+        if (Input.GetKeyDown(KeyCode.E))
+            SceneManager.LoadScene("OverworldScene");
     }
 
     public void ItemHeal(int heal)
