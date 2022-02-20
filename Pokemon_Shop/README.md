@@ -12,6 +12,7 @@
 * Setting up a shop
 * Displaying items
 * Buying items
+* Integrating with inventory and overworld
  
 ## What you'll need
 * [Unity Hub](https://unity.com/download)
