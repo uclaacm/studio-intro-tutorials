@@ -8,9 +8,6 @@ public class PlayerMovement : MonoBehaviour
     public float moveSpeed;
     private bool isMoving;
     private Vector2 input;
-
-    public ShopUIController shop;
-
     private Animator animator;
 
 
@@ -106,8 +103,6 @@ public class PlayerMovement : MonoBehaviour
     private bool IsWalkable(Vector3 targetPos) {
         if (Physics2D.OverlapCircle(targetPos, .1f, solidObjectsLayer|interactableLayer) != null) {
 
-            //Debug.Log("can't walk there");
-            //SceneManager.LoadScene("Shop");
             SceneManager.LoadScene("ShopScene");
 
             return false;

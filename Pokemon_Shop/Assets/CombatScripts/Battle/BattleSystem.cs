@@ -182,7 +182,7 @@ public class BattleSystem : MonoBehaviour
 
             // Item select phase
             case Phases.ItemSelect:
-                if (itemSelected||Input.GetKeyDown(KeyCode.E))   // If an item was selected (from function called by broadcast) 
+                if (itemSelected||Input.GetKeyDown(KeyCode.R))   // If an item was selected (from function called by broadcast) or if the "B" is pressed for return
                 {
                     phase = Phases.ActionSelect;
                     healPokemon(player, playerHud, healPower);

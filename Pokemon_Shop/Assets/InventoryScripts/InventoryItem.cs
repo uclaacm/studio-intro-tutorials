@@ -11,7 +11,7 @@ public class InventoryItem : ScriptableObject
     [SerializeField] [TextArea] string tooltip;
     [SerializeField] Sprite icon;
 
-    //
+    //vairables for shop
     [SerializeField] bool isPurchased = false;
     [SerializeField] int price = 0;
 
@@ -55,7 +55,7 @@ public class InventoryItem : ScriptableObject
         return healPower;
     }
 
-    //
+    //functions for shop
     public bool getPurchased()
     {
         return isPurchased;

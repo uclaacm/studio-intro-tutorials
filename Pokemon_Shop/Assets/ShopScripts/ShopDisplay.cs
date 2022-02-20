@@ -1,4 +1,3 @@
-
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -9,19 +8,17 @@ using UnityEngine.SceneManagement;
 
 public class ShopDisplay : MonoBehaviour
 {
-    //INVENTORY LIST
+    //INVENTORY LIST - 
     [Header("Inventory List")]
     [SerializeField] Image[] images;
     [SerializeField] Inventory player;
-    InventoryItem[] invIndex;  // Master list of all InventoryItems
-    Dictionary<string, int> inventory;  // Dictionary passed in from the Inventory class
+    InventoryItem[] invIndex;  
+    Dictionary<string, int> inventory;  
     Dictionary<InventoryItem, int> inventoryDict;
-    List<InventoryItem> displayList;  // List of items to be referenced by the display
+    List<InventoryItem> displayList;  
     int lstSize = 0;
     int dispIndex = 0;
-    int cursorPos = 0;  // Can go from 0-2, 0 being topmost, 2 being bottommost
-
-    //Faustine's added fields
+    int cursorPos = 0;  
     [SerializeField] int setNumber = 3; //number of items on screen at once // change
     [SerializeField] Scrollbar scrollbar;
     //actions
@@ -29,17 +26,17 @@ public class ShopDisplay : MonoBehaviour
     bool actionsOn = false;
     [SerializeField] KeyCode actionKey = KeyCode.Space; //optional
 
-    //INVENTORY DISPLAY
+    //Item DISPLAY
     [Header("Item Displays")]
     [SerializeField] Image itemIcon; //image of items in game
     [SerializeField] TextMeshProUGUI tooltip;
+    InventoryItem itemSelected; //item currently being selected
+
+    //SHOP DISPLAY
     [SerializeField] TextMeshProUGUI price;
     [SerializeField] TextMeshProUGUI coinstext;
     [SerializeField] TextMeshProUGUI inventoryList;
-    int coins = StartScene.coins;
-    string temp = "";
-
-    InventoryItem itemSelected; //item currently being selected
+    int coins = StartScene.coins; //get coins from the startscene which intializes and stores the value
 
     // Update is called once per frame
     void Update()
@@ -55,18 +52,17 @@ public class ShopDisplay : MonoBehaviour
             MoveCursorDown(false);
             RenderDisplay();
         }
+
+        //Integrate: exist the shop
         if (Input.GetKeyDown(KeyCode.E))
             SceneManager.LoadScene("OverworldScene");
 
-
-
-        //Faustine's added methods: visuals
         ActionPanelToggle();
     }
 
     private void OnEnable()
     {
-        GetInventory();
+        GetShop();
         RenderDisplay();
     }
 
@@ -75,19 +71,17 @@ public class ShopDisplay : MonoBehaviour
         invIndex = Resources.FindObjectsOfTypeAll<InventoryItem>();
         foreach (InventoryItem item in invIndex)
         {
-            Debug.Log(item);
+            Debug.Log(item);//helpful for debugging purposes
         }
         displayList = new List<InventoryItem>();
-        // GetInventory();
     }
 
-    // Update local inventory dictionary 
-    void GetInventory()
-    {
-        // inventory = player.GetItemList();
+    // Update shop display
+    void GetShop()
+    { 
         inventoryDict = player.GetItemDict();
         List<InventoryItem> killList = new List<InventoryItem>();
-        // Remove any items no longer in inventory from display
+        // Remove any items that are purchased from display
         foreach (InventoryItem item in displayList)
         {
             if (!inventoryDict.ContainsKey(item) || item.getPurchased())
@@ -102,7 +96,7 @@ public class ShopDisplay : MonoBehaviour
         }
         foreach (InventoryItem item in inventoryDict.Keys)  // Search through the inventory dictionary
         {
-            if (!displayList.Contains(item) && !item.getPurchased())
+            if (!displayList.Contains(item) && !item.getPurchased()) //if not in display and not purchased, add to display list
             {
                 Debug.Log(item.getPurchased());
                 displayList.Add(item);
@@ -167,7 +161,7 @@ public class ShopDisplay : MonoBehaviour
         }
     }
 
-    // Display the Inventory slots, rendering each slot with its corresponding image
+    // Display the shop slots, rendering each slot with its corresponding image
     void RenderDisplay()
     {
         for (int i = 0; i < setNumber; i++)
@@ -183,19 +177,20 @@ public class ShopDisplay : MonoBehaviour
 
         images[cursorPos].color = new Color(images[cursorPos].color.r, images[cursorPos].color.g, images[cursorPos].color.b, 1f); //then set selected to opaque
 
-        //OLD DISPLAY INFO FUNCTION
+        //DISPLAY INFO FUNCTION
         try
         {
             itemSelected = GetItemOnCursor(); //get item currently selected
             itemIcon.sprite = itemSelected.GetIcon(); //change the sprite icon displayed (.sprite takes in sprites, Image types doon't automatically do that)
             tooltip.text = itemSelected.GetToolTip(); //change the item description displayed
+            //display price and coins
             price.text = "Price: " + itemSelected.getPrice().ToString();
             coinstext.text = "Coins: " + coins;
             inventoryList.text = getInventory();
         }
         catch
         {
-            itemIcon.sprite = null; //idk if this works
+            itemIcon.sprite = null; 
             tooltip.text = "No Item Selected."; //make variable if wanted
             price.text = "N/A";
             coinstext.text = "N/A";
@@ -255,20 +250,19 @@ public class ShopDisplay : MonoBehaviour
         }
         actionsPanel.SetActive(actionsOn);
 
-        if (actionsOn && Input.GetKeyDown(KeyCode.Alpha1)) //accessing different actions via numeric keys, or shift cursor to actions panel;
-                                                           //actions can display like inventory list OR like combat choices (how many total actions?) https://answers.unity.com/questions/420324/get-numeric-key.html
+        if (actionsOn && Input.GetKeyDown(KeyCode.Alpha1))//if the user selects "purchase"
         { 
             Debug.Log("action 1 initiated");
             BuyItem(GetItemOnCursor());
             actionsOn = !actionsOn;
-            GetInventory();
+            GetShop(); //update available items
         }
-        else if (actionsOn && Input.GetKeyDown(KeyCode.Alpha2))
+        else if (actionsOn && Input.GetKeyDown(KeyCode.Alpha2)) //if the user selects "back"
         {
             actionsOn = !actionsOn;
-            GetInventory();
+            GetShop(); //update available itesm
         }
-        RenderDisplay();
+        RenderDisplay(); //display items
     }
 
     // Actions
@@ -281,17 +275,16 @@ public class ShopDisplay : MonoBehaviour
         {
             item.purchase();
             coins -= item.getPrice();
-            Debug.Log("buy");
         }
     }
 
-    string getInventory()
+    string getInventory()//output list of purchased items
     {
         string inventory = "Inventory List: \n";
-
+        //surch through items and add purchased items
         foreach (InventoryItem item in Resources.FindObjectsOfTypeAll<InventoryItem>()) 
         {
-            if (item.getPurchased()) 
+            if (item.getPurchased()) //
                 inventory = inventory + item.GetDisplayName() + "\n";
                     
         }

@@ -33,10 +33,10 @@ public class UIController : MonoBehaviour
         Debug.Log("attempting toggle");
         canvasEnabled = !canvasEnabled;
 
-        if (canvasEnabled)
-            Time.timeScale = 0;
-        else
-            Time.timeScale = 1;
+       // if (canvasEnabled)
+         //   Time.timeScale = 0;
+       // else
+        //    Time.timeScale = 1;
 
         canvasComp.enabled = canvasEnabled;
         uIDisplayComp.enabled = canvasEnabled;

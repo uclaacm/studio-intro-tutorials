@@ -88,7 +88,7 @@ public class UIDisplay : MonoBehaviour
         // Remove any items no longer in inventory from display
         foreach (InventoryItem item in inventoryList)
         {
-            if (!inventoryDict.ContainsKey(item)||!item.getPurchased())
+            if (!inventoryDict.ContainsKey(item)||!item.getPurchased())//if not purchased, don't display
             {
                 killList.Add(item);
             }
@@ -100,7 +100,7 @@ public class UIDisplay : MonoBehaviour
         }
         foreach (InventoryItem item in inventoryDict.Keys)  // Search through the inventory dictionary
         {
-            if (!inventoryList.Contains(item)&&item.getPurchased())
+            if (!inventoryList.Contains(item) && item.getPurchased()) //if purchased display
             {
                 //Debug.Log(item.getPurchased());
                 inventoryList.Add(item);
