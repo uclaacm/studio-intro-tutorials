@@ -16,12 +16,6 @@ MonoBehaviour:
   displayName: MAX Heal
   tooltip: 'Bad news: you kinda suck at this game. Good news: no one will know if
     you just heal back up & pretend that nothing went wrong! Heals HP to full.'
-<<<<<<< Updated upstream
   icon: {fileID: 21300000, guid: c8149eb21cf4da04ab926e4dda7ed137, type: 3}
-=======
-  icon: {fileID: 21300000, guid: 9dc29bc934a4f4227a64df69a7f55e1b, type: 3}
-  isPurchased: 0
-  price: 50
->>>>>>> Stashed changes
   availableActions: 0000000001000000
   healPower: 100

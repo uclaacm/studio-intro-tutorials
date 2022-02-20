@@ -15,12 +15,6 @@ MonoBehaviour:
   idName: junkFood
   displayName: Junk
   tooltip: Before considering if you CAN eat this, ask yourself if you SHOULD.
-<<<<<<< Updated upstream
   icon: {fileID: 21300000, guid: e6904e5b63e22b44784b5a9326ae3867, type: 3}
-=======
-  icon: {fileID: 21300000, guid: e240a3ae5ad564bf09d0a59007d57777, type: 3}
-  isPurchased: 0
-  price: 1
->>>>>>> Stashed changes
   availableActions: 0000000001000000
   healPower: 1

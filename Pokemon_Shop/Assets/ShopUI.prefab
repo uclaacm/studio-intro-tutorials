@@ -1360,6 +1360,8 @@ MonoBehaviour:
   actionKey: 32
   itemIcon: {fileID: 6671462525629463982}
   tooltip: {fileID: 6671462524388236868}
+  price: {fileID: 0}
+  coinstext: {fileID: 0}
 --- !u!1 &6671462524498675943
 GameObject:
   m_ObjectHideFlags: 0

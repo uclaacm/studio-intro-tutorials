@@ -10,12 +10,11 @@ public class InventoryItem : ScriptableObject
     [SerializeField] string displayName;
     [SerializeField] [TextArea] string tooltip;
     [SerializeField] Sprite icon;
-<<<<<<< Updated upstream
-=======
+
     //
     [SerializeField] bool isPurchased = false;
     [SerializeField] int price = 0;
->>>>>>> Stashed changes
+
     public enum Actions
     {
         use,
@@ -55,9 +54,6 @@ public class InventoryItem : ScriptableObject
     {
         return healPower;
     }
-<<<<<<< Updated upstream
-}
-=======
 
     //
     public bool getPurchased()
@@ -80,4 +76,4 @@ public class InventoryItem : ScriptableObject
         return price;
     }
 }
->>>>>>> Stashed changes
+

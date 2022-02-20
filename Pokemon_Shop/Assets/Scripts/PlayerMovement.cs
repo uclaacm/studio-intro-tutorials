@@ -8,11 +8,9 @@ public class PlayerMovement : MonoBehaviour
     public float moveSpeed;
     private bool isMoving;
     private Vector2 input;
-<<<<<<< Updated upstream
 
-=======
     public ShopUIController shop;
->>>>>>> Stashed changes
+
     private Animator animator;
 
 
@@ -80,14 +78,12 @@ public class PlayerMovement : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Z)) {
             Interact();
         }
-<<<<<<< Updated upstream
-=======
 
         if (Input.GetKeyDown(KeyCode.S))
         {
             SceneManager.LoadScene("ShopScene");
         }
->>>>>>> Stashed changes
+
         
     }
 
@@ -109,14 +105,11 @@ public class PlayerMovement : MonoBehaviour
 
     private bool IsWalkable(Vector3 targetPos) {
         if (Physics2D.OverlapCircle(targetPos, .1f, solidObjectsLayer|interactableLayer) != null) {
-<<<<<<< Updated upstream
-            Debug.Log("can't walk there");
-            SceneManager.LoadScene("Shop");
-=======
+
             //Debug.Log("can't walk there");
             //SceneManager.LoadScene("Shop");
             SceneManager.LoadScene("ShopScene");
->>>>>>> Stashed changes
+
             return false;
             
         }
@@ -151,16 +144,5 @@ public class PlayerMovement : MonoBehaviour
         }
         
     }
-<<<<<<< Updated upstream
 
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        Debug.Log("test");
-        SceneManager.LoadScene("Shop");
-    }
-
-
-=======
-
->>>>>>> Stashed changes
 }

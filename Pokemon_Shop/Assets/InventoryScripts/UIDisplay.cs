@@ -173,10 +173,7 @@ public class UIDisplay : MonoBehaviour
         {
             image.color = new Color(image.color.r, image.color.g, image.color.b, 0.5f); //first set all to half transparent
         }
-<<<<<<< Updated upstream
-=======
-        
->>>>>>> Stashed changes
+
         images[cursorPos].color = new Color(images[cursorPos].color.r, images[cursorPos].color.g, images[cursorPos].color.b, 1f); //then set selected to opaque
 
         //OLD DISPLAY INFO FUNCTION
@@ -205,26 +202,13 @@ public class UIDisplay : MonoBehaviour
     {
         if (dispIndex + order < lstSize)
         {
-<<<<<<< Updated upstream
-            try
-            {
-                images[order].GetComponentInChildren<TextMeshProUGUI>().text = displayList[dispIndex + order].GetDisplayName(); //find corresponding item with its index, display
-            }
-            catch
-            {  // Poor practice but we know the escape clause won't break
-                images[order].GetComponentInChildren<TextMeshProUGUI>().text = " ";
-            }
-        }
-        else
-        {
-=======
             // find corresponding item with its index, display
             images[order].GetComponentInChildren<TextMeshProUGUI>().text = inventoryList[dispIndex + order].GetDisplayName();
         }
         else
         {
 
->>>>>>> Stashed changes
+
             images[order].GetComponentInChildren<TextMeshProUGUI>().text = " ";  // Set to blank
         }
     }

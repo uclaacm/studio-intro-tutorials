@@ -15,10 +15,7 @@ public class BattleSystem : MonoBehaviour
     public curr_pokemon enemy;
     //public UIController ui;
     public UIController ui;
-<<<<<<< Updated upstream
 
-=======
->>>>>>> Stashed changes
 
     private Phases phase = Phases.SetUp;
     private int selected = 0;
