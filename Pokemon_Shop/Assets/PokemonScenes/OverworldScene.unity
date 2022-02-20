@@ -1334,6 +1334,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 5
+<<<<<<< Updated upstream
+=======
+  shop: {fileID: 0}
+>>>>>>> Stashed changes
   solidObjectsLayer:
     serializedVersion: 2
     m_Bits: 256

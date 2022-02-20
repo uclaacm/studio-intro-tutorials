@@ -16,6 +16,12 @@ MonoBehaviour:
   displayName: Tasty Donut
   tooltip: By comsuming this you trade long-term health hazards for a short-term
     energy boost. Eh, who cares about health anyways. Heals 20 HP.
+<<<<<<< Updated upstream
   icon: {fileID: 21300000, guid: e6904e5b63e22b44784b5a9326ae3867, type: 3}
+=======
+  icon: {fileID: 21300000, guid: e5706c1eb8ea7ef48b47e9569659769e, type: 3}
+  isPurchased: 0
+  price: 10
+>>>>>>> Stashed changes
   availableActions: 0000000001000000
   healPower: 20

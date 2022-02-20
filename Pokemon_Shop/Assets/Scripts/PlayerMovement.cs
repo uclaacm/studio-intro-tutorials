@@ -8,8 +8,13 @@ public class PlayerMovement : MonoBehaviour
     public float moveSpeed;
     private bool isMoving;
     private Vector2 input;
+<<<<<<< Updated upstream
 
+=======
+    public ShopUIController shop;
+>>>>>>> Stashed changes
     private Animator animator;
+
 
     private void Awake() {
         animator = GetComponent<Animator>();
@@ -24,11 +29,17 @@ public class PlayerMovement : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+
+        
         if (PlayerPrefs.GetFloat("justReturned") == 1) {
             PlayerIsBack();
             PlayerPrefs.SetFloat("justReturned", 0f);
         }
+
+
     }
+
+
 
     void PlayerIsBack() {
         //transform.position.x = PlayerPrefs.GetFloat("X");
@@ -59,7 +70,8 @@ public class PlayerMovement : MonoBehaviour
                 targetPos.y += input.y; //-.5f if you want origin at feet
 
                 if(IsWalkable(targetPos))
-                StartCoroutine(Move(targetPos)); 
+                StartCoroutine(Move(targetPos));
+              
             }
         }
 
@@ -68,6 +80,14 @@ public class PlayerMovement : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Z)) {
             Interact();
         }
+<<<<<<< Updated upstream
+=======
+
+        if (Input.GetKeyDown(KeyCode.S))
+        {
+            SceneManager.LoadScene("ShopScene");
+        }
+>>>>>>> Stashed changes
         
     }
 
@@ -89,8 +109,14 @@ public class PlayerMovement : MonoBehaviour
 
     private bool IsWalkable(Vector3 targetPos) {
         if (Physics2D.OverlapCircle(targetPos, .1f, solidObjectsLayer|interactableLayer) != null) {
+<<<<<<< Updated upstream
             Debug.Log("can't walk there");
             SceneManager.LoadScene("Shop");
+=======
+            //Debug.Log("can't walk there");
+            //SceneManager.LoadScene("Shop");
+            SceneManager.LoadScene("ShopScene");
+>>>>>>> Stashed changes
             return false;
             
         }
@@ -125,6 +151,7 @@ public class PlayerMovement : MonoBehaviour
         }
         
     }
+<<<<<<< Updated upstream
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
@@ -133,4 +160,7 @@ public class PlayerMovement : MonoBehaviour
     }
 
 
+=======
+
+>>>>>>> Stashed changes
 }

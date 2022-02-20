@@ -1,27 +1,28 @@
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.Assertions;
+using UnityEngine.SceneManagement;
 
-public class UIDisplay : MonoBehaviour
+public class ShopDisplay : MonoBehaviour
 {
     //INVENTORY LIST
     [Header("Inventory List")]
     [SerializeField] Image[] images;
-
     [SerializeField] Inventory player;
-
     InventoryItem[] invIndex;  // Master list of all InventoryItems
     Dictionary<string, int> inventory;  // Dictionary passed in from the Inventory class
     Dictionary<InventoryItem, int> inventoryDict;
-    List<InventoryItem> inventoryList;  // List of items to be referenced by the display
+    List<InventoryItem> displayList;  // List of items to be referenced by the display
     int lstSize = 0;
     int dispIndex = 0;
     int cursorPos = 0;  // Can go from 0-2, 0 being topmost, 2 being bottommost
 
     //Faustine's added fields
-    [SerializeField] int setNumber = 3; //number of items on screen at once
+    [SerializeField] int setNumber = 3; //number of items on screen at once // change
     [SerializeField] Scrollbar scrollbar;
 
     //actions
@@ -32,7 +33,11 @@ public class UIDisplay : MonoBehaviour
     //INVENTORY DISPLAY
     [Header("Item Displays")]
     [SerializeField] Image itemIcon; //image of items in game
-    [SerializeField] TextMeshProUGUI tooltip; //item description / tooltip in inventory
+    [SerializeField] TextMeshProUGUI tooltip;
+    [SerializeField] TextMeshProUGUI price;
+    [SerializeField] TextMeshProUGUI coinstext;
+    int coins = 100;
+
 
     InventoryItem itemSelected; //item currently being selected
 
@@ -50,11 +55,15 @@ public class UIDisplay : MonoBehaviour
             MoveCursorDown(false);
             RenderDisplay();
         }
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+            SceneManager.LoadScene("OverworldScene");
+        }
 
 
 
-        //Faustine's added methods: visuals
-        ActionPanelToggle();
+            //Faustine's added methods: visuals
+            ActionPanelToggle();
     }
 
     private void OnEnable()
@@ -63,15 +72,15 @@ public class UIDisplay : MonoBehaviour
         RenderDisplay();
     }
 
-    private void Awake()
+    private void Start()
     {
         invIndex = Resources.FindObjectsOfTypeAll<InventoryItem>();
         foreach (InventoryItem item in invIndex)
         {
             Debug.Log(item);
         }
-        inventoryList = new List<InventoryItem>();
-        // GetInventory();
+        displayList = new List<InventoryItem>();
+        GetInventory();
     }
 
     // Update local inventory dictionary 
@@ -79,26 +88,28 @@ public class UIDisplay : MonoBehaviour
     {
         // inventory = player.GetItemList();
         inventoryDict = player.GetItemDict();
+        //Assert.IsNotNull(inventoryDict); // Testing if the inventory dictionary is nulll
         List<InventoryItem> killList = new List<InventoryItem>();
         // Remove any items no longer in inventory from display
-        foreach (InventoryItem item in inventoryList)
+        
+        foreach (InventoryItem item in displayList)
         {
-            if (!inventoryDict.ContainsKey(item)||!item.getPurchased())
+            if (item.getPurchased())
             {
                 killList.Add(item);
             }
         }
         foreach (InventoryItem item in killList)
         {
-            inventoryList.Remove(item);
+            displayList.Remove(item);
             lstSize--;
         }
+        
         foreach (InventoryItem item in inventoryDict.Keys)  // Search through the inventory dictionary
         {
-            if (!inventoryList.Contains(item)&&item.getPurchased())
+            if (!displayList.Contains(item)&&!item.getPurchased())
             {
-                //Debug.Log(item.getPurchased());
-                inventoryList.Add(item);
+                displayList.Add(item);
                 lstSize++;
             }
         }
@@ -173,24 +184,24 @@ public class UIDisplay : MonoBehaviour
         {
             image.color = new Color(image.color.r, image.color.g, image.color.b, 0.5f); //first set all to half transparent
         }
-<<<<<<< Updated upstream
-=======
-        
->>>>>>> Stashed changes
-        images[cursorPos].color = new Color(images[cursorPos].color.r, images[cursorPos].color.g, images[cursorPos].color.b, 1f); //then set selected to opaque
+        //images[cursorPos].color = new Color(images[cursorPos].color.r, images[cursorPos].color.g, images[cursorPos].color.b, 1f); //then set selected to opaque
 
         //OLD DISPLAY INFO FUNCTION
         try
         {
             itemSelected = GetItemOnCursor(); //get item currently selected
             itemIcon.sprite = itemSelected.GetIcon(); //change the sprite icon displayed (.sprite takes in sprites, Image types doon't automatically do that)
-            tooltip.text = itemSelected.GetToolTip(); //change the item description displayed
+            tooltip.text = itemSelected.GetToolTip();
+            price.text = "Price: " + itemSelected.getPrice().ToString();
+            coinstext.text = "Coins: " + coins.ToString();
         }
         catch
         {
             // TODO: Set all to a default blank display
             itemIcon.sprite = null; //idk if this works
             tooltip.text = "No Item Selected."; //make variable if wanted
+            price.text = "N/A";
+            coinstext.text = "N/A";
 
             if (actionsOn) //if they try to turn on action panel, it won't
             {
@@ -203,36 +214,24 @@ public class UIDisplay : MonoBehaviour
 
     private void DisplayItemName(int order) //taking image index as input
     {
+
         if (dispIndex + order < lstSize)
         {
-<<<<<<< Updated upstream
-            try
-            {
-                images[order].GetComponentInChildren<TextMeshProUGUI>().text = displayList[dispIndex + order].GetDisplayName(); //find corresponding item with its index, display
-            }
-            catch
-            {  // Poor practice but we know the escape clause won't break
-                images[order].GetComponentInChildren<TextMeshProUGUI>().text = " ";
-            }
-        }
-        else
-        {
-=======
             // find corresponding item with its index, display
-            images[order].GetComponentInChildren<TextMeshProUGUI>().text = inventoryList[dispIndex + order].GetDisplayName();
+            images[order].GetComponentInChildren<TextMeshProUGUI>().text = displayList[dispIndex + order].GetDisplayName();
         }
         else
         {
-
->>>>>>> Stashed changes
+         
             images[order].GetComponentInChildren<TextMeshProUGUI>().text = " ";  // Set to blank
         }
     }
 
+
     // Returns the InventoryItem that cursor is pointing at
     private InventoryItem GetItemOnCursor()
     {
-        return inventoryList[dispIndex + cursorPos];
+        return displayList[dispIndex + cursorPos];
     }
 
     private void SetScrollbar()
@@ -264,37 +263,32 @@ public class UIDisplay : MonoBehaviour
 
         if (actionsOn && Input.GetKeyDown(KeyCode.Alpha1)) //accessing different actions via numeric keys, or shift cursor to actions panel;
                                                            //actions can display like inventory list OR like combat choices (how many total actions?) https://answers.unity.com/questions/420324/get-numeric-key.html
-        {
-            // Should only be allowed in battle scene
+        { 
             Debug.Log("action 1 initiated");
-            UseItem(GetItemOnCursor());
-            GetInventory();
+            BuyItem(GetItemOnCursor());
             actionsOn = !actionsOn;
+            GetInventory();
         }
         else if (actionsOn && Input.GetKeyDown(KeyCode.Alpha2))
         {
-            Debug.Log("action 2 initiated");
-            DropItem(GetItemOnCursor());
-            GetInventory();
             actionsOn = !actionsOn;
+            GetInventory();
         }
         RenderDisplay();
     }
 
     // Actions
 
-    // Only intended for use in combat as of right now, returns the healPower of given item for healing
-    int UseItem(InventoryItem item)
+
+    void BuyItem(InventoryItem item)
     {
-        player.RemoveItem(item);
-        GameObject.FindObjectOfType<BattleSystem>().ItemHeal(item.getHealPower());
-        return item.getHealPower();
+        //make sure there are enough coins left
+        if (coins - item.getPrice() >= 0)
+        {
+            item.purchase();
+            coins -= item.getPrice();
+        }
     }
 
-    bool DropItem(InventoryItem item)
-    {
-        return player.RemoveItem(item);
-    }
-
-
+    
 }

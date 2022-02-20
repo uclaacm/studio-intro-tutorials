@@ -1,3 +1,4 @@
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -9,6 +10,9 @@ public class Inventory : MonoBehaviour
     [SerializeField] InventoryItem testItem;
     [SerializeField] InventoryItem testItem2;
     [SerializeField] InventoryItem testItem3;
+    [SerializeField] InventoryItem testItem4;
+    [SerializeField] InventoryItem testItem5;
+    [SerializeField] InventoryItem testItem6;
 
     void Awake()
     {
@@ -22,15 +26,23 @@ public class Inventory : MonoBehaviour
             DontDestroyOnLoad(gameObject);
         }
         inventory = new Dictionary<InventoryItem, int>();
-        AddAll();   
+        AddAll();
     }
 
     void AddAll()
     {
-        foreach(InventoryItem item in Resources.FindObjectsOfTypeAll<InventoryItem>()) //causes unscrollable bug
+        foreach (InventoryItem item in Resources.FindObjectsOfTypeAll<InventoryItem>()) //causes unscrollable bug
         {
             // Debug.Log("Adding " + item);
+<<<<<<< Updated upstream
             AddItem(item);
+=======
+            //
+
+            AddItem(item);
+
+
+>>>>>>> Stashed changes
         }
     }
 
@@ -39,7 +51,8 @@ public class Inventory : MonoBehaviour
         if (inventory.ContainsKey(item))
         {
             inventory[item] += 1;
-        } else
+        }
+        else
         {
             inventory[item] = 1;
         }
@@ -59,7 +72,7 @@ public class Inventory : MonoBehaviour
         }
         return true;
     }
-    
+
     // Returns a dictionary with the IDName and number of items in said Inventory object
     public Dictionary<string, int> GetItemList()
     {

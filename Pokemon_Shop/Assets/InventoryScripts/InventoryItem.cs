@@ -1,3 +1,4 @@
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -9,6 +10,12 @@ public class InventoryItem : ScriptableObject
     [SerializeField] string displayName;
     [SerializeField] [TextArea] string tooltip;
     [SerializeField] Sprite icon;
+<<<<<<< Updated upstream
+=======
+    //
+    [SerializeField] bool isPurchased = false;
+    [SerializeField] int price = 0;
+>>>>>>> Stashed changes
     public enum Actions
     {
         use,
@@ -16,7 +23,7 @@ public class InventoryItem : ScriptableObject
     }
     [SerializeField] List<Actions> availableActions;
     [SerializeField] int healPower;
-    
+
 
     // PUBLIC 
     public string GetIDName()
@@ -33,7 +40,7 @@ public class InventoryItem : ScriptableObject
     {
         return icon;
     }
-    
+
     public string GetToolTip()
     {
         return tooltip;
@@ -48,4 +55,29 @@ public class InventoryItem : ScriptableObject
     {
         return healPower;
     }
+<<<<<<< Updated upstream
 }
+=======
+
+    //
+    public bool getPurchased()
+    {
+        return isPurchased;
+    }
+
+    public void purchase()
+    {
+        isPurchased = true;
+    }
+
+    public void reset()
+    {
+        isPurchased = false;
+    }
+
+    public int getPrice()
+    {
+        return price;
+    }
+}
+>>>>>>> Stashed changes
