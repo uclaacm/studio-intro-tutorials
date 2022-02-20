@@ -12,6 +12,7 @@
 * Setting up a shop
 * Displaying items
 * Buying items
+* Integrating the four tutorials together!!
  
 ## What you'll need
 * [Unity Hub](https://unity.com/download)
