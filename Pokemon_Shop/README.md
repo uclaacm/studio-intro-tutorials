@@ -6,7 +6,7 @@
  
 ## Resources
 [Slides](https://docs.google.com/presentation/d/1-Pkv1ArakrWpbGaBlzdFmZH7MKRcwZtHVb-EqT1kG5A/edit?usp=sharing )<br>
-[Video]( )<br>
+[Video](https://www.youtube.com/watch?v=qGQa0KbByiU)<br>
  
 ## Topics Covered
 * Setting up a shop
