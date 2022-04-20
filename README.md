@@ -20,7 +20,7 @@ Additionally, if you'd like to get started with using version control with Unity
 
 ## Essential Links
 - [Studio Discord](https://discord.com/invite/bBk2Mcw)
-- [Linktree](https://linktr.ee/acmstudio)
+- [Carrd](https://acmstudio.carrd.co/)
 - [ACM Membership Portal](https://members.uclaacm.com/)
 ## Additional Resources
 - [Unity Documentation](https://docs.unity3d.com/Manual/index.html)
