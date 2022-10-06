@@ -19,7 +19,6 @@
 ## What you'll need
 * [Unity Hub](https://unity.com/download)
 * [Unity 2021.3 (Any Unity 2021.3 version should work)](https://unity3d.com/unity/qa/lts-releases)
-* [Git](https://git-scm.com/downloads)
 ---
 ## Setting up a scene:
 Start Unity Hub and click on **Projects** on the sidebar. Click on Add and select the folder named Roll a Ball to add Unity to your list of projects. If the project is greyed out, make sure that you have selected Unity 2020.3.15f2 as your project version.
