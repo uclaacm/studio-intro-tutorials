@@ -1,24 +1,24 @@
 # Studio Beginner Tutorials - Roll a Ball Part 1
  
-**Date**: October 12, 2021, 7:00 pm - 9:00 pm<br>
-**Location**: Faraday Room 67-124 (Engineering IV)<br>
-**Instructors**: Richard Cheng, Ray Hsiao, Peter Sutarjo, Ryan Vuong
+**Date**: October 10, 2022, 7:00 pm - 9:00 pm<br>
+**Location**: Boelter 2760 <br>
+**Instructors**: Ming Zhu, Matthew Workman, Ryan Vuong
  
 ## Resources
-[Slides](https://docs.google.com/presentation/d/1jJV7GuUdXfJm5YG7ruv3OJBBqoY1VfJ1LB5PPNmsd1w/edit?usp=sharing)<br>
-[Video](https://youtu.be/oB3sk4a3VkE)<br>
+[Slides]()<br>
+[Video (From Last Year)](https://youtu.be/oB3sk4a3VkE)<br>
  
 ## Topics Covered
+* Navigating Unity
 * Setting up a scene
 * GameObject and Component fundamentals
-* Using an input system
 * Introduction to scripting
 * Cameras
 * Colliders
  
 ## What you'll need
 * [Unity Hub](https://unity.com/download)
-* [Unity 2020.3.15f2](https://unity3d.com/unity/qa/lts-releases)
+* [Unity 2021.3 (Any Unity 2021.3 version should work)](https://unity3d.com/unity/qa/lts-releases)
 * [Git](https://git-scm.com/downloads)
 ---
 ## Setting up a scene:
@@ -68,13 +68,6 @@ The following are the default controls for navigating the scene view.
 
  ---
 
-## Setting up an input system
-![Screenshot](Screenshots/image4.png)<br>
-To ensure that you have the new input system installed (not the legacy version), go to ```Window->Package Manager->Input System```. If you don’t see the Input System package, verify that you have *Packages:Unity Packages* selected on the top left of the Package Manager. If there is a green checkmark next to the Input System, then it is correctly installed.
- 
-![Screenshot](Screenshots/image5.png)<br>
-Next, create an Input Actions Asset by going to ```Create->Input Actions```. Double-clicking on this asset will bring up several panels, which you can use to configure control schemes for different controllers. For this tutorial, we’ll be using the default generated control scheme as shown above.
- 
 ## Creating a level
 The ball will need a platform to roll on. We can create a plane by going to ```GameObject->3D Object->Plane``` at the top left. Reset its position so that it starts at the origin by clicking on the three dots next to the transform tab and select *Reset Position*.
 
@@ -100,7 +93,6 @@ Finally, add a C# script component to the player, which will contain the followi
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.InputSystem;
 
 public class PlayerController : MonoBehaviour
 {
