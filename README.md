@@ -9,7 +9,7 @@ We also offer the [Special Topics Track](https://github.com/uclaacm/studio-advan
 ## Curriculum Overview
 | Tutorials | Topics Covered | Live Schedule | Slides |
 |-----------|----------------|---------------|--------|
-| [Week 3: Roll a Ball Part 1](./Roll%20a%20Ball%20-%20Part%20I) | <ul> <li>Navigating Unity</li> <li>Scenes</li> <li>Scripting</li> <li>GameObjects & components</li> </ul> | October 10th | [Slides](https://docs.google.com/presentation/d/1e-JKN4uXpfnkBJeLQNw1DbF4L7mNLuZV49Xxdulj_bI/edit?usp=sharing) |
+| [Week 3: Roll a Ball Part 1](./Roll%20A%20Ball%20-%20Part%20I) | <ul> <li>Navigating Unity</li> <li>Scenes</li> <li>Scripting</li> <li>GameObjects & components</li> </ul> | October 10th | [Slides](https://docs.google.com/presentation/d/1e-JKN4uXpfnkBJeLQNw1DbF4L7mNLuZV49Xxdulj_bI/edit?usp=sharing) |
 | [Week 4: Roll a Ball Part 2](./Roll%20a%20Ball%20-%20Part%20II) | <ul> <li>User interface</li> <li>Respawns</li> <li>Scene management</li> </ul> | October 17th | [Slides]() |
 | [Week 5: 2D Platformer Part 1]() | <ul> <li>Movement and platforms</li> <li>Tilemaps & 2D animation</li> <li>Audio management</li> </ul> | October 24th | [Slides]() |
 | [Week 6: 2D Platformer Part 2]() | <ul> <li>Platformer mechanics</li> <li>Cinemachine</li> <li>Enemies and Combat</li> </ul> | November 31st | [Slides]() |
