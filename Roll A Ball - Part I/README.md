@@ -68,7 +68,7 @@ The following are the default controls for navigating the scene view.
  ---
 
 ## Creating a level
-The ball will need a platform to roll on. We can create a plane by going to ```GameObject->3D Object->Plane``` at the top left. Reset its position so that it starts at the origin by clicking on the three dots next to the transform tab and select *Reset Position*.
+The ball will need a platform to roll on. We can create a plane by going to ```GameObject->3D Object->Plane``` at the top left. Reset its position so that it starts at the origin by clicking on the three dots next to the transform tab and select *Reset Position*. Next, scroll down to the bottom of the inspector to ```Add Component```. Here we add the **Box Collider** component so that the ball we are going to create can make contact with the plane.
 
 ### Creating materials
 You can assign it a custom material by right-clicking in the *Project* window and selecting ```Create->Material```. Materials and shaders determine how a GameObject appears in a scene. To change the base color of a material, select the color next to the dropper. Alternatively, you can assign a texture map by clicking on the target icon next to *Albedo*. The other parameters are not necessary for the scope of this tutorial, but more info about each of the parameters can found [here](https://docs.unity3d.com/Manual/StandardShaderMaterialParameterAlbedoColor.html).
