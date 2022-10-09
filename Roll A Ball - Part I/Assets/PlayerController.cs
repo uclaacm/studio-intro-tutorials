@@ -24,7 +24,7 @@ public class PlayerController : MonoBehaviour
     {
         // Unity's built-in input system commands
         float inputX = Input.GetAxis("Horizontal");  // Checks the keys associated with horizontal movement (A, D, leftarrow, rightarrow)
-        float inputZ = Input.GetAxis("Vertical");  // Same as above comment except for vertical movement
+        float inputZ = Input.GetAxis("Vertical");  // Checks the keys associated with vertical movement (W, S, uparrow, downarrow)
 
         // Set the x & z velocity of the Rigidbody to correspond with our inputs while keeping the y velocity what it originally is.
         rb.velocity = new Vector3(inputX * speed, rb.velocity.y, inputZ * speed);
