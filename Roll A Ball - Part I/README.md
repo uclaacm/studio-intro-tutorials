@@ -23,8 +23,6 @@
 ## Setting up a scene:
 Start Unity Hub and click on **Projects** on the sidebar. Click on **New Project**, make sure **3D** is selected, choose where you want to save this project on your computer, name your project “Roll a ball” or something like that and click **Create Project**. It might take a few minutes for the project to be created but once it’s finished, it’ll open Unity. 
  
-![](Screenshots/newProj.gif) <br>
- 
 ![ScreenShot](Screenshots/image1.png)<br>
 To create a new scene, first open the project and navigate to ```Assets->Create->Scene```. You can name your scene whatever you want.
  
@@ -191,4 +189,3 @@ public class CameraController : MonoBehaviour
 - [Unity Documentation](https://docs.unity3d.com/Manual/index.html)
 - [ACM Website](https://www.uclaacm.com/)
 - [ACM Discord](https://discord.com/invite/eWmzKsY)
- 
