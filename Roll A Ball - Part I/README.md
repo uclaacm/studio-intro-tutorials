@@ -70,7 +70,7 @@ The following are the default controls for navigating the scene view.
  ---
  
 ## Creating a level
-The ball will need a platform to roll on. We can create a plane by going to ```GameObject->3D Object->Plane``` at the top left. Reset its position so that it starts at the origin by clicking on the three dots next to the transform tab and select *Reset Position*. Under that plane, we need to add a `Rigidbody` component and a `Box Collider` component. Under `Rigidbody`, Check `Is Kinematic` and uncheck `Use Gravity`. `Rigidbody` is Unity’s built-in physics object, but we only need it to be an obstacle for the ball to roll on. Kinematic makes the object immovable to collisions, and Use Gravity applies gravity-based acceleration to the object.
+The ball will need a platform to roll on. We can create a plane by going to ```GameObject->3D Object->Plane``` at the top left. Reset its position so that it starts at the origin by clicking on the three dots next to the transform tab and select *Reset Position*. Under that plane, we need to add a `Rigidbody` component and a `Box Collider` component. Under `Rigidbody`, Check *Is Kinematic` and uncheck *Use Gravity`. `Rigidbody` is Unity’s built-in physics object, but we only need it to be an obstacle for the ball to roll on. Kinematic makes the object immovable to collisions, and Use Gravity applies gravity-based acceleration to the object.
  
 ### Creating materials
 You can assign it a custom material by right-clicking in the *Project* window and selecting ```Create->Material```. Materials and shaders determine how a GameObject appears in a scene. To change the base color of a material, select the color next to the dropper. Alternatively, you can assign a texture map by clicking on the target icon next to *Albedo*. The other parameters are not necessary for the scope of this tutorial, but more info about each of the parameters can found [here](https://docs.unity3d.com/Manual/StandardShaderMaterialParameterAlbedoColor.html).
@@ -163,17 +163,21 @@ using UnityEngine;
  
 public class CameraController : MonoBehaviour
 {
-    public GameObject camTarget;
-    public float posLerp = 0.04f;
+    // Reference to the player's Transform (their position)
+    [SerializeField] private Transform player;
  
-    // LateUpdate is called once per frame after all update functions have been called.
-    // This method is useful to order script execution.
-    // We use LateUpdate because we want to update the camera's position only after all tracked objects have been moved.
-    void LateUpdate()
+    // Offsets for our camera
+    [SerializeField] float yOffset = 1.5f;
+    [SerializeField] float xOffset = 0f;
+    [SerializeField] float zOffset = -2f;
+ 
+    void Update()
     {
-        // Lerp means linear interpolation, which returns a value between two points in a linear scale.
-        // In this case, we use lerp so that the camera changes its position in a fixed amount of time, resulting in smooth movement.
-        transform.position = Vector3.Lerp(transform.position, camTarget.transform.position, posLerp);
+        ///
+        /// So we want the camera to follow the player, but at a distance. To do this we set our
+        /// camera's position to the player's position vector plus another vector containing an offset.
+        ///
+        transform.position = player.position + new Vector3(xOffset, yOffset, zOffset);        
     }
 }
 ```
@@ -187,5 +191,4 @@ public class CameraController : MonoBehaviour
 - [Unity Documentation](https://docs.unity3d.com/Manual/index.html)
 - [ACM Website](https://www.uclaacm.com/)
 - [ACM Discord](https://discord.com/invite/eWmzKsY)
- 
  
