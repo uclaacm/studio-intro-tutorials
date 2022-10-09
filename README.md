@@ -13,7 +13,7 @@ We also offer the [Special Topics Track](https://github.com/uclaacm/studio-advan
 | [Week 4: Roll a Ball Part 2](./Roll%20a%20Ball%20-%20Part%20II) | <ul> <li>User interface</li> <li>Respawns</li> <li>Scene management</li> </ul> | October 17th | [Slides]() |
 | [Week 5: 2D Platformer Part 1]() | <ul> <li>Movement and platforms</li> <li>Tilemaps & 2D animation</li> <li>Audio management</li> </ul> | October 24th | [Slides]() |
 | [Week 6: 2D Platformer Part 2]() | <ul> <li>Platformer mechanics</li> <li>Cinemachine</li> <li>Enemies and Combat</li> </ul> | November 31st | [Slides]() |
-| [Week 7: Yarnspinner (Interactive Dialogue)]() | <ul> <li>3D movement</li> <li>More cinemachine</li> </ul> | November 7th | [Slides]() |
+| [Week 7: Yarnspinner]() | <ul> <li>Interactive Dialogue</li> </ul> | November 7th | [Slides]() |
 | [Week 8: Mini Game Jam]() | <ul> <li>Making a small game</li> <li>Apply what you've learned</li>  </ul> | November 14th | [Slides]() |
 
 ## Essential Links
