@@ -11,12 +11,17 @@ public class PlayerController : MonoBehaviour
     [SerializeField] float speed = 5f;
     [SerializeField] float jumpHeight = 5f;
 
+    Vector3 startPos;
+
     // Start is called before the first frame update
     void Start()
     {
         // Get references to the components attached to the current GameObject
         rb = GetComponent<Rigidbody>();
         col = GetComponent<SphereCollider>();
+
+        // Save starting position to use for respawning
+        startPos = transform.position;
     }
 
     // Update is called once per frame
@@ -33,6 +38,9 @@ public class PlayerController : MonoBehaviour
         {
             Jump();
         }
+
+        if (transform.position.y < -20f)
+            Respawn();
     }
 
     bool isGrounded()
@@ -55,5 +63,11 @@ public class PlayerController : MonoBehaviour
     {
         // Set the y velocity to some positive value while keeping the x and z whatever they were originally
         rb.velocity = new Vector3(rb.velocity.x, jumpHeight, rb.velocity.z);
+    }
+
+    private void Respawn()
+    {
+        transform.position = startPos;
+        rb.velocity = Vector3.zero;
     }
 }

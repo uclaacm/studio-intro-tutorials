@@ -4,11 +4,11 @@ using UnityEngine;
 
 public class Collectible : MonoBehaviour
 {
-    [SerializeField] GameManager gm;
+    GameManager gm;
     // Start is called before the first frame update
     void Start()
     {
-        
+        gm = FindObjectOfType<GameManager>();
     }
 
     // Update is called once per frame
@@ -17,8 +17,9 @@ public class Collectible : MonoBehaviour
         
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnTriggerEnter(Collider collision)
     {
+        Debug.Log("Collided");
         gm.AddScore(5f);
         Destroy(gameObject);
     }

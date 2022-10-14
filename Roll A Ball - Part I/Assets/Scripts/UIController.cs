@@ -16,7 +16,7 @@ public class UIController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        string display = "Score: " + gm.GetScore();
+        string display = "Score: " + gm.GetScore() + "\nTime: " + gm.GetTime();
         txt.text = display;
     }
 }

@@ -26,4 +26,9 @@ public class GameManager : MonoBehaviour
     {
         return score;
     }
+
+    public int GetTime()
+    {
+        return (int) Time.timeSinceLevelLoad;
+    }
 }
