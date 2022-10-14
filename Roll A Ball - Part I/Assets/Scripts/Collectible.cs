@@ -19,8 +19,12 @@ public class Collectible : MonoBehaviour
 
     private void OnTriggerEnter(Collider collision)
     {
-        Debug.Log("Collided");
+        // Adds score for collecting the object
         gm.AddScore(5f);
+
+        // OPTIONAL: make the player jump again from picking up the object
+        collision.gameObject.GetComponent<PlayerController>().Jump();
+
         Destroy(gameObject);
     }
 }

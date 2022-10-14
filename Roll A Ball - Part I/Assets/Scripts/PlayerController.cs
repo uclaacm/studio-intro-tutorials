@@ -59,7 +59,7 @@ public class PlayerController : MonoBehaviour
         return Physics.Raycast(transform.position, Vector3.down, distToGround);
     }
 
-    void Jump()
+    public void Jump()
     {
         // Set the y velocity to some positive value while keeping the x and z whatever they were originally
         rb.velocity = new Vector3(rb.velocity.x, jumpHeight, rb.velocity.z);
