@@ -2,7 +2,7 @@
  
 **Date**: October 17, 2022, 7:00 pm - 9:00 pm<br>
 **Location**: Boelter 2760 <br>
-**Instructors**: Ming Zhu, Ryan Vuong
+**Instructors**: Ming Zhu, Ryan Vuong, Connor Daly
  
 ## Resources
 [Slides](https://tinyurl.com/Roll-a-Ball-pt2-slideshow)<br>
@@ -17,7 +17,7 @@
  
 ## What you'll need
 * [Unity Hub](https://unity.com/download)
-* [Unity 2020.3.15f2](https://unity3d.com/unity/qa/lts-releases)
+* [Unity 2021.3.11f1](https://unity3d.com/unity/qa/lts-releases)
 * [Git](https://git-scm.com/downloads)
 ---
 ## User interface
