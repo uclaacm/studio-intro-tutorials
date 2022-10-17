@@ -1,17 +1,18 @@
 # Studio Beginner Tutorials - Roll a Ball Part 2
  
-**Date**: October 19, 2021, 7:00 pm - 9:00 pm<br>
-**Location**: Faraday Room 67-124 (Engineering IV)<br>
-**Instructors**: Richard Cheng, Peter Sutarjo, Ryan Vuong
+**Date**: October 17, 2022, 7:00 pm - 9:00 pm<br>
+**Location**: Boelter 2760 <br>
+**Instructors**: Ming Zhu, Ryan Vuong
  
 ## Resources
-[Slides](https://docs.google.com/presentation/d/1N__34gQRdCBV8gSB7huCgWJGKWnnMpdQAGUF3QjkW_k/edit?usp=sharing)<br>
-[Video](https://youtu.be/AAJRsnKxLKk)<br>
-[Unity Package for Part 1 (in case you missed it)](https://drive.google.com/file/d/1s9E6elKknWeoaUj-9DM1qlYfSwgamIsx/view?usp=sharing)
+[Slides](https://tinyurl.com/Roll-a-Ball-pt2-slideshow)<br>
+[Video (From Last Year)](https://youtu.be/AAJRsnKxLKk)<br>
+[Unity Package for Part 1 (in case you missed it)](https://tinyurl.com/Roll-A-Ball-part2-pkg)
  
 ## Topics Covered
 * UI Elements
 * Adding items for player to pick up
+* Respawning
 * Switching scenes
  
 ## What you'll need
@@ -22,8 +23,56 @@
 ## User interface
 ![Screenshot](Screenshots/image1.png)<br>
  
+### `GameManager`
+For this tutorial, we'll first make a simple UI which will display a score and a timer that counts down as shown above. For this, we will create a `GameManager` class to store our global variables. Global variable management may be slightly overkill here, but is prudent for scaling the project. We will attach this script to a GameObject in the scene, and any script requiring our score and timer will reference this single GameObject. The script is as follows:
+ 
+```csharp
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+ 
+public class GameManager : MonoBehaviour
+{
+    /// 
+    /// So the intuition behind a GameManager is that all global variables are consolidated in an organized way.
+    /// In our case, we only need to save the score and the time of the player, which could be stuck in any of
+    /// the existing scripts but we use this as a template for organization such that your code is scalable. Do
+    /// beware that you should only have one instance of the GameManager that every script would reference.
+    /// 
+ 
+    // Locally store our score
+    float score = 0;
+ 
+    public void AddScore(float amt)
+    {
+        score += amt;
+    }
+ 
+    public float GetScore()
+    {
+        return score;
+    }
+ 
+    public int GetTime()
+    {
+        ///
+        /// Time.timeSinceLevelLoad will give the seconds elapsed since the current game scene has been loaded. 
+        /// In other words, reloading the scene resets this number. We cast to integer (originally returns float)
+        /// so it counts up by whole seconds.
+        ///  
+ 
+        return (int) Time.timeSinceLevelLoad;
+    }
+}
+```
+ 
+With the script written, right click the Hierarchy to create an empty GameObject and attach the GameManager script to it. Any reference to GameManager should now be directed to this GameObject.
+ 
 ### Create a canvas
-For this tutorial, we'll be making a simple UI which will display a score and a timer that counts down as shown above. To get started, create a `Canvas` by clicking `GameObject->UI->Canvas`. All UI objects need to be created as children of Canvases. Looking at the inspector, you may notice that a canvas is in the UI layer, separate from the 2D/3D scene. Every canvas game object has the following components:
+Create a `Canvas` by clicking `GameObject->UI->Canvas`. All UI objects need to be created as children of Canvases. Looking at the inspector, you may notice that a canvas is in the UI layer, separate from the 2D/3D scene. 
+ 
+**The following section describes some useful information on UI elements & canvasses written by alum officer Richard, though it is unnecessary to reproduce the tutorial content.**
+Every canvas game object has the following components:
 * RectTransform: All UI elements have a RectTransform that has 2D coordinates instead of 3D coordinates.
 * Canvas: The area in which UI elements appear within.
     * Render Mode: How the Canvas is rendered.
@@ -37,129 +86,123 @@ For this tutorial, we'll be making a simple UI which will display a score and a 
     * Scale with Screen Size: Your UI elements will change size depending on the size of the screen and the resolution. You can match the height or width of the screen, or expand so that nothing is cut off by the edge of the screen, or shrink so that your UI always covers the entire screen (with cut off for certain resolutions).
 * Graphic Raycaster: Determines if an element on a canvas has been hit (e.g. a button). For world canvases, you can change the settings to allow game objects in your scene to block raycasts to your UI.
  
-For our canvas, we can go with a simple overlay canvas with constant pixel size. Then right click the canvas in the inspector and create a `UI->Image` to serve as the background for the text. Right click the image and select `UI->Text-TextMeshPro`. (Note: You should always use the TextMeshPro version of UI components, the regular versions look worse and are basically just there for backwards compatibility purposes.) Click on the `Text (TMP)` and change the text to “Score: 0”. Then, go to the Image and add a `VerticalLayoutGroup` (or a `HorizontalLayoutGroup`, both work for this purpose) and a `ContentSizeFitter` component. Make sure that everything next to “Control Child Size” and “Child Force Expand” is checked in the `LayoutGroup`. You should see that the white background now changes its size to match the text. You can also add a bit of padding so that there is a bit of space around the text. To position this image+text in the corner of our screen, go to the `RectTransform` of the image, and change the pivot to be X 0; Y 1. This tells Unity to calculate the position of the image based on its upper left corner. Then we move the image to the upper left corner by clicking the box in the `RectTransform` and selecting top-left, then changing PosX and PosY to 0.
- 
-Repeat these steps to create a timer text in the upper-right hand corner, except obviously select top-right instead of top-left, and change the X pivot to 1 to use the upper-right hand corner of the image as the pivot.
- 
-### Game Over Screen
-For the game over screen, we can repeat the steps that were used to implement the timer and score UI elements; however, set the anchor for the image to stretch across the screen (hold alt and select the bottom right option). It’s children elements will be two `Text (TMP)`, which will be used to display “Game Over” and the Score. We’ll also add a `Button` element such that when it is clicked, it will restart the scene.
- 
----
- 
-## Implementing a timer
-To implement the timer, we can record the current time at `Start()` using `Time.time` and calculate the time elapsed after every frame in the `Update` function.
+**Here resumes content to recreate the tutorial.**
+For our UI, right click the canvas and select `UI->Text-TextMeshPro`. (Note: You should always use the TextMeshPro version of UI components, the regular versions look worse and are basically just there for backwards compatibility purposes.). This should add a “Text(TMP)” object to your scene, attached under the Canvas. For our canvas, we keep the Canvas component’s Render Mode option to “Screen Space - Overlay” and set Canvas Scaler’s UI Scale Mode to “Scale With Screen Size”, then set the Reference Resolution to x:1600 by y:900 (1600x900 is a common set of dimensions fro screen size so we use that). Now we will implement the rest of the UI through code:
 ```csharp
-public class TimerController : MonoBehaviour
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using TMPro;  // Extra import for TextMeshPro
+ 
+public class UIController : MonoBehaviour
 {
-    // Time to count down from
-    [SerializeField] private int countdownTime;
+    /// 
+    /// This script controls the UI display.
+    /// 
  
-    // When we started counting down
-    private float startTime;
+    [SerializeField] GameManager gm;  // Our game manager reference
+    [SerializeField] TMP_Text txt;  // The text element that we are modifying
  
-    // UI component for time
-    [SerializeField] private TextMeshProUGUI countText;
+    void Update()
+    {
+        /// 
+        /// So we are displaying the score of the player as well as the time that they have been on the level.
+        /// All we have to do is set the text of the text display to the string that we need. 
+        ///
+        string display = "Score: " + gm.GetScore() + "\nTime: " + gm.GetTime();
+        txt.text = display;
+    }
+}
+```
  
-    // UI Game Over component
-    private GameOver gameOver;
+Drag the script onto the Canvas, and drag in the GameManager object we made previously and the Text(TMP) object under the Canvas into their respective `SerializeField`s.
  
-    // Start is called before the first frame update
+### Pickups
+To implement the physical pickups themselves, let’s first create a 3D Cube by going to `GameObject->3D Object->Cube`. Next, let’s write a simple script that will increase the score whenever the player moves into it and then delete the pickup. Optionally, there is code that makes the player jump when they pick up a collectible. The full commented script is as follows:
+ 
+```csharp
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+ 
+public class Collectible : MonoBehaviour
+{
+    /// 
+    /// This script controls the behaviour for collectibles, which we would save as a prefab. Because of this, we can't use
+    /// SerializeFields to pass in references since we want to be able to quickly duplicate a lot of these (or even instantiate
+    /// them dynamically with scripts!). As such, we will reference other GameObjects through code
+    /// 
+    GameManager gm;
+ 
     void Start()
     {
-        Time.timeScale = 1;
-        startTime = Time.time;
-        Debug.Assert(countText != null, "TextController missing TextMeshProUGUI component.");
-        gameOver = (GameOver)GameObject.FindObjectOfType(typeof(GameOver));
+        // Searches your scene hierarchy for a GameManager component, returning a reference of the first that it finds.
+        gm = FindObjectOfType<GameManager>();
     }
  
-    void Update()
+    private void OnTriggerEnter(Collider collision)
     {
-        float timeElapsed = Time.time - startTime;
+        // Adds score for collecting the object
+        gm.AddScore(5f);
  
-        int timeRemaining;
-        if (timeElapsed < countdownTime)
-        {
-            timeRemaining = (int) (countdownTime - timeElapsed);
-        }
-        else
-        {
-            timeRemaining = 0; // Time remaining cannot go negative
-            gameOver.DisplayFinalScore(ScoreController.score);
-            Destroy(this);
-        }
+        /// 
+        /// The following we will optionally cover in the tutorial. We want the player to jump after picking up the object.
+        /// To do this, first make sure that Jump() under PlayerController is made a public function (so this script can actually call it).
+        /// We will grab a reference to PlayerController through the collider (we don't need to check of the colliding object
+        /// is the player since only the player can move to collide with this object). To do so, we first reference the GameObject the 
+        /// collider is attached to, then reference the PlayerController attached to the GameObject, and then call Jump().
+        ///
  
-        countText.text = string.Format("{0:D2}:{1:D2}", timeRemaining / 60, timeRemaining % 60);
+        // OPTIONAL: make the player jump again from picking up the object
+        collision.gameObject.GetComponent<PlayerController>().Jump();
+ 
+        // Delete the GameObject that this script is attached to
+        Destroy(gameObject);
     }
 }
 ```
+Attach it to the cube and make sure the `Is Trigger` box is checked under the Box Collider component. Finally, drag the cube into the Project window, under your Assets folder. This will create a **Prefab**, which is a template for generating duplicates of the same GameObject. Now, you can drag the newly created prefab from the assets folder into your hierarchy, and editing the prefab will update all its instances in the scene.
+  
+## Respawning the Player
+It’s important to respawn the player if the player falls off the edge so that we aren’t falling into the abyss forever. To do this, we can start by editing our PlayerController.cs file (or whichever file that’s used to control the player’s movement through inputs) to include a `Respawn` function. 
  
-## Implementing score
-### Score controller
-To keep track of score and update the text in the UI, we can create a script that will have a reference to the score text and a public static variable, which contains the value of the player's current score. A static variable means that there will only be one instance of it created at the start of the game that will remain over any scope. This allows for the score value to be preserved when switching scenes and scripts to modify its value during runtime. This will be shown next when implementing the pickups.
 ```csharp
-using UnityEngine;
-using TMPro;
- 
-public class ScoreController : MonoBehaviour
-{
-    public static int score = 0;
-    public TextMeshProUGUI scoreText;
-   
-    // Update is called once per frame
-    void Update()
+private void Respawn()
     {
-        scoreText.text = string.Format("Score: {0}", score);
+        transform.position = startPos;
+        rb.velocity = Vector3.zero;
     }
-}
 ```
-### Pickups
-To implement the physical pickups themselves, let’s first create a 3D Cube by going to `GameObject->3D Object->Cube`. Next, let’s write a simple script that will increase the score whenever the player moves into it and then delete the pickup.
+ 
+This function sets the ball's position to the position it was at the start of the game and stops it from moving. First we have to define this start position though. We do so by defining a new Vector3 `startPos` towards the beginning of the PlayerController file and initializing it in the start function. 
+ 
 ```csharp
-public class Pickup : MonoBehaviour
-{
-   private void OnTriggerEnter(Collider other)
-   {
-       if (other.gameObject.tag == "Player")
-       {
-           ScoreController.score += 1;
-           Destroy(this.gameObject);
-       }
-   }
-}
+    Vector3 startPos;
+ 
+    void Start()
+    {
+        // Save starting position to use for respawning
+        startPos = transform.position;
+	…
 ```
-Attach it to the cube and make sure the `Is Trigger` box is checked under the Box Collider component. Also check that the ball is correctly tagged as `Player` in the inspector. Note that we did not require an object of `ScoreController` in order to access the score variable because it was declared `public static`, only the type name was required to reference the variable.<br>
  
-### Adding animation
-Finally, we can add a simple animation (that doesn’t require any coding) to make the cube spin. First, add an animator component to the cube. The animator requires an `animator controller` asset. You can create the animator controller by right-clicking in the `Project` window and selecting `Animator Controller`. Don’t forget to assign the controller in the inspector.
+Lastly, we want to call this respawn function after the ball has been falling for too long. An easy way to do this is to check the position of the ball and if it’s below some threshold, we can call `Respawn`.
  
-![Screenshot](Screenshots/image2.png)<br>
- 
-Double-clicking the `Animator Controller`should bring up a window as shown above. This controller manages the transitions between animations and the various states of an animation using a **State Machine**. Currently the window should be blank because we have not added any animation clips as states yet. To create an animation clip for the pickup, select `Create New Clip…` in the Animation window as seen below.
- 
-![Screenshot](Screenshots/image3.png)<br>
- 
-Name and save the .anim clip. When you create a new animation clip, you should see the window. With the game object you want to animate still selected, Click **Add Property** and select `Transform->Rotation`. 
- 
-![Screenshot](Screenshots/image4.png)<br>
- 
-Above is the animation window. The *keyframes* (diamond shape keys on the timeline) will contain specific values of our rotation in the timeline. You can add keyframes by selecting the second button on the right next to `Samples` in the Animation window. Alternatively, you can press the record button to enable keyframe recording mode. In this mode, any modifications made to the object in the inspector will generate a keyframe depending on where the bar on the animation on the timeline is currently. The timeline displays units in `Seconds: Frame`. So for example, `1:10` means the 10th frame of the first second. Additionally, properties in the inspector will either be highlighted blue if they’re added as properties to an animation clip or red if keyframe recording mode is on. 
- 
-To have the cube rotate as seamlessly as possible, make sure that the rotational values between keyframes are evenly spaced. For example, since the sample rate for this animation is set to 30 frames, I have the y-rotation set to half of a full rotation at 0:15. Feel free to experiment with keyframes and the rotational values yourself to make a unique animation! Preview the animation by pressing spacebar or clicking on play button while cube is selected in the Scene View.
- 
-![Screenshot](Screenshots/image5.png)<br>
- 
-When you’re done, double click the animation clip and ensure **Loop Time** and **Loop Pose** are checked.<br>
+```csharp
+    if (transform.position.y < -20f)
+            Respawn();
+```
  
 ## Scene Transitions
-To move to other levels or stages in a game, it is important to know how to switch between scenes in Unity. To do this, we will need to create a new scene and name it “Level 2”. We can go ahead and make this new scene a copy of our previous level, so we can do less work. To do this, delete all the elements in the second scene (the default generated ones) and control (or command) click all the elements in scene 1 and paste them into the new scene. Now we should have two identical scenes.
+To move to other levels or stages in a game, it is important to know how to switch between scenes in Unity. To do this, we will need to create a new scene and name it “Level 2”. We can go ahead and make this new scene a copy of our previous level, so we can do less work. To do this, simply copy and paste the level we have into the “Scenes” folder.
  
-To distinguish our new scene from the previous one, let’s change the colors of some walls. We can do this by making a new material and changing the color to something different, like green. By dragging the new material to the walls, we can recolor them. Now we should have two identical scenes but one has green walls (or whatever color you want).
+To distinguish our new scene from the previous one, let’s change the colors of the plane. We can do this by making a new material and changing the color to something different, like green. By dragging the new material to the walls, we can recolor them. Now we should have two identical scenes but one has a green floor(or whatever color you want).
  
-To actually transition between scenes, there needs to be some kind of trigger or event that takes place which causes the change. We can make landing on a separate platform transport us to the next level. If we change back to our first scene and select the separate platform in the hierarchy, in the inspector we can go to the box collider and check the “Is Trigger” box. This will make it so that contact with the collider will cause a trigger to occur which can be accessed through scripting. 
+To actually transition between scenes, there needs to be some kind of trigger or event that takes place which causes the change. We can make landing on a separate platform transport us to the next level. If we change back to our first scene and create a new plane, in the inspector we can go to the collider and check the “Is Trigger” box. This will make it so that contact with the collider will cause a trigger to occur which can be accessed through scripting.
  
-We can now create a new script to manipulate this trigger to switch the player to our second scene. We can call this script something like “ToLevel2” and edit it to our liking. We can remove the start and update functions since we won’t be using them. Then at the top under “using UnityEngine;” we have to add the line “using UnityEngine.SceneManagement;” to enable scene switching. Next, within our ToLevel2 class we can add an OnTriggerEnter(Collider collider) function to dictate what happens when the trigger on our platform is activated. 
+We can now create a new script to manipulate this trigger to switch the player to our second scene. We can call this script something like “ToLevel2” and edit it to our liking. We can remove the start and update functions since we won’t be using them. Then at the top under “using UnityEngine;” we have to add the line `using UnityEngine.SceneManagement;` to enable scene switching. Next, within our ToLevel2 class we can add an OnTriggerEnter(Collider collider) function to dictate what happens when the trigger on our platform is activated.
  
-Within this function, we can call “SceneManager.LoadScene(“Level 1”)” with “Level 1” being whatever your first scene is named. In the end, the code will look something like:
+Within this function, we can call `SceneManager.LoadScene(“Level2”)` with `Level 2` being whatever your first scene is named. In the end, the code will look something like:
  
 ```csharp
 using UnityEngine.SceneManagement;
@@ -167,82 +210,15 @@ public class ToLevel2 : MonoBehaviour
 {
    void OnTriggerEnter(Collider collider)
    {
-       SceneManager.LoadScene("Level 2");
+       SceneManager.LoadScene("Level2");
    }
 }
 ```
  
-We can now drag and attach this script onto our platform and try it out. It should transport you into your new scene. If you notice that the lighting in the second scene is darker compared to the first scene, despite everything being the same, it’s because each scene needs a unique lighting asset. To create this asset, go to your new scene then click Window -> Rendering -> Lighting -> Generate Lighting. 
+We can now drag and attach this script onto our platform and try it out. It should transport you into your new scene. If you notice that the lighting in the second scene is darker compared to the first scene, despite everything being the same, it’s because each scene needs a unique lighting asset. To create this asset, go to your new scene then click Window -> Rendering -> Lighting -> Generate Lighting.
  
 ![Screenshot](Screenshots/image7.jpg)<br>
- 
-If you are receiving errors when playing the game regarding inputs in the new scene, you have to go to “EventSystem” and enable the new input system.
- 
-Lastly, we don’t want our game to end here, so why don’t we switch scenes back to our first one after landing on the platform in our new scene. To do this, create a new script, name it something like “ToLevel1”, check “Is Trigger” on the platform’s box collider, and copy paste the previous script into it. Rename the class to “ToLevel1” and change the SceneManager.LoadScene line to “SceneManager.LoadScene(“Level 1”). Now we can drag this new script onto the platform in our second scene and run our game. It should be a constant loop of jumping onto the platforms back and forth. 
- 
-## Implement game over screen
-To implement the game over screen, we’ll create a script called GameOver which will contain the following code:
-```csharp
-using UnityEngine;
-using TMPro;
-using UnityEngine.SceneManagement;
-
-public class GameOver : MonoBehaviour
-{
-    // A reference to the "Score: ..." text element 
-   public TextMeshProUGUI scoreText;
-
-   // The game object containing the Game Over canvas
-   public GameObject gameOverBG;
-
-   // This function will be called when the timer runs out
-   public void DisplayFinalScore(int score) 
-   {
-       gameOverBG.SetActive(true); 
-       scoreText.text = string.Format("Score: {0}", score.ToString());
-       ScoreController.score = 0; // Reset the static variable score
-       Time.timeScale = 0; // Pause the game
-   }
-   
-   // This function will be called when the Restart button is clicked
-   public void Restart()
-   {
-       SceneManager.LoadScene("Level 1 - Basics");
-   }
-}
-```
- we’ll need to make modifications to the ```TimeController``` script so that it calls ```DisplayFinalScore()``` as well.
-
-```csharp
-private void Update()
-{
-    // a reference to an object of type GameOver
-    private GameOver gameOver
-
-    // When the game starts, we'll look for an object of type GameOver. Since we
-    // only expect to have one GameOver object, it is guaranteed that the same object
-    // will be returned by the FindObjectOfType() method.
-    void Start()
-    {
-        ...
-        gameOver = (GameOver)GameObject.FindObjectOfType(typeof(GameOver));    
-    }
-
-    if (timeElapsed < countdownTime)
-    {
-        ...
-    }
-    else
-    {   // if the timer is <= 0, up we want to display GameOver
-        gameOver.DisplayFinalScore(ScoreController.score); 
-    }
-}
-```
-The last step is to assign the ```Restart``` function to the restart button as shown below.
-![Screenshot](Screenshots/image7.png)<br>
-
----
-## Essential Links
+ ## Essential Links
 - [Studio Discord](https://discord.com/invite/bBk2Mcw)
 - [Linktree](https://linktr.ee/acmstudio)
 - [ACM Membership Portal](https://members.uclaacm.com/)
@@ -251,6 +227,3 @@ The last step is to assign the ```Restart``` function to the restart button as s
 - [ACM Website](https://www.uclaacm.com/)
 - [ACM Discord](https://discord.com/invite/eWmzKsY)
  
- 
- 
-
