@@ -165,7 +165,8 @@ public class Collectible : MonoBehaviour
 Attach it to the cube and make sure the `Is Trigger` box is checked under the Box Collider component. Finally, drag the cube into the Project window, under your Assets folder. This will create a **Prefab**, which is a template for generating duplicates of the same GameObject. Now, you can drag the newly created prefab from the assets folder into your hierarchy, and editing the prefab will update all its instances in the scene.
 
 ![Screenshot](Screenshots/shit.gif)<br>
-![Screenshot](Screenshots/shit.mp4)<br>
+
+This GIF displays the `Timer` keeping track of time elapsed in the game, `Score` changing from interacting with the `Pickup`, and the player jumping as a result of picking up the pickup.
 
 ## Respawning the Player
 It’s important to respawn the player if the player falls off the edge so that we aren’t falling into the abyss forever. To do this, we can start by editing our PlayerController.cs file (or whichever file that’s used to control the player’s movement through inputs) to include a `Respawn` function. 
