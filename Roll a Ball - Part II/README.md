@@ -23,7 +23,7 @@
 ## User interface
 ![Screenshot](Screenshots/image1.png)<br>
  
-### `GameManager`
+### GameManager
 For this tutorial, we'll first make a simple UI which will display a score and a timer that counts down as shown above. For this, we will create a `GameManager` class to store our global variables. Global variable management may be slightly overkill here, but is prudent for scaling the project. We will attach this script to a GameObject in the scene, and any script requiring our score and timer will reference this single GameObject. The script is as follows:
  
 ```csharp
@@ -71,7 +71,8 @@ With the script written, right click the Hierarchy to create an empty GameObject
 ### Create a canvas
 Create a `Canvas` by clicking `GameObject->UI->Canvas`. All UI objects need to be created as children of Canvases. Looking at the inspector, you may notice that a canvas is in the UI layer, separate from the 2D/3D scene. 
  
-**The following section describes some useful information on UI elements & canvasses written by alum officer Richard, though it is unnecessary to reproduce the tutorial content.**
+#### The following section describes some useful information on UI elements & canvasses written by alum officer Richard, though it is unnecessary to reproduce the tutorial content.
+
 Every canvas game object has the following components:
 * RectTransform: All UI elements have a RectTransform that has 2D coordinates instead of 3D coordinates.
 * Canvas: The area in which UI elements appear within.
@@ -86,7 +87,7 @@ Every canvas game object has the following components:
     * Scale with Screen Size: Your UI elements will change size depending on the size of the screen and the resolution. You can match the height or width of the screen, or expand so that nothing is cut off by the edge of the screen, or shrink so that your UI always covers the entire screen (with cut off for certain resolutions).
 * Graphic Raycaster: Determines if an element on a canvas has been hit (e.g. a button). For world canvases, you can change the settings to allow game objects in your scene to block raycasts to your UI.
  
-**Here resumes content to recreate the tutorial.**
+#### Here resumes content to recreate the tutorial.
 For our UI, right click the canvas and select `UI->Text-TextMeshPro`. (Note: You should always use the TextMeshPro version of UI components, the regular versions look worse and are basically just there for backwards compatibility purposes.). This should add a “Text(TMP)” object to your scene, attached under the Canvas. For our canvas, we keep the Canvas component’s Render Mode option to “Screen Space - Overlay” and set Canvas Scaler’s UI Scale Mode to “Scale With Screen Size”, then set the Reference Resolution to x:1600 by y:900 (1600x900 is a common set of dimensions fro screen size so we use that). Now we will implement the rest of the UI through code:
 ```csharp
 using System.Collections;
@@ -162,7 +163,10 @@ public class Collectible : MonoBehaviour
 }
 ```
 Attach it to the cube and make sure the `Is Trigger` box is checked under the Box Collider component. Finally, drag the cube into the Project window, under your Assets folder. This will create a **Prefab**, which is a template for generating duplicates of the same GameObject. Now, you can drag the newly created prefab from the assets folder into your hierarchy, and editing the prefab will update all its instances in the scene.
-  
+
+![Screenshot](Screenshots/gif.png)<br>
+![Screenshot](Screenshots/shit.gif)<br>
+
 ## Respawning the Player
 It’s important to respawn the player if the player falls off the edge so that we aren’t falling into the abyss forever. To do this, we can start by editing our PlayerController.cs file (or whichever file that’s used to control the player’s movement through inputs) to include a `Respawn` function. 
  
