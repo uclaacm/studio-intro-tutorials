@@ -1,21 +1,23 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
+using TMPro;  // Extra import for TextMeshPro
 
 public class UIController : MonoBehaviour
 {
-    [SerializeField] GameManager gm;
-    [SerializeField] Text txt;
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    /// 
+    /// This script controls the UI display.
+    /// 
 
-    // Update is called once per frame
+    [SerializeField] GameManager gm;  // Our game manager reference
+    [SerializeField] TMP_Text txt;  // The text element that we are modifying
+
     void Update()
     {
+        /// 
+        /// So we are displaying the score of the player as well as the time that they have been on the level.
+        /// All we have to do is set the text of the text display to the string that we need. 
+        ///
         string display = "Score: " + gm.GetScore() + "\nTime: " + gm.GetTime();
         txt.text = display;
     }

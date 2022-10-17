@@ -4,18 +4,15 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    float score = 0;
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    /// 
+    /// So the intuition behind a GameManager is that all global variables are consolidated in an organized way.
+    /// In our case, we only need to save the score and the time of the player, which could be stuck in any of
+    /// the existing scripts but we use this as a template for organization such that your code is scalable. Do
+    /// beware that you should only have one instance of the GameManager that every script would reference.
+    /// 
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    // Locally store our score
+    float score = 0;
 
     public void AddScore(float amt)
     {
@@ -29,6 +26,12 @@ public class GameManager : MonoBehaviour
 
     public int GetTime()
     {
+        ///
+        /// Time.timeSinceLevelLoad will give the seconds elapsed since the current game scene has been loaded. 
+        /// In other words, reloading the scene resets this number. We cast to integer (originally returns float)
+        /// so it counts up by whole seconds.
+        ///  
+
         return (int) Time.timeSinceLevelLoad;
     }
 }
