@@ -1,11 +1,11 @@
-# Studio Beginner Tutorials - 2D Platformer Part 1 
+# Studio Intro Tutorials - 2D Platformer Part 1 
   
-**Date**: October 24, 2022, 7:00 pm - 9:00 pm<br>
+**Date**: October 31, 2022, 7:00 pm - 9:00 pm<br>
 **Location**: Boelter 2760 <br>
 **Instructors**: Ryan, Matthew
  
 ## Resources
-[Slides](https://docs.google.com/presentation/d/1pfJ3OuMaTnBttJlBjijEGwMq7aT6koFEN7K3zYEDpoI/edit?usp=sharing)<br>
+[Slides](https://docs.google.com/presentation/d/1OSyPHceBciuf17cykduwBJfjBs9J3H0AzfuUA8UHg_Y/edit?usp=sharing)<br>
 [Video (From last year)](https://youtu.be/sxFkzWTz08E)
  
 ## Topics Covered
@@ -24,7 +24,7 @@
 When you download and open the assets in unity, (bottom right corner, project ->assets) you will be able to see the things that you can drag into the empty workspace. We can try dragging in images one block at a time. Try rotating and stretching the images. Look for the background asset and drop it in. then we can talk about the background layers. 
  
 ### Tilemaps
-To expedite the process of making platforms, we can use a tilemap to quickly and easily paint platforms into the scene. First, find the [image](https://github.com/uclaacm/studio-beginner-tutorials-f21/blob/main/Platformer%20Part%20I/Assets/Kings%20and%20Pigs/Sprites/14-TileSets/Terrain%20(32x32).png) containing the tiles representing parts of platforms. We need to slice this single image into multiple tiles by changing the `Sprite Mode` to `Multiple` in the Inspector. While you’re doing this, also find the `Filter mode` near the bottom and change it to `Point (no filter)` since we want the pixel art to be sharp and crisp. Don’t forget to click `Apply` to actually save these changes!
+To expedite the process of making platforms, we can use a tilemap to quickly and easily paint platforms into the scene. First, find the image containing the tiles representing parts of platforms. We need to slice this single image into multiple tiles by changing the `Sprite Mode` to `Multiple` in the Inspector. While you’re doing this, also find the `Filter mode` near the bottom and change it to `Point (no filter)` since we want the pixel art to be sharp and crisp. Don’t forget to click `Apply` to actually save these changes!
 
 Next, click the `Sprite Editor` button, and go to the `Slice` tab. Since our tiles are all 32 by 32 pixels, we can slice using “Grid by Cell Size”. Check that our tiles have been sliced correctly, then click apply to save these changes. Next, go to `Window → 2D → Tile Palette`, and create a new Tile Palette. Drag in the tiles you just sliced into this new Tile Palette.
 
@@ -45,7 +45,61 @@ To create a player, drag any of the player sprites into the scene. (We don't car
 
 If you play the scene and notice that the player seems to hover slightly above the platform, you may need to adjust Unity's physics settings to detect collisions at a smaller scale, since our sprites are so small. To do so, go to `Edit → Project Settings → Physics → Default Contact Offset` and change the value from the default to some smaller number, such as `0.01`.
 
-To get our player movement, we attach a `PlayerInput` component with the default action map and a [`PlayerMovement` script](https://github.com/uclaacm/studio-beginner-tutorials-f21/blob/main/Platformer%20Part%20I/Assets/Scripts/PlayerMovement.cs) very similar to the one used for Roll a Ball, except in 2D of course. I would recommend coding a movement script from scratch for practice if you have the time!
+To get our player movement, we attach a [`PlayerController` script](https://github.com/uclaacm/studio-intro-tutorials/blob/fall-22/Platformer%20-%20Part%20I/Assets/Scripts/PlayerController.cs) very similar to the one used for Roll a Ball, except in 2D of course. I would recommend coding a movement script from scratch for practice if you have the time! Make sure to set the tag of the tilemap with platforms to `Ground`.
+
+```c#
+using System.Diagnostics;
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class PlayerController : MonoBehaviour
+{
+    private Rigidbody2D rb;
+    private BoxCollider2D box;
+    private bool grounded;
+    [SerializeField] float speed = 5f;
+    [SerializeField] float jumpHeight = 5f;
+    void Start()
+    {
+        // Getting components that are attached to the player
+        rb = GetComponent<Rigidbody2D>();
+        box = GetComponent<BoxCollider2D>();
+        grounded = true;
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        // Getting inputs
+        float inputX = Input.GetAxis("Horizontal");
+        
+        // Changing speed of the player based on input.
+        rb.velocity = new Vector2(inputX * speed, rb.velocity.y);
+
+        // Execute jump if the correct input is inputted
+        if((Input.GetKey(KeyCode.Space) || Input.GetKey(KeyCode.W)) && grounded){
+            rb.velocity = new Vector2(rb.velocity.x, jumpHeight);
+        }
+    }
+
+    void OnCollisionEnter2D(Collision2D collision)
+    {
+        if(collision.gameObject.tag == "Ground"){
+            grounded = true;
+        }
+    }
+
+    void OnCollisionExit2D(Collision2D collision)
+    {
+        if(collision.gameObject.tag == "Ground"){
+            grounded = false;
+        }
+    }
+
+}
+
+```
 
 ### Animation
 Now we want to animate our player so that it doesn’t look like the character is just sliding across the screen. To do this, we need to first prepare the spritesheets containing the images for the animations. Find the [idle animation spritesheet](https://github.com/uclaacm/studio-beginner-tutorials-f21/blob/main/Platformer%20Part%20I/Assets/Kings%20and%20Pigs/Sprites/01-King%20Human/Idle%20(78x58).png) and slice it, much as we did with the spritesheets for the tilemaps. If you allow Unity to automatically slice the sprites, you will notice that the sprites themselves are about 37 wide by 28 pixels tall, but some sprites are slightly smaller. Since we want all of the sprites to be the same size, we can slice by cell size, with a padding based on the 78 pixel by 58 pixel size box containing each sprite. If you do so, an offset of about 9 pixels on the x axis and 16 pixels on the y axis should position the box in the correct place for each sprite in the sheet. Don’t forget to click `Apply` to save the sliced sprites! Repeat these steps for the [running animation](https://github.com/uclaacm/studio-beginner-tutorials-f21/blob/main/Platformer%20Part%20I/Assets/Kings%20and%20Pigs/Sprites/01-King%20Human/Run%20(78x58).png) and the [jumping animation](https://github.com/uclaacm/studio-beginner-tutorials-f21/blob/main/Platformer%20Part%20I/Assets/Kings%20and%20Pigs/Sprites/01-King%20Human/Jump%20(78x58).png).
@@ -58,59 +112,9 @@ To create the jumping animation, we repeat these steps by creating a jumping cli
 
 Now in our `PlayerMovement` script, we need to set the value of `isRunning` when the player starts and stops moving by calling `Animator.SetBool()` with values based on whether we are moving or not. For setting the value of `isJumping`, we can also use `Animator.SetBool()` in our `OnCollision` functions when we detect whether the player is grounded.
 
+View the completed [`PlayerController` script](https://github.com/uclaacm/studio-intro-tutorials/blob/fall-22/Platformer%20-%20Part%20I/Assets/Scripts/PlayerController.cs) for the animator components.
 --- 
 
-## Audio
-
-### Audio Components
-In Unity, the most basic audio components are an `AudioSource` component that plays sounds and an `AudioListener` component, which comes attached to the camera in each scene by default. The `AudioListener` acts like a microphone in 3D space in that it will hear sounds differently based on its position to the `AudioSource` components. For our simple 2D platformer, we don’t care quite as much about this, since we will be setting all of our `AudioSource` components to use 2D instead of 3D in the `Spatial Blend`.
-
-Although you could set up an audio system using just `AudioSource` components, you should use the `AudioMixer`, even if only for making it easy to implement volume settings. The `AudioMixer` allows you to mix different sounds and apply different effects to those sounds depending on which `AudioMixerGroup` the sounds are routed through. For our game, we will be using two groups, one for music and one for sound effects.
-
-To create an `AudioMixer`, go to the project folders (by default at the bottom of Unity’s layout) and click `Create → AudioMixer`. This will create an `AudioMixer` asset that is shared by all of the scenes (the `AudioMixer` is not a game object that lives as part of a scene, but a separate entity that “lives” outside of your scenes.) Double-clicking the `AudioMixer` will open up a window - create a new music group and a sound effects group as children of the master group here.
-
-### Background Music
-
-For our background music, we will create a new empty game object as a child of the Camera game object so that the background music will always play from the location of the camera (which is also where the `AudioListener` is located). Create a new `AudioSource` component on this empty game object, and select one of the [music loops](https://github.com/uclaacm/studio-beginner-tutorials-f21/tree/main/Platformer%20Part%20I/Assets/Audio/Music) as its `AudioClip`. Make sure to set the Music `AudioMixerGroup` for `Output` and make sure the `Play on Awake` and `Loop` boxes are checked. If you play the scene, the background music will now play forever! That was easy.
-
-### Sound Effects
-
-Unfortunately, sound effects are a lot more work to implement. To demonstrate this, let’s add some footstep sounds that play whenever the player is running. A good way to add footstep sounds is to have collection of different footsteps so that you can play one randomly whenever the player takes a step - however I don't have good audio editing software or a good set of footstep sounds so we'll just have to make do with [this sound clip](https://github.com/uclaacm/studio-beginner-tutorials-f21/blob/main/Platformer%20Part%20I/Assets/Audio/Sound%20Effects/Short%20Footsteps.mp3) I cut to be slightly longer than the animation. We can create a new script with a function that will play this sound whenever the player moves:
-
-```c#   
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-[RequireComponent(typeof(Animator))]
-[RequireComponent(typeof(AudioSource))]
-
-public class PlayFootstep : MonoBehaviour
-{
-
-	[SerializeField] private AudioClip footsteps;
-	private AudioSource source;
-
-    void Awake()
-    {
-        source = GetComponent<AudioSource>();
-        if (footsteps == null)
-            Debug.LogWarning("PlayFootstep script not provided with AudioClip.");
-    }
-
-    void PlayFootsteps()
-    {
-        source.PlayOneShot(footsteps);
-    }
-
-    void StopPlaying()
-    {
-        source.Stop();
-    }
-}
-```
-
-Attach this script to the player along with an `AudioSource` that outputs to the Sound Effects `AudioMixerGroup`, than select the Running animation clip in the `Animation` window. Add a new `AnimationEvent` at the start of the clip, and set it to trigger `PlayFootsteps()`. In the Idle and Jumping animation clip, do the same thing except set it to trigger `StopPlaying()` instead. This will allow the animations to play the footstep sounds each cycle the player is running, while also stopping the sound immediately when the player jumps or stops moving.
 
 ---
 ## Essential Links
