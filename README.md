@@ -12,9 +12,9 @@ We also offer the [Special Topics Track](https://github.com/uclaacm/studio-advan
 | [Week 3: Roll a Ball Part 1](./Roll%20A%20Ball%20-%20Part%20I) | <ul> <li>Navigating Unity</li> <li>Scenes</li> <li>Scripting</li> <li>GameObjects & components</li> </ul> | October 10th | [Slides](https://docs.google.com/presentation/d/1e-JKN4uXpfnkBJeLQNw1DbF4L7mNLuZV49Xxdulj_bI/edit?usp=sharing) |
 | [Week 4: Roll a Ball Part 2](./Roll%20a%20Ball%20-%20Part%20II) | <ul> <li>User interface</li> <li>Respawns</li> <li>Scene management</li> </ul> | October 17th | [Slides](https://tinyurl.com/Roll-a-Ball-pt2-slideshow) |
 | [Week 5: CANCELLED]() |  | October 24th | [Slides]() |
-| [Week 5: 2D Platformer Part 1]() | <ul> <li>Tilemaps</li> <li>Player Movement</li> <li>2D Animation</li> </ul> | October 31st | [Slides](https://docs.google.com/presentation/d/1OSyPHceBciuf17cykduwBJfjBs9J3H0AzfuUA8UHg_Y/edit?usp=sharing) |
-| [Week 6: 2D Platformer Part 2]() | <ul> <li>Platformer mechanics</li> <li>Cinemachine</li> <li>Enemies and Combat</li> </ul> | November 7th | [Slides]() |
-| [Week 7: Dialogue in Unity]() | <ul> <li>Yarnspinner</li> </ul> | November 14th | [Slides]() |
+| [Week 6: 2D Platformer Part 1]() | <ul> <li>Tilemaps</li> <li>Player Movement</li> <li>2D Animation</li> </ul> | October 31st | [Slides](https://docs.google.com/presentation/d/1OSyPHceBciuf17cykduwBJfjBs9J3H0AzfuUA8UHg_Y/edit?usp=sharing) |
+| [Week 7: 2D Platformer Part 2]() | <ul> <li>Platformer mechanics</li> <li>Cinemachine</li> <li>Enemies and Combat</li> </ul> | November 7th | [Slides]() |
+| [Week 8: Dialogue in Unity]() | <ul> <li>Yarnspinner</li> </ul> | November 14th | [Slides]() |
 
 ## Essential Links
 - [Studio Discord](https://discord.com/invite/bBk2Mcw)
