@@ -6,7 +6,7 @@
  
 ## Resources
 [Slides]()<br>
-[Video (From last year)](https://youtu.be/sxFkzWTz08E)
+[Video (From last year)](https://youtu.be/sxFkzWTz08E) <br>
 [Skeleton Package (COMING SOON - Ryan)]()
 
 ## Topics Covered
