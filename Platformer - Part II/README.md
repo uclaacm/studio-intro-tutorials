@@ -20,6 +20,10 @@
 * [Kings and Pigs Assets](https://pixelfrog-assets.itch.io/kings-and-pigs)
  
 ---
+
+### Initial Setup
+Don't worry if you missed part 1, we have a Unity package that you can install above that will catch you up to where we left off last time. To import this package, download it from our Github Repository -> create a new 2D project in Unity -> go to Assets -> Import Package -> Custom Package and select our package. Please also install the Cinemachine package in your project in Window -> Package Manager -> Unity Registry -> Install Cinemachine.
+
 ## Cinemachine
  
 ### Setup
