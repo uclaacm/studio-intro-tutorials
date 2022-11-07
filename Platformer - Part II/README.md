@@ -7,7 +7,7 @@
 ## Resources
 [Slides]()<br>
 [Video (From last year)](https://youtu.be/sxFkzWTz08E) <br>
-[Skeleton Package (COMING SOON - Ryan)]()
+[Skeleton Package](https://github.com/uclaacm/studio-intro-tutorials/tree/fall-22/Platformer%20-%20Part%20II/platformer-pt1.unitypackage)
 
 ## Topics Covered
 * Camera Movement
@@ -49,64 +49,58 @@ We'll set the `Follow` setting to the `Player` transform. You should see a grid 
 **Soft Zone Width/Height**<br>
 If the target enters the soft zone, the camera will reorient itself to frame the target in the dead zone. Note that damping values affect how quickly this readjustment occurs.
  
-## Destructible Tilemaps
- 
-### Setup
-A common mechanic in platformers are destructible walls and platforms. To add this into our platformer, we will write a script which will delete tiles from our `Tilemap` when something collides with the tile. But first, create a new `2D Object → Tilemap → Rectangular` as a child of the `Grid` game object that already holds our existing tilemaps. We need a separate `Tilemap` since we don't want to delete tiles from platforms that aren't supposed to be destructible. Remember to attach `Tilemap Collider 2D` and `Composite Collider 2D` components, and set the `Rigidbody2D` to static so that other things will be able to collide with our new `Tilemap`! Finally, paint in some tiles into the new tileamp in easily accessible locations so you can test destroying them later.
- 
-### Deleting Tiles
-Create a new [`DestructibleTilemap` script](https://github.com/uclaacm/studio-beginner-tutorials-f21/blob/main/Platformer%20Part%20I/Assets/Scripts/DestructibleTilemap.cs) and attach it to your new `Tilemap`. Add a member variable referencing the `Tilemap` that's attached to the same game object as our script. You'll also need to add `using UnityEngine.Tilemaps;` at the top of your script. To delete tiles from the tilemap, we can use `tilemap.SetTile(Vector3Int position, null)` since setting a tile to null removes it from the tilemap. The function below iterates over each point where the `Composite Collider 2D` touches another collider, and deletes the tile at the point of contact. Note that we add a small offset (`0.01f`) in the direction of the vector normal to the surface at the contact point so that we delete the correct tile, since the contact points are all on the edge of our tiles.
- 
-```c#
-// Find position of tiles being collided with and trigger their deletion
-private void TriggerDeletions(Collision2D collision)
+## Audio
+
+### Audio Components
+In Unity, the most basic audio components are an `AudioSource` component that plays sounds and an `AudioListener` component, which comes attached to the camera in each scene by default. The `AudioListener` acts like a microphone in 3D space in that it will hear sounds differently based on its position to the `AudioSource` components. For our simple 2D platformer, we don’t care quite as much about this, since we will be setting all of our `AudioSource` components to use 2D instead of 3D in the `Spatial Blend`.
+
+Although you could set up an audio system using just `AudioSource` components, you should use the `AudioMixer`, even if only for making it easy to implement volume settings. The `AudioMixer` allows you to mix different sounds and apply different effects to those sounds depending on which `AudioMixerGroup` the sounds are routed through. For our game, we will be using two groups, one for music and one for sound effects.
+
+To create an `AudioMixer`, go to the project folders (by default at the bottom of Unity’s layout) and click `Create → AudioMixer`. This will create an `AudioMixer` asset that is shared by all of the scenes (the `AudioMixer` is not a game object that lives as part of a scene, but a separate entity that “lives” outside of your scenes.) Double-clicking the `AudioMixer` will open up a window - create a new music group and a sound effects group as children of the master group here.
+
+### Background Music
+
+For our background music, we will create a new empty game object as a child of the Camera game object so that the background music will always play from the location of the camera (which is also where the `AudioListener` is located). Create a new `AudioSource` component on this empty game object, and select one of the [music loops](https://github.com/uclaacm/studio-beginner-tutorials-f21/tree/main/Platformer%20Part%20I/Assets/Audio/Music) as its `AudioClip`. Make sure to set the Music `AudioMixerGroup` for `Output` and make sure the `Play on Awake` and `Loop` boxes are checked. If you play the scene, the background music will now play forever! That was easy.
+
+### Sound Effects
+
+Unfortunately, sound effects are a lot more work to implement. To demonstrate this, let’s add some footstep sounds that play whenever the player is running. A good way to add footstep sounds is to have collection of different footsteps so that you can play one randomly whenever the player takes a step - however I don't have good audio editing software or a good set of footstep sounds so we'll just have to make do with [this sound clip](https://github.com/uclaacm/studio-beginner-tutorials-f21/blob/main/Platformer%20Part%20I/Assets/Audio/Sound%20Effects/Short%20Footsteps.mp3) I cut to be slightly longer than the animation. We can create a new script with a function that will play this sound whenever the player moves:
+
+```c#   
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+[RequireComponent(typeof(Animator))]
+[RequireComponent(typeof(AudioSource))]
+
+public class PlayFootstep : MonoBehaviour
 {
-    // Iterate over all points where the collider is touching something
-    Vector3 tilePosition = Vector3.zero;
-    foreach (ContactPoint2D contact in collision.contacts)
+
+	[SerializeField] private AudioClip footsteps;
+	private AudioSource source;
+
+    void Awake()
     {
-        // Add small offset to delete correct tile
-        tilePosition.x = contact.point.x + offset * contact.normal.x;
-        tilePosition.y = contact.point.y + offset * contact.normal.y;
-   
-        // Delete the tile from our tilemap
-        tilemap.SetTile(tilemap.WorldToCell(tilePosition), null);
+        source = GetComponent<AudioSource>();
+        if (footsteps == null)
+            Debug.LogWarning("PlayFootstep script not provided with AudioClip.");
+    }
+
+    void PlayFootsteps()
+    {
+        source.PlayOneShot(footsteps);
+    }
+
+    void StopPlaying()
+    {
+        source.Stop();
     }
 }
 ```
- 
-Call this function within `void OnCollisionStay2D(Collision2D collision)` so that we delete tiles when the player collides with them. If you play the game, you should see that when the player runs into or onto a destructible tile, the tile is instantly deleted. While you can now create hidden rooms and fake walls, deleting tiles instantly isn't so great if we want a platform that will collapse after we run over it. To implement a delay between detecting the collisions and actually deleting the tiles, we can use coroutines.
- 
-### Coroutines
-Couroutines are a special type of function in Unity which allow you to pause execution of your code and then return to it later. In our case, we can start the process of deleting a tile, pause our coroutine, and then actually delete the tile after the delay.
- 
-Coroutines always have an `IEnumerator` return type, and within your coroutine you will need to use `yield return` instead of just `return`. Unity provides some very useful `YieldInstructions` that can be used with `yield return`, such as `new WaitForSeconds(float seconds)` which will pause the coroutine for approximately the provided number of seconds. You can also use `yield return null` to only pause your coroutine until the next frame of the game. Finally, to actually run a coroutine, instead of calling it like a regular function (`ExampleCoroutine(inputParameter);`), coroutines are started with `StartCoroutine()` (`StartCoroutine(ExampleCoroutine(inputParameter));`). If you would like to learn more about coroutines and how to use them, you can take a look at the [Programming Essential workshop](https://github.com/uclaacm/studio-advanced-tutorials-f21/tree/main/Programming%20Essentials) from the Advanced Track.
- 
-```c#
-[SerializeField] private float deletionDelay = 0.5f;    // How long to wait before deleting a tile
- 
-private IEnumerator DeleteTileDelayed(Vector3 tilePosition)
-{
-    // Only need to wait if delay is non-negative
-    if (deletionDelay > 0)
-    {
-        yield return new WaitForSeconds(deletionDelay);
-    }
- 
-    // Actually delete tile after delay
-    tilemap.SetTile(tilemap.WorldToCell(tilePosition), null);
-}
-```
- 
-The function above shows an implementation of waiting a number of seconds before deleting tiles. If you call `DeleteTileDelayed()` from `TriggerDeletions()` and play the game, you should now see that a tile that you walk into or onto will only delete itself after a short delay. However, if you have multiple destructible tiles next to each other and walk over them, you may notice that only the first tile you touch is deleted. This is because we called `TriggerDeletions()` from `OnCollisionEnter2D` — when we move from one tile to the next we don't enter the collider again, since we no longer exit the collider when the tile is instantaneously deleted. To fix this, also call `TriggerDeletions()` from `OnCollisionStay2D`. Now you should be able to run over a destructible platform and have it collapse behind you!
- 
-### Bonus Sidequests
-One disadvantage of calling `TriggerDeletions()` from `OnCollisionStay2D` is that our player will trigger the deletion of the same tile many times before the tile is actually deleted, slowing down our game. This problem is worsened by longer delays before deletion, and could cause problems down the line if we need to add back a tile in the same position, since it could be deleted by the deletions that have been "buffered". You can solve this by checking whether the tile has already been marked for destruction in your coroutine - the example implementation uses `HashSet<>` to keep track of which tiles are marked for deletion.
- 
-You can also extend your newfound knowledge to create moving platforms! By moving a tilemap around, you can move all of the platforms within the tilemap. You can use coroutines or the animation state machine to create platforms that move in a specific pattern.
- 
-Finally, our tilemap currently deletes tiles whenever anything collides with it - not just the player. While this can be a good thing (such as allowing enemies to destroy platforms by running over them!), you may also want to have platforms that are only destroyed by certain objects or types of objects. For example, you could modify your DestructibleTilemap script to only delete tiles when the tile touches a bomb!
- 
+
+Attach this script to the player along with an `AudioSource` that outputs to the Sound Effects `AudioMixerGroup`, than select the Running animation clip in the `Animation` window. Add a new `AnimationEvent` at the start of the clip, and set it to trigger `PlayFootsteps()`. In the Idle and Jumping animation clip, do the same thing except set it to trigger `StopPlaying()` instead. This will allow the animations to play the footstep sounds each cycle the player is running, while also stopping the sound immediately when the player jumps or stops moving.
+
 ## Enemies and Combat
  
 ### Setup
