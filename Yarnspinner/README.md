@@ -5,8 +5,8 @@
 **Instructors**: Connor Daly
  
 ## Resources
-[Slides]()<br>
-[Unity Skeleton package]()
+[Slides](https://docs.google.com/presentation/d/1s0GM1ZaPMfFGZEiMaICFHvSrDr1EbyZttKFEgR63GrA/edit?usp=sharing)<br>
+[Unity Skeleton package](yarnspinner_skeleton.unitypackage)
  
 ## Topics Covered
 * Overview of Yarnspinner
@@ -110,7 +110,7 @@ Let's add an event to make the npc go away after they finish speaking. Click the
 ### Making Our Own Line View
 Now let's make the npc speak from a speech bubble. First lets create a new canvas under the **Dialogue System** and set it's **Render Mode** to **World Space** and drag in the **Main Camera.** This will let us put the speech bubble above the npc and not have it move when the camera moves with the player. Now under this canvas make an empty and call it **CustomLineView.** This will be our version of the **Line View** that is used in the **Dialogue System,** so let's add the **Line View** script to this empty. Then add a **UI->Image** called "Background and a **UI->Text - TextMeshPro** called "LineText" under this line view. Drag the speech bubble image from the **Art Assets** folder into the **Source Image** box in the Inspector view after clicking on the **Background** object. Then drag these objects so that the bubble is above the npc's head and the text box fills the bubble. Make sure to change the font color so it is visible and the font size to something reasonable for the size of the text bubble. (Note: for me the background is at (x,y) = (-429.52, -217.42) with width and height of 100, the Line text is at around the same (x, y), and the font size of 0.5 works well). 
 
-Now we need to drag the values into their places on the scripts. Drag the **LineText** into the **Line Text** field of the **Line Veiw** script. We also need to add a **Canvas Group** to the **CustomLineView** and drag that into the corresponding field of the script. Finally, drag our custom line view to replace the old line view in the **Dialogue Runner** script. If we play the game now we should see the speech bubble pop up when we talk to the npc, but we can't progress to the next line of dialogue. In the example earlier they used a continue button. We could add a continur button, but lets look at one way to allow us to press space to see the next line. We will add the following **ContinueScript** script to our **CustomLineView** and drag the line view itself into the script.
+Now we need to drag the values into their places on the scripts. Drag the **LineText** into the **Line Text** field of the **Line Veiw** script. We also need to add a **Canvas Group** to the **CustomLineView** and drag that into the corresponding field of the script. Finally, drag our custom line view to replace the old line view in the **Dialogue Runner** script. If we play the game now we should see the speech bubble pop up when we talk to the npc, but we can't progress to the next line of dialogue. In the example earlier they used a continue button. We could add a continue button, but lets look at one way to allow us to press space to see the next line. We will add the following **ContinueScript** script to our **CustomLineView** and drag the line view itself into the script.
 
 ```c#
 using System.Collections;
