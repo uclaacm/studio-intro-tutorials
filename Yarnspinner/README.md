@@ -12,7 +12,7 @@
 * Overview of Yarnspinner
 * Add Yarnspinner to game  
 * Yarnspinner Example 
-* Very basic writing dialogue just basically adding character name, a choice and doing a command and  maybe switch node 
+* Very basic writing dialogue
 * coding a yarn command 
 * editing lineview 
 * editing option List view
