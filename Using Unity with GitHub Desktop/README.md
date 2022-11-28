@@ -60,7 +60,7 @@ Note that the top of the .gitignore says "This .gitignore file should be placed 
 
 To correct this, move your .gitignore into the Unity project folder. Notice how the number of changes drops down to a much more reasonable number! This is because the .gitignore is working.
 
-![Screenshot of GitHub Desktop with 27 changed files, including a gitignore](Images/WithoutGitIgnore.JPG)
+![Screenshot of GitHub Desktop with 27 changed files, including a gitignore](Images/WithGitIgnore.JPG)
 
 
 (I'm recommending this method because I find it to be the most straightforward. One alternate method is to remove the slashes in front of `/[Ll]ibrary/`, `/[Tt]emp/`, etc. in the .gitignore. That way, you don't need to move the .gitignore into the Unity project folder. Another alternate method is to copy all of the git files from the repo into the Unity project folder.)
