@@ -9,10 +9,10 @@ We also offer the [Special Topics Track](https://github.com/uclaacm/studio-advan
 ## Curriculum Overview
 | Tutorials | Topics Covered | Live Schedule | Slides |
 |-----------|----------------|---------------|--------|
-| [Week 3: Tower Defense - Setup, Spawning, & Health System]() | <ul> <li>Setting up the scene</li> <li>Spawning enemies</li> <li>Player health system</li> </ul> | **Wednesday January 25th** | [Slides]() |
-| [Week 5: Tower Defense - Towers & Attacking]() | <ul> <li>Setting up towers</li> <li>Placing mechanism for towers</li> <li>Tower attacking</li> </ul> | **Tuesday February 7th** | [Slides]() |
-| [Week 6: Tower Defense - Shop & Currency]() | <ul> <li>Creating currency system</li> <li>Tower purchasing</li> </ul> | **Tuesday February 14th** | [Slides]() |
-| [Week 7: Tower Defense - User Interface]() | <ul> <li>Tower placing and shop UI</li> <li>Making the game not look super ugly</li>  </ul> | **Wednesday February 22nd** | [Slides]() |
+| [Week 3: Tower Defense - Setup, Spawning, & Health System]() | <ul> <li>Setting up the scene</li> <li>Spawning enemies</li> <li>Player health system</li> </ul> | **Wednesday January 25th, Ackerman Union 2408** | [Slides]() |
+| [Week 5: Tower Defense - Towers & Attacking]() | <ul> <li>Setting up towers</li> <li>Placing mechanism for towers</li> <li>Tower attacking</li> </ul> | **Tuesday February 7th, Boelter 4760** | [Slides]() |
+| [Week 6: Tower Defense - Shop & Currency]() | <ul> <li>Creating currency system</li> <li>Tower purchasing</li> </ul> | **Tuesday February 14th, Boelter 4760** | [Slides]() |
+| [Week 7: Tower Defense - User Interface]() | <ul> <li>Tower placing and shop UI</li> <li>Making the game not look super ugly</li>  </ul> | **Wednesday February 22nd, Ackerman Union 2408** | [Slides]() |
 
 ## Essential Links
 - [Studio Discord](https://discord.com/invite/bBk2Mcw)
