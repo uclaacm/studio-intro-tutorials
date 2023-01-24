@@ -10,6 +10,7 @@
 */[Bb]uild/
 */[Bb]uilds/
 */[Ll]ogs/
+/[Ll]ogs/
 */[Mm]emoryCaptures/
 
 # Asset meta data should only be ignored when the corresponding asset is also ignored
@@ -67,3 +68,5 @@ Roll a Ball/Temp/UnityLockfile
 *.vsconfig
 *.dwlt
 Roll A Ball - Part I/UserSettings/Layouts/default-2021.dwlt
+Logs/AssetImportWorker1.log
+Logs/AssetImportWorker0.log
