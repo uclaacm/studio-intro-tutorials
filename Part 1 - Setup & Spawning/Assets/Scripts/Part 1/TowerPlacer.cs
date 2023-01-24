@@ -14,18 +14,18 @@ public class TowerPlacer : MonoBehaviour
 
         transform.position = new Vector3(mousePos.x, mousePos.y, transform.position.z);
 
-        if (Input.GetMouseButtonDown(0))
-        {
-            if (obstructed)
-            {
-                Debug.Log("Obstructed!");
-            } else
-            {
-                Debug.Log("Can place!");
-                // Instantiate(tower, transform.position, Quaternion.identity);
-            }
-        }
+    }
 
+    void OnFire(){
+        if (obstructed)
+        {
+            Debug.Log("Obstructed!");
+        } 
+        else
+        {
+            Debug.Log("Can place!");
+            // Instantiate(tower, transform.position, Quaternion.identity);
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
