@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 6985075326155077153}
   - component: {fileID: 699959179651797485}
   - component: {fileID: 8732167358444215694}
+  - component: {fileID: 5195861477285182678}
   - component: {fileID: 1075801042813770667}
   m_Layer: 0
   m_Name: Enemy
@@ -98,7 +99,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9ae0f9cd238f746c4a32bdf61ef11d8d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 100
+  health: 10
+--- !u!114 &5195861477285182678
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4405537095214104944}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3274db0ff7f1b4f49af66ab290b9fed1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  moveSpeed: 2
 --- !u!61 &1075801042813770667
 BoxCollider2D:
   m_ObjectHideFlags: 0

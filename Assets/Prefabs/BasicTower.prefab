@@ -220,7 +220,7 @@ MonoBehaviour:
   damage: 25
   currentTarget: {fileID: 0}
   timeBetweenShots: 1
-  bulletSpeed: 0
+  bulletSpeed: 3
   pivot: {fileID: 8653419009064978832}
   barrel: {fileID: 4376845802555202411}
   bullet: {fileID: 4540991253257380502, guid: 4ad4a584b56e34d9ebbb34d824939746, type: 3}

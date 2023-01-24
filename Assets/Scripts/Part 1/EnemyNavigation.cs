@@ -9,12 +9,14 @@ public class EnemyNavigation : MonoBehaviour
     [SerializeField] float moveSpeed = 5f;
     int curCheckpoint = 0;
     Transform curTarg;
+    EnemySpawner spawner;
     // Start is called before the first frame update
     void Start()
     {
         try
         {
-            checkpoints = GameObject.FindObjectOfType<EnemySpawner>().checkpoints;
+            spawner = GameObject.FindObjectOfType<EnemySpawner>();
+            checkpoints = spawner.checkpoints;
             Debug.Log(checkpoints.Count);
             curTarg = checkpoints[curCheckpoint];
         } catch
@@ -41,10 +43,16 @@ public class EnemyNavigation : MonoBehaviour
         {
             // The enemy has reached its destination
             Debug.Log("Enemy escaped!");
+
             Destroy(gameObject);
         } else
         {
             curTarg = checkpoints[curCheckpoint];
         }
+    }
+
+    private void OnDestroy()
+    {
+        spawner.EnemyDestroyed();
     }
 }
