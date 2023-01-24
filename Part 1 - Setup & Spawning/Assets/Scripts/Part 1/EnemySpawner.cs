@@ -11,6 +11,7 @@ public class EnemySpawner : MonoBehaviour
     [SerializeField] int activeEnemyCount = 0;
 
     int curWave = 0;
+    bool waveSpawned = false;
 
     // Start is called before the first frame update
     void Start()
@@ -27,9 +28,10 @@ public class EnemySpawner : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (activeEnemyCount == 0)
+        if (activeEnemyCount == 0 && waveSpawned)
         {
             curWave++;
+            waveSpawned = false;
             StartCoroutine(SpawnWave());
         }
     }
@@ -38,12 +40,14 @@ public class EnemySpawner : MonoBehaviour
     {
         if (curWave < waveInfo.Count)
         {
+            Debug.Log(curWave);
             for (int i = 0; i < waveInfo[curWave]; i++)
             {
                 Instantiate(enemy, spawnPosition.position, Quaternion.identity);
                 activeEnemyCount++;
                 yield return new WaitForSeconds(1f);
             }
+            waveSpawned = true;
         } 
     }
 

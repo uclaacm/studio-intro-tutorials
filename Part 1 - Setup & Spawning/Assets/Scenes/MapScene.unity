@@ -771,7 +771,7 @@ MonoBehaviour:
   - {fileID: 1740038965}
   - {fileID: 544653319}
   enemy: {fileID: 4405537095214104944, guid: c19efc1b707f94484ab923dfcbe0f15b, type: 3}
-  waveInfo: 0200000004000000
+  waveInfo: 0200000004000000040000000400000004000000
   activeEnemyCount: 0
 --- !u!4 &705298762
 Transform:
