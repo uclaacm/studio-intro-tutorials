@@ -12,21 +12,21 @@ public class BasicTower : Tower
 
     private float nextTimeToShoot;
 
-    private void shoot()
+    private void Shoot()
     {
         Bullet newBullet = Instantiate(bullet, barrel.position, pivot.rotation);
-        newBullet.setDamage(damage);
-        newBullet.setSpeed(bulletSpeed);
+        newBullet.SetDamage(damage);
+        newBullet.SetSpeed(bulletSpeed);
     }
 
     private void Update()
     {
-        updateNearestEnemy();
+        UpdateNearestEnemy();
         if(Time.time >= nextTimeToShoot)
         {
             if(currentTarget != null)
             {
-                shoot();
+                Shoot();
                 nextTimeToShoot = Time.time + timeBetweenShots; //check if can replace with deltaTime
             }
         }

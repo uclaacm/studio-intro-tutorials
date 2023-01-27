@@ -9,19 +9,15 @@ public class BarrelRotation : MonoBehaviour
 
     public Tower tower;
 
+    /* rotates barrel towards the enemy */
     private void Update()
     {
         if(tower != null)
         {
-            if(tower.currentTarget != null)
+            if (tower.currentTarget != null) 
             {
                 Vector2 relative = tower.currentTarget.transform.position - pivot.position;
-
-                float angle = Mathf.Atan2(relative.y, relative.x) * Mathf.Rad2Deg;
-
-                Vector3 newRotation = new Vector3(0, 0, angle);
-
-                pivot.localRotation = Quaternion.Euler(newRotation);
+                pivot.right = new Vector3(relative.x, relative.y, 0);
             }
         }
     }

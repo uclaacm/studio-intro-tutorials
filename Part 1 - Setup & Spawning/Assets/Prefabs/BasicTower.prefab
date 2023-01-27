@@ -216,7 +216,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b4babc3028bfd474e90e3cc713595629, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  range: 5
+  range: 25
   damage: 25
   currentTarget: {fileID: 0}
   timeBetweenShots: 1

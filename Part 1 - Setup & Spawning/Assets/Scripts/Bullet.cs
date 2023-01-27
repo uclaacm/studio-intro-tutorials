@@ -17,18 +17,18 @@ public class Bullet : MonoBehaviour
         if(collision.gameObject.tag == "Enemy")
         {
             Enemy enemyScript = collision.gameObject.GetComponent<Enemy>();
-            enemyScript.takeDamage(damage);
+            enemyScript.TakeDamage(damage);
 
             Destroy(gameObject);
         }
     }
 
-    public void setDamage(float dmg)
+    public void SetDamage(float dmg)
     {
         damage = dmg;
     }
 
-    public void setSpeed(float spd)
+    public void SetSpeed(float spd)
     {
         speed = spd;
     }

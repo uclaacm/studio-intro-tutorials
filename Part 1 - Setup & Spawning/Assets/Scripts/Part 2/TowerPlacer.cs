@@ -5,12 +5,11 @@ using UnityEngine;
 public class TowerPlacer : MonoBehaviour
 {
     bool obstructed = false;
-    // [SerializeField] GameObject tower;
 
     // Update is called once per frame
     void Update()
     {
-        Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition); //get current mouse position
 
         transform.position = new Vector3(mousePos.x, mousePos.y, transform.position.z);
 
@@ -24,7 +23,6 @@ public class TowerPlacer : MonoBehaviour
         else
         {
             Debug.Log("Can place!");
-            // Instantiate(tower, transform.position, Quaternion.identity);
         }
     }
 
