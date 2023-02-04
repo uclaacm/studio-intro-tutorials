@@ -16,8 +16,7 @@ public class BarrelRotation : MonoBehaviour
         {
             if (tower.currentTarget != null) 
             {
-                Vector2 relative = tower.currentTarget.transform.position - pivot.position;
-                pivot.right = new Vector3(relative.x, relative.y, 0);
+                // TODO: Rotate the barrel towards the current target
             }
         }
     }

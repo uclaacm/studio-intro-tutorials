@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class BarrelRotation : MonoBehaviour
 {
-    public Transform pivot;
-    public Transform barrel;
+    [SerializeField] private Transform pivot;
+    [SerializeField] private Transform barrel;
 
-    public Tower tower;
+    [SerializeField] private Tower tower;
 
     /* rotates barrel towards the enemy */
     private void Update()

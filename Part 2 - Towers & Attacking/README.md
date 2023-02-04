@@ -1,18 +1,17 @@
-# Studio Intro Tutorials - Tower Defense Pt. 1: Setup and Spawning
+# Studio Intro Tutorials - Tower Defense Pt. 2: Towers and Attacking
  
-**Date**: January 25, 2023, 6:00 pm - 8:00 pm<br>
-**Location**: Bunche Hall 3178 <br>
-**Instructors**: Ming, Alicia, and Ryan
+**Date**: February 7, 2023, 6:00 pm - 8:00 pm<br>
+**Location**: Boelter Hall 4760 <br>
+**Instructors**: Clea and Grace
  
 ## Resources
-[Slides](https://docs.google.com/presentation/d/1x0B7ZPyWlOQB9NOZ_BBeT9HpsY08JPX5L00Rgfpfais/edit?usp=sharing)<br>
+[Slides](https://docs.google.com/presentation/d/1GS-BnMBoUY26BvcIIB4K_aQgicpCc65UEeA6vfsqOtE/edit?usp=sharing)<br>
 [Video (Not Available Yet)]()<br>
 [Unity Package(Not Available Yet)]()
  
 ## Topics Covered
-* Map Setup
-* Enemy Spawning and Navigation
-* Player Health
+* Tower Setup
+* Attacking Enemies with Towers
  
 ## What you'll need
 * [Unity Hub](https://unity.com/download)
