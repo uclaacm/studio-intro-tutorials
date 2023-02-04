@@ -12,18 +12,18 @@ public class LaserTower : Tower //inherits from Tower.cs
 
     void Awake()
     {
-        lineRend = gameObject.GetComponent<LineRenderer>(); //getting LineRenderer
+        // TODO: Get LineRenderer component
     }
 
     private void UpdateComponents()
     {
-        enemyScript = currentTarget.GetComponent<Enemy>(); //getting the Enemy script from the current target
+        // TODO: get Enemy script of the current target
     }
 
     /* damages the enemy for one instance when called */
     private void Shoot()
     {
-        enemyScript.TakeDamage(damage); //call the take damage function in the Enemy script
+        // TODO: deal damage to the current target
     }
 
     /* uses LineRenderer to draw a laser between the enemy and tower */
@@ -32,11 +32,12 @@ public class LaserTower : Tower //inherits from Tower.cs
         if(currentTarget != null)
         {
             //NOTE: if you want the laser to show in front of some sprites, you need to set z-position of those sprites to -1 (map tiles)
-            Vector3 sp = transform.position; //starting point - position of tower
-            Vector3 ep = currentTarget.transform.position; //end point - position of the target
+            // TODO: Get the position of the tower and the current target and store them as Vector3
+
             lineRend.positionCount = 2; //2 vertices for the line
-            lineRend.SetPosition(0, sp); //set first vertex as the starting point
-            lineRend.SetPosition(1, ep); //set second vertex as the end point
+
+            // TODO: set position 0 of the LineRenderer to be the tower's position and position 1 to be that of current target
+          
         }
         else
             lineRend.positionCount = 0; //if no current target, don't draw the laser
@@ -46,16 +47,16 @@ public class LaserTower : Tower //inherits from Tower.cs
     {
         bool changedEnemy = UpdateNearestEnemy(); //from parent class
 
-        if(changedEnemy)
-            UpdateComponents();
+        // TODO: if the target changed, update Enemy component
         
-        DrawLaser();
+        // TODO: draw the laser
 
         if(Time.time >= nextTimeToShoot) //if current time is greater than the next time to shoot
         {
             if(currentTarget != null)
             {
-                Shoot();
+                // TODO: Shoot the current target
+
                 nextTimeToShoot = Time.time + timeBetweenShots; 
             }
         }

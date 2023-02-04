@@ -7,12 +7,12 @@ public class Tower : MonoBehaviour
     [SerializeField] protected float range; //range of the tower
     [SerializeField] protected float damage; //damage that the tower does per instance
 
-    [HideInInspector]public GameObject currentTarget; //nearest enemy to tower
+    [HideInInspector] public GameObject currentTarget; //nearest enemy to tower
 
     /* checks through all the current enemies and finds the closest one to set as
-    the current target of the tower
-    
-    returns true if the current enemy has changed, false if it has not or if there is no current enemy */
+    the current target of the tower 
+    returns true if the current enemy has changed, 
+    false if it has not or if there is no current enemy */
     protected bool UpdateNearestEnemy()
     {
         GameObject currentNearestEnemy = null; //will store current nearest enemy
@@ -22,37 +22,14 @@ public class Tower : MonoBehaviour
                                         //variable will be storing the smallest
                                         //distance between an enemy and the tower 
 
-        //loop through all the enemies in the list stored in the script Enemies.cs
-        foreach(GameObject enemy in Enemy.enemies)
-        {
-            if(enemy != null)
-            {
-                //get the distance between the tower (transform.position) and the enemy
-                float _distance = (transform.position - enemy.transform.position).sqrMagnitude;
-                if(_distance < distance) //if the distance is smaller than the current smallest
-                                            //distance
-                {
-                    distance = _distance; //set distance to smallest distance
-                    currentNearestEnemy = enemy; //set enemy as the current nearest enemy
-                }
-            }
-        }
+        // TODO: loop through all the enemies and find the closest enemy
 
-        //if the current nearest enemy is in the tower's range
-        if(distance <= range) 
-        {
-            if(currentNearestEnemy == currentTarget)
-                return false;
-            else
-            {
-                currentTarget = currentNearestEnemy; //set current target to be the enemy
-                return true;
-            }
-        }
-        else
-        {
-            currentTarget = null; //there is no current target (tower won't attack)
-        }
+        // TODO: check if the nearest enemy is in the tower's range. If so, check if the
+        // current target has changed (return false if not, true if it has changed) and
+        // set current target to the new nearest enemy if it has changed.
+        // If nearest enemy is not in range, make sure currentTarget does not store an object
+        
+
         return false;
     }
 }

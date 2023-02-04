@@ -7,11 +7,10 @@ public class Tower : MonoBehaviour
     [SerializeField] protected float range; //range of the tower
     [SerializeField] protected float damage; //damage that the tower does per instance
 
-    [HideInInspector]public GameObject currentTarget; //nearest enemy to tower
+    [HideInInspector] public GameObject currentTarget; //nearest enemy to tower
 
     /* checks through all the current enemies and finds the closest one to set as
     the current target of the tower
-    
     returns true if the current enemy has changed, false if it has not or if there is no current enemy */
     protected bool UpdateNearestEnemy()
     {

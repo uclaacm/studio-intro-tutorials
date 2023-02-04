@@ -4,30 +4,28 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
-    public static List<GameObject> enemies = new List<GameObject>(); //creates a list of Enemy objects
+    // TODO: Create a public state list of GameObjects to store enemies
 
     [SerializeField] private float health;
 
     private void Awake()
     {
-        Enemy.enemies.Add(gameObject); //add current Enemy object to the list in Enemies
+        // TODO: add current Enemy object to the list in Enemies
     }
 
     public void TakeDamage(float dmg)
     {
-        health -= dmg; //reduce health by dmg
+        // TODO: reduce health by dmg
     }
 
     public void Die()
     {
-        Enemy.enemies.Remove(gameObject); //remove current Enemy object from the list in Enemies
-        Destroy(gameObject); //destroy current object
+        // TODO: remove current Enemy object from the list in Enemies
+        // TODO: destroy current object
     }
 
     private void Update()
     {
-        //check if health is less than 0
-        if(health <= 0)
-            Die();
+        // TODO: check if health is less than 0, kill the enemy if so
     }
 }
