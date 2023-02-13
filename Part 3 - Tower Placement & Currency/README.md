@@ -1,6 +1,6 @@
-# Studio Intro Tutorials - Tower Defense Pt. 2: Towers and Attacking
+# Studio Intro Tutorials - Tower Defense Pt. 3: Tower Placement & Currency System
  
-**Date**: February 7, 2023, 6:00 pm - 8:00 pm<br>
+**Date**: February 14, 2023, 6:00 pm - 8:00 pm<br>
 **Location**: Boelter Hall 4760 <br>
 **Instructors**: Matthew and Yun
  
