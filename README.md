@@ -12,7 +12,7 @@ We also offer the [Special Topics Track](https://github.com/uclaacm/studio-advan
 | [Week 3: Tower Defense - Setup, Spawning, & Health System](./Part%201%20-%20Setup%20%26%20Spawning) | <ul> <li>Setting up the scene</li> <li>Spawning enemies</li> <li>Player health system</li> </ul> | **Wednesday January 25th, Bunche Hall 3178** | [Slides](https://docs.google.com/presentation/d/1x0B7ZPyWlOQB9NOZ_BBeT9HpsY08JPX5L00Rgfpfais/edit?usp=sharing) |
 | [Week 5: Tower Defense - Towers & Attacking]() | <ul> <li>Setting up towers</li> <li>Placing mechanism for towers</li> <li>Tower attacking</li> </ul> | **Tuesday February 7th, Boelter 4760** | [Slides]() |
 | [Week 6: Tower Defense - Shop & Currency]() | <ul> <li>Creating currency system</li> <li>Tower purchasing</li> </ul> | **Tuesday February 14th, Boelter 4760** | [Slides](https://docs.google.com/presentation/d/1HLMFHSj7GgQaSFJ1P4B3aGHydCjcKnq6ViytIpaYz0U/edit?usp=sharing) |
-| [Week 7: Tower Defense - User Interface]() | <ul> <li>Tower placing and shop UI</li> <li>Making the game not look super ugly</li>  </ul> | **Wednesday February 22nd, Bunche Hall 3178** | [Slides](https://docs.google.com/presentation/d/13cGs6IVLqNnqbHDri6vl5SFi4W54udoRi7nEXYYTXMg/edit#slide=id.gf6e0d2fcff_0_0) |
+| [Week 7: Tower Defense - User Interface]() | <ul> <li>Currency and shop UI</li> <li>Player health</li> <li>Pause Menu</li> </ul> | **Wednesday February 22nd, Bunche Hall 3178** | [Slides](https://docs.google.com/presentation/d/13cGs6IVLqNnqbHDri6vl5SFi4W54udoRi7nEXYYTXMg/edit#slide=id.gf6e0d2fcff_0_0) |
 
 ## Essential Links
 - [Studio Discord](https://discord.com/invite/bBk2Mcw)
