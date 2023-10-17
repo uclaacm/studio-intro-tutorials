@@ -1,59 +1,54 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.InputSystem;
-using UnityEngine.SceneManagement;
+
+// TODO: import UnityEngine.InputSystem and UnityEngine.SceneManagement
+
 
 public class PlayerController : MonoBehaviour
 {
-    // Component references
-    Rigidbody rb;  // Unity's physics component
-    SphereCollider col;  // Collision detection 
+    // TODO: add component references
 
-    [SerializeField] float speed = 5f;
-    [SerializeField] float jumpHeight = 5f;
-    [SerializeField] float respawnHeight = -10f;
+
+    // TODO: add variables for speed, jumpHeight, and respawnHeight
+
 
     // Start is called before the first frame update
     void Start()
     {
-        // Get references to the components attached to the current GameObject
-        rb = GetComponent<Rigidbody>();
-        col = GetComponent<SphereCollider>();
+        // TODO: Get references to the components attached to the current GameObject
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (transform.position.y < respawnHeight)
-            Respawn();
+        // TODO: check if player is under respawnHeight and call Respawn()
+
     }
 
     void OnJump()
     {
-        //if player is on the ground, jump
-        if (IsGrounded())
-            Jump();
+        // TODO: check if player is on the ground, and call Jump()
+
     }
 
     private void Jump()
     {
-        // Set the y velocity to some positive value while keeping the x and z whatever they were originally
-        rb.velocity = new Vector3(rb.velocity.x, jumpHeight, rb.velocity.z);
+        // TODO: Set the y velocity to some positive value while keeping the x and z whatever they were originally
+
     }
 
     void OnMove(InputValue moveVal)
     {
-        //store input as a 2D vector
-        Vector2 direction = moveVal.Get<Vector2>();
-        Move(direction.x, direction.y);
+        //TODO: store input as a 2D vector and call Move()
 
     }
 
     private void Move(float x, float z)
     {
-        // Set the x & z velocity of the Rigidbody to correspond with our inputs while keeping the y velocity what it originally is.
-        rb.velocity = new Vector3(x * speed, rb.velocity.y, z * speed);
+        // TODO: Set the x & z velocity of the Rigidbody to correspond with our inputs while keeping the y velocity what it originally is.
+
     }
 
     bool IsGrounded()
@@ -74,6 +69,7 @@ public class PlayerController : MonoBehaviour
 
     private void Respawn()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        // TODO: reload current scene
+
     }
 }
